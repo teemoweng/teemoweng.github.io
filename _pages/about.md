@@ -29,6 +29,7 @@ Hi!👋 My name is **Teemo Weng**. I am currently pursuing an **MSc in Economics
 - *2024.08*: 📊 I worked at BCG, focusing on the new energy vehicle industry, where I analyzed Huawei's strategic positioning and business dynamics.
 - *2023.11*: 🧬 I worked at ZS Consulting, conducting orthopedics market research in the pharmaceutical industry, gaining exposure to healthcare strategy and industry insights.
 - *2023.10*: 🌍 I began my first internet internship at POIZON (DeWu), working in the overseas business team on product operations (user growth).
+- *2023.09*: 🎉 I was excited to start my exchange semester at [Fudan University School of Management](https://www.fdsm.fudan.edu.cn/en/), gaining new perspectives on business and strategy in China.
 - *2022.03*: 🚀 I led the 0-to-1 launch of [Hinbor](https://www.instagram.com/genzeats/), a North America campus group-ordering food platform — an unforgettable builder experience.
 
 # 📝 Projects

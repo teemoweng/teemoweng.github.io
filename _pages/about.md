@@ -54,28 +54,6 @@ My core contributions included full product design across both the customer and 
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">AI Product</div><img src='images/project-lab.svg' alt="AI product work" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-
-**AI Product Commercial Analysis at Beike**
-
-Beike AI Product Team
-
-At Beike, I worked on overseas commercial analysis for AI product initiatives. My role focused on understanding business opportunities, evaluating commercialization logic, and supporting decisions on how AI-enabled products could fit platform growth and monetization goals in international contexts.
-</div>
-</div>
-
-<div class='paper-box'><div class='paper-box-image'><div><div><div class="badge">Strategy x Growth</div><img src='images/project-systems.svg' alt="strategy and growth work" width="100%"></div></div></div>
-<div class='paper-box-text' markdown="1">
-
-**Strategy and Growth Work Across Consulting and Platforms**
-
-BCG, ZS, JQ Consulting, POIZON, BDA, Caitong Securities
-
-These experiences strengthened one common capability: using structured methods to solve complex business questions and then driving those insights into action. My work covered new energy strategy, healthcare consulting, Southeast Asia market research, cross-border product operations, flavoring market strategy, and food-and-beverage equity research.
-</div>
-</div>
-
 # 📖 Education
 - *2025 - 2026*: **Imperial College London**, MSc in Economics & Strategy for Business.
 - *2021 - 2025*: **The University of British Columbia**, Bachelor's degree in Finance.

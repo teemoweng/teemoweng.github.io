@@ -8,14 +8,18 @@ on:
 
 jobs:
   build:
-    if: ${{ secrets.GOOGLE_SCHOLAR_ID != '' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Skip if Scholar ID is not configured
+      if: env.GOOGLE_SCHOLAR_ID == ''
+      run: echo "GOOGLE_SCHOLAR_ID is not configured. Skipping citation sync."
     - name: Install Reqs
+      if: env.GOOGLE_SCHOLAR_ID != ''
       run: |
         sudo apt-get install python3-setuptools
     - name: Run
+      if: env.GOOGLE_SCHOLAR_ID != ''
       run: |
         cd ./google_scholar_crawler
         pip3 install -r requirements.txt
@@ -27,5 +31,5 @@ jobs:
         git add *.json
         git commit -m "Updated Citation Data"
         git push "${remote_repo}" HEAD:google-scholar-stats --force
-      env: 
+      env:
         GOOGLE_SCHOLAR_ID: ${{ secrets.GOOGLE_SCHOLAR_ID }}

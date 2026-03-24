@@ -46,7 +46,7 @@
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    border-bottom: 1px #dbe4ea solid;
+    border-bottom: 1px #efefef solid;
     padding: 2em 0 2em 0;
     
 
@@ -57,8 +57,8 @@
         order: 2;
         img {
             max-width: 400px;
-            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
-            border-radius: 18px;
+            box-shadow: 3px 3px 6px #888;
+            border-radius: 4px;
             object-fit: cover;
         }
     }
@@ -105,15 +105,14 @@ h1:before, .anchor:before {
     margin-top: .5em;
     margin-left: -.5em;
     color: white;
-    background: linear-gradient(135deg, #0f766e, #155e75);
+    background-color: #00369f;
     font-size: .8em;
-    border-radius: 999px;
 }
 
 .page__content {
     h1 {
-        color: #0f172a;
-        border-bottom: 1px solid #dbe4ea;
+        color: #494e52;
+        border-bottom: 1px solid #f2f3f3;
     }
 }
 

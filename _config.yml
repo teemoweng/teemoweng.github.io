@@ -22,7 +22,7 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 # Site Author
 author:
   name             : "Teemo Weng"
-  avatar           : "images/avatar-placeholder.svg"
+  avatar           : "images/teemo-avatar-square.jpg"
   bio              : "MSc Economics & Strategy for Business, Imperial College London"
   location         : "Hangzhou, Zhejiang, China"
   employer         : "Imperial College London"

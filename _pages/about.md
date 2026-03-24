@@ -67,5 +67,5 @@ My core contributions included full product design across both the customer and 
 - **Vibe Coding:** Claude Code, CodeX
 
 # 🎖 Honors and Awards
-- **International Student Scholarship**, The University of British Columbia.
-- **Kenneth G. Young Memorial Scholarship**, The University of British Columbia.
+- **2025.10:** International Student Scholarship, **The University of British Columbia**.
+- **2024.04:** Kenneth G. Young Memorial Scholarship, **The University of British Columbia**.

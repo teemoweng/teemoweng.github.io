@@ -50,6 +50,22 @@ Hinbor is a pickup-plus-group-ordering platform designed for university students
 </div>
 </div>
 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Competition</div><img src='images/project-blueprint.svg' alt="L'Oreal Brandstorm project" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**L'Oreal Brandstorm 2026 - LuxePop**
+
+Shanghai, China
+
+LuxePop is a strategic response to the evolving fragrance market, targeting urban professionals (25-39) who seek portable, interactive, and scenario-based scent experiences. We identified key limitations in traditional luxury sprays around portability, usability, and waste, and proposed a YSL micro-encapsulated solid fragrance balm featuring touch-activated release, alcohol-free formulation, long-lasting scent, and a refillable design.
+
+<div class="inline-links">
+  <a href="https://drive.google.com/file/d/14uT5YCMrzA3ab5zLMBuhzVeRDOuSm8id/view?usp=sharing">🗂 Google</a>
+  <a href="https://www.bilibili.com/video/BV1GTQQBcEHR/?share_source=copy_web&vd_source=8f0b918521ca1a3d6f788252257b1fb4">📺 Bilibili</a>
+</div>
+</div>
+</div>
+
 # 📖 Education
 - 2025.09 - 2026.11 (expected): **Imperial College London**, MSc in Economics & Strategy for Business.
 - 2021.09 - 2025.05: **The University of British Columbia**, Bachelor's degree in Finance.

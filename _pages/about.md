@@ -51,14 +51,14 @@ My core contributions included full product design across both the customer and 
 - *2021.09 - 2025.05*: **The University of British Columbia**, Bachelor's degree in Finance.
 - *2023.09 - 2024.06*: **Fudan University School of Management**, Exchange Program.
 
-# 💻 Experience
-- *2025*: **Beike** - AI Product Intern, focused on overseas commercial analysis.
-- *2024*: **Boston Consulting Group (BCG)** - Strategy consulting projects in new energy.
-- *2024*: **ZS Consulting** - Healthcare consulting.
-- *2024*: **JQ Consulting** - Southeast Asia market research.
-- *2024*: **POIZON** - Overseas product operations and user growth.
-- *2024*: **BDA** - Strategic consulting on the compound seasoning market.
-- *2024*: **Caitong Securities** - Industry research in the food and beverage sector.
+# 💻 Internships
+- **2025.07 - 2025.09:** AI Product Intern, Overseas Commercialization, **Beike**.
+- **2024.08 - 2024.10:** Strategy Consulting Intern, New Energy Sector, **Boston Consulting Group (BCG)**.
+- **2023.12 - 2024.03:** Healthcare Consulting Intern, Orthopedics Market Research, **ZS Consulting**.
+- **2023.09 - 2023.11:** Product Operations Intern, Overseas User Growth, **POIZON**.
+- **2023.04 - 2023.08:** Strategy Consulting Intern, Southeast Asia Market Research, **JQ Consulting**.
+- **2022.09 - 2022.12:** Industry Research Intern, Food & Beverage Sector, **Caitong Securities**.
+- **2021.05 - 2021.12:** Strategy Consulting Intern, Compound Seasoning Market, **BDA**.
 
 # 🧰 Skills
 - **Data analysis:** SQL, R, Python, Excel

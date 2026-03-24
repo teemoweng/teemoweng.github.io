@@ -47,18 +47,18 @@ My core contributions included full product design across both the customer and 
 </div>
 
 # 📖 Education
-- *2025.09 - 2026.11 (Expected)*: **Imperial College London**, MSc in Economics & Strategy for Business.
-- *2021.09 - 2025.05*: **The University of British Columbia**, Bachelor's degree in Finance.
-- *2023.09 - 2024.06*: **Fudan University School of Management**, Exchange Program.
+- 2025.09 - 2026.11 (Expected): **Imperial College London**, MSc in Economics & Strategy for Business.
+- 2021.09 - 2025.05: **The University of British Columbia**, Bachelor's degree in Finance.
+- 2023.09 - 2024.06: **Fudan University School of Management**, Exchange Program.
 
 # 💻 Internships
-- **2025.07 - 2025.09:** AI Product Intern, Overseas Commercialization, **Beike**.
-- **2024.08 - 2024.10:** Strategy Consulting Intern, New Energy Sector, **Boston Consulting Group (BCG)**.
-- **2023.12 - 2024.03:** Healthcare Consulting Intern, Orthopedics Market Research, **ZS Consulting**.
-- **2023.09 - 2023.11:** Product Operations Intern, Overseas User Growth, **POIZON**.
-- **2023.04 - 2023.08:** Strategy Consulting Intern, Southeast Asia Market Research, **JQ Consulting**.
-- **2022.09 - 2022.12:** Industry Research Intern, Food & Beverage Sector, **Caitong Securities**.
-- **2021.05 - 2021.12:** Strategy Consulting Intern, Compound Seasoning Market, **BDA**.
+- 2025.07 - 2025.09: AI Product Intern, Overseas Commercialization, **Beike**.
+- 2024.08 - 2024.10: Strategy Consulting Intern, New Energy Sector, **Boston Consulting Group (BCG)**.
+- 2023.12 - 2024.03: Healthcare Consulting Intern, Orthopedics Market Research, **ZS Consulting**.
+- 2023.09 - 2023.11: Product Operations Intern, Overseas User Growth, **POIZON**.
+- 2023.04 - 2023.08: Strategy Consulting Intern, Southeast Asia Market Research, **JQ Consulting**.
+- 2022.09 - 2022.12: Industry Research Intern, Food & Beverage Sector, **Caitong Securities**.
+- 2021.05 - 2021.12: Strategy Consulting Intern, Compound Seasoning Market, **BDA**.
 
 # 🧰 Skills
 - **Data analysis:** SQL, R, Python, Excel
@@ -67,5 +67,5 @@ My core contributions included full product design across both the customer and 
 - **Vibe Coding:** Claude Code, CodeX
 
 # 🎖 Honors and Awards
-- **2025.10:** International Student Scholarship, **The University of British Columbia**.
-- **2024.04:** Kenneth G. Young Memorial Scholarship, **The University of British Columbia**.
+- 2025.10: International Student Scholarship, **The University of British Columbia**.
+- 2024.04: Kenneth G. Young Memorial Scholarship, **The University of British Columbia**.

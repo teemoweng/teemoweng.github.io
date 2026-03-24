@@ -38,11 +38,14 @@ Hi!👋 My name is **Teemo Weng**. I am currently pursuing an **MSc in Economics
 
 **Hinbor - Campus Group Ordering Food Platform for North America**
 
-Teemo Weng and team
+Vancouver, Canada
 
-Hinbor is a pickup-plus-group-ordering platform built for university students. The model reduces delivery costs through self-pickup, improves order density through tiered group discounts, and integrates campus traffic to make unit economics more sustainable for student food ordering.
+Hinbor is a pickup-plus-group-ordering platform designed for university students. The model reduces delivery costs through self-pickup, improves order density via tiered group discounts, and leverages campus traffic to create more sustainable unit economics for student food ordering.
 
-My core contributions included full product design across both the customer and merchant sides, pricing and group-order mechanism design, merchant-first cold-start strategy, and end-to-end launch execution. Within three months, the platform reached **3,000+ users** and **30+ merchants** on a single campus.
+<div class="inline-links">
+  <a href="https://apps.apple.com/us/app/hinbor/id1561569206">🍎 App Store</a>
+  <a href="https://play.google.com/store/apps/details?hl=en_GB&id=com.hinbor&utm_source=chatgpt.com">▶ Google Play</a>
+</div>
 </div>
 </div>
 

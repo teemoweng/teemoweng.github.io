@@ -24,7 +24,7 @@ Hi!👋 My name is **Teemo Weng**. I am currently pursuing an **MSc in Economics
 # 🔥 News
 
 - *2026.03*: 🔍 I'm actively seeking product, AI, and strategy roles in China — excited to explore new opportunities.
-- *2025.09*: 🎓 I started my MSc in Economics & Strategy for Business at Imperial College London, further deepening my interest in strategy, products, and AI.
+- *2025.09*: 🎓 I started my [MSc in Economics & Strategy for Business at Imperial College London](https://www.imperial.ac.uk/business-school/masters/economics-strategy-business/), further deepening my interest in strategy, products, and AI.
 - *2025.07*: 🤖 I worked with the AI product team at Beike as a Business Analyst, focusing on overseas commercialization — a deep dive into AI + global markets!
 - *2024.08*: 📊 I worked at BCG, focusing on the new energy vehicle industry, where I analyzed Huawei's strategic positioning and business dynamics.
 - *2023.11*: 🧬 I worked at ZS Consulting, conducting orthopedics market research in the pharmaceutical industry, gaining exposure to healthcare strategy and industry insights.

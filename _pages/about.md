@@ -63,9 +63,8 @@ My core contributions included full product design across both the customer and 
 # 🧰 Skills
 - **Data analysis:** SQL, R, Python, Excel
 - **Visualization:** Tableau, Power BI
-- **Product design:** Figma
-- **Problem-solving frameworks:** MECE, issue trees
-- **Growth frameworks:** AARRR, LTV, funnel analysis
+- **Product design & prototyping:** Figma, Axure, Stitch
+- **Vibe Coding:** Claude Code, CodeX
 
 # 🎖 Honors and Awards
 - **International Student Scholarship**, The University of British Columbia.

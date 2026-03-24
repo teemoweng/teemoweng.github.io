@@ -50,7 +50,7 @@ Hinbor is a pickup-plus-group-ordering platform designed for university students
 </div>
 
 # 📖 Education
-- 2025.09 - 2026.11 (Expected): **Imperial College London**, MSc in Economics & Strategy for Business.
+- 2025.09 - 2026.11 (expected): **Imperial College London**, MSc in Economics & Strategy for Business.
 - 2021.09 - 2025.05: **The University of British Columbia**, Bachelor's degree in Finance.
 - 2023.09 - 2024.06: **Fudan University School of Management**, Exchange Program.
 

@@ -37,7 +37,7 @@ Hi!👋 My name is **Teemo Weng**. I am currently pursuing an **MSc in Economics
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Competition</div><img src='images/Project2.png' alt="L'Oreal Brandstorm project" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**L'Oreal Brandstorm 2026 - LuxePop**
+**LuxePop - L'Oreal Brandstorm 2026**
 
 Shanghai, China
 

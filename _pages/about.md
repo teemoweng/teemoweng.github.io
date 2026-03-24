@@ -27,10 +27,13 @@ Hi!👋 My name is **Teemo Weng**. I am currently pursuing an **MSc in Economics
 Selected updates on my work, internships, and current search focus.
 </div>
 
-- *2026*: Actively seeking product, AI, and strategy roles in China.
-- *2025*: Worked with the AI product team at **Beike** as a Business Analyst focused on overseas commercialization.
-- *2024*: Completed multiple strategy consulting and market research projects across **BCG**, **ZS**, **JQ Consulting**, and product-growth work at **POIZON**.
-- *2023*: Led the 0-to-1 launch of **Hinbor**, a North America campus group-ordering food platform.
+- *2026.03*: 🔍 I'm actively seeking product, AI, and strategy roles in China — excited to explore new opportunities.
+- *2025.09*: 🎓 I started my MSc in Economics & Strategy for Business at Imperial College London, further deepening my interest in strategy, products, and AI.
+- *2025.07*: 🤖 I worked with the AI product team at Beike as a Business Analyst, focusing on overseas commercialization — a deep dive into AI + global markets!
+- *2024.08*: 📊 I worked at BCG, focusing on the new energy vehicle industry, where I analyzed Huawei's strategic positioning and business dynamics.
+- *2023.11*: 🧬 I worked at ZS Consulting, conducting orthopedics market research in the pharmaceutical industry, gaining exposure to healthcare strategy and industry insights.
+- *2023.10*: 🌍 I began my first internet internship at POIZON (DeWu), working in the overseas business team on product operations (user growth).
+- *2022.03*: 🚀 I led the 0-to-1 launch of Hinbor, a North America campus group-ordering food platform — an unforgettable builder experience.
 
 # 📝 Projects
 

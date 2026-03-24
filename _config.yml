@@ -23,9 +23,9 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 author:
   name             : "Teemo Weng"
   avatar           : "images/teemo-avatar-square.jpg"
-  bio              : "MSc Economics & Strategy for Business, Imperial College London"
-  location         : "Hangzhou, Zhejiang, China"
-  employer         : "Imperial College London"
+  bio              : "Imperial College London"
+  location         : "Hangzhou, China"
+  employer         :
   pubmed           : 
   googlescholar    :
   email            : "teemow0106@163.com"
@@ -58,7 +58,7 @@ author:
   xing             :
   youtube          :
   wikipedia        :
-  cv               : "/resume/"
+  cv               :
 
 
 # Reading Files

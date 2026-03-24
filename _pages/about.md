@@ -23,10 +23,6 @@ Hi!👋 My name is **Teemo Weng**. I am currently pursuing an **MSc in Economics
 
 # 🔥 News
 
-<div class="section-intro" markdown="1">
-Selected updates on my work, internships, and current search focus.
-</div>
-
 - *2026.03*: 🔍 I'm actively seeking product, AI, and strategy roles in China — excited to explore new opportunities.
 - *2025.09*: 🎓 I started my MSc in Economics & Strategy for Business at Imperial College London, further deepening my interest in strategy, products, and AI.
 - *2025.07*: 🤖 I worked with the AI product team at Beike as a Business Analyst, focusing on overseas commercialization — a deep dive into AI + global markets!
@@ -36,10 +32,6 @@ Selected updates on my work, internships, and current search focus.
 - *2022.03*: 🚀 I led the 0-to-1 launch of Hinbor, a North America campus group-ordering food platform — an unforgettable builder experience.
 
 # 📝 Projects
-
-<div class="section-intro" markdown="1">
-Selected projects and workstreams that best represent how I connect strategy, product design, and execution.
-</div>
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">0-to-1 Startup</div><img src='images/project-blueprint.svg' alt="Hinbor project" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">

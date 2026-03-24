@@ -19,11 +19,7 @@ redirect_from:
 
 # 👋 About Me
 
-Hi! My name is **Teemo Weng**. I am currently pursuing an **MSc in Economics & Strategy for Business at Imperial College London**, focusing on **corporate strategy, business analytics, product design, and vibe coding**. I have experience in **strategy consulting (BCG, ZS, JQ, BDA)**, **internet product and business analytics (Beike, POIZON)**, and **0-to-1 startup building (Hinbor)**, with cross-company and cross-role experience in **overseas market analysis and go-to-market strategy**. I am actively seeking **product or strategy roles** in **internet, FMCG, consulting, and traditional manufacturing companies in China** and would be happy to connect.
-
-My background spans three connected tracks: **strategy consulting** across BCG, ZS, JQ, and BDA; **product and growth work** at Beike and POIZON; and **0-to-1 startup building** through Hinbor. Across these roles, I have worked on new energy, healthcare, Southeast Asia market research, AI product commercialization, cross-border growth, and marketplace operations.
-
-I am especially interested in **AI-native products**, **workflow redesign**, **platform growth and monetization**, and **go-to-market strategy** for North America and Southeast Asia. I am currently seeking **product or strategy roles in AI, technology, and platform companies in China**, especially opportunities where I can combine structured thinking, fast execution, and strong cross-functional problem solving.
+Hi!👋 My name is **Teemo Weng**. I am currently pursuing an **MSc in Economics & Strategy for Business at Imperial College London**, focusing on **corporate strategy, business analytics, product design, and vibe coding**. I have experience in **strategy consulting (BCG, ZS, JQ, BDA)**, **internet product and business analytics (Beike, POIZON)**, and **0-to-1 startup building (Hinbor)**, with cross-company and cross-role experience in **overseas market analysis and go-to-market strategy**. ‼️ I am actively seeking **product or strategy roles** in **internet, FMCG, consulting, and traditional manufacturing companies in China** and would be happy to connect.
 
 # 🔥 News
 

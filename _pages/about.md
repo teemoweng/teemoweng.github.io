@@ -55,9 +55,9 @@ My core contributions included full product design across both the customer and 
 </div>
 
 # 📖 Education
-- *2025 - 2026*: **Imperial College London**, MSc in Economics & Strategy for Business.
-- *2021 - 2025*: **The University of British Columbia**, Bachelor's degree in Finance.
-- *2023 - 2024*: **Fudan University School of Management**, Exchange program.
+- *2025.09 - 2026.11 (Expected)*: **Imperial College London**, MSc in Economics & Strategy for Business.
+- *2021.09 - 2025.05*: **The University of British Columbia**, Bachelor's degree in Finance.
+- *2023.09 - 2024.06*: **Fudan University School of Management**, Exchange Program.
 
 # 💻 Experience
 - *2025*: **Beike** - AI Product Intern, focused on overseas commercial analysis.

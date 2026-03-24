@@ -34,6 +34,22 @@ Hi!👋 My name is **Teemo Weng**. I am currently pursuing an **MSc in Economics
 
 # 📝 Projects
 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Competition</div><img src='images/Project2.png' alt="L'Oreal Brandstorm project" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**L'Oreal Brandstorm 2026 - LuxePop**
+
+Shanghai, China
+
+LuxePop is a strategic response to the evolving fragrance market, targeting urban professionals (25-39) who seek portable, interactive, and scenario-based scent experiences. We identified key limitations in traditional luxury sprays around portability, usability, and waste, and proposed a YSL micro-encapsulated solid fragrance balm featuring touch-activated release, alcohol-free formulation, long-lasting scent, and a refillable design.
+
+<div class="inline-links">
+  <a href="https://drive.google.com/file/d/14uT5YCMrzA3ab5zLMBuhzVeRDOuSm8id/view?usp=sharing">🗂 Google</a>
+  <a href="https://www.bilibili.com/video/BV1GTQQBcEHR/?share_source=copy_web&vd_source=8f0b918521ca1a3d6f788252257b1fb4">📺 Bilibili</a>
+</div>
+</div>
+</div>
+
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Prototype</div><img src='images/combined_hd.png' alt="Hinbor project" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
@@ -46,22 +62,6 @@ Hinbor is a pickup-plus-group-ordering platform designed for university students
 <div class="inline-links">
   <a href="https://apps.apple.com/us/app/hinbor/id1561569206">🍎 App Store</a>
   <a href="https://play.google.com/store/apps/details?hl=en_GB&id=com.hinbor&utm_source=chatgpt.com">▶ Google Play</a>
-</div>
-</div>
-</div>
-
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Competition</div><img src='images/project-blueprint.svg' alt="L'Oreal Brandstorm project" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-
-**L'Oreal Brandstorm 2026 - LuxePop**
-
-Shanghai, China
-
-LuxePop is a strategic response to the evolving fragrance market, targeting urban professionals (25-39) who seek portable, interactive, and scenario-based scent experiences. We identified key limitations in traditional luxury sprays around portability, usability, and waste, and proposed a YSL micro-encapsulated solid fragrance balm featuring touch-activated release, alcohol-free formulation, long-lasting scent, and a refillable design.
-
-<div class="inline-links">
-  <a href="https://drive.google.com/file/d/14uT5YCMrzA3ab5zLMBuhzVeRDOuSm8id/view?usp=sharing">🗂 Google</a>
-  <a href="https://www.bilibili.com/video/BV1GTQQBcEHR/?share_source=copy_web&vd_source=8f0b918521ca1a3d6f788252257b1fb4">📺 Bilibili</a>
 </div>
 </div>
 </div>

@@ -17,93 +17,85 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-<div class="starter-note" markdown="1">
-**Starter template:** this homepage already matches the one-page academic layout you referenced. Replace the placeholder values in `_config.yml` and `_pages/about.md`, then swap the files in `images/` with your own portrait, project thumbnails, and favicon assets.
-</div>
+I am **Teemo Weng**, currently pursuing an **MSc in Economics & Strategy for Business at Imperial College London**. I am a strategy-minded product builder with both consulting and internet-platform experience, and I enjoy translating ambiguous business problems into structured decisions and executable plans.
 
-Hi! I am **Your Name**, and this is an English-first academic homepage starter built for GitHub Pages. It keeps the same information architecture as the reference site: a fixed left profile card, anchor-based navigation, and a clean single-page flow for your research story.
+My background spans three connected tracks: **strategy consulting** across BCG, ZS, JQ, and BDA; **product and growth work** at Beike and POIZON; and **0-to-1 startup building** through Hinbor. Across these roles, I have worked on new energy, healthcare, Southeast Asia market research, AI product commercialization, cross-border growth, and marketplace operations.
 
-My work broadly spans **AI systems**, **LLM applications**, and **human-centered tooling**. This placeholder copy is here to show the right tone and length for a strong first-screen introduction: who you are, what you work on, what you are currently seeking, and where people should contact you.
-
-{% if site.author.googlescholar %}
-I also maintain a Google Scholar profile with total citations shown here: <a href='{{ site.author.googlescholar }}'><strong><span id='total_cit'>Loading...</span></strong></a>. You can enable the automatic badge after adding your Scholar ID to repository secrets. <a href='{{ site.author.googlescholar }}'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=0f766e&style=flat&label=citations"></a>
-{% endif %}
+I am especially interested in **AI-native products**, **workflow redesign**, **platform growth and monetization**, and **go-to-market strategy** for North America and Southeast Asia. I am currently seeking **product or strategy roles in AI, technology, and platform companies in China**, especially opportunities where I can combine structured thinking, fast execution, and strong cross-functional problem solving.
 
 # 🔥 News
 
 <div class="section-intro" markdown="1">
-Use this section for short, timestamped updates: new papers, internships, collaborations, demos, scholarships, or application cycles.
+Selected updates on my work, internships, and current search focus.
 </div>
 
-- *2026.03*: Launched this GitHub Pages homepage starter and adapted the structure to match a modern academic profile.
-- *2026.02*: Add your latest milestone here, such as a paper submission, lab visit, internship offer, or project release.
-- *2025.11*: Add one more update to create an immediate sense of momentum for visitors and recruiters.
+- *2026*: Actively seeking product, AI, and strategy roles in China.
+- *2025*: Worked with the AI product team at **Beike** as a Business Analyst focused on overseas commercialization.
+- *2024*: Completed multiple strategy consulting and market research projects across **BCG**, **ZS**, **JQ Consulting**, and product-growth work at **POIZON**.
+- *2023*: Led the 0-to-1 launch of **Hinbor**, a North America campus group-ordering food platform.
 
-# 📝 Publications
+# 📝 Projects
 
 <div class="section-intro" markdown="1">
-If you do not have many papers yet, keep this section title and use project-style cards. Once you have publications, swap the labels and links without changing the layout.
+Selected projects and workstreams that best represent how I connect strategy, product design, and execution.
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Research Project</div><img src='images/project-blueprint.svg' alt="project blueprint" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">0-to-1 Startup</div><img src='images/project-blueprint.svg' alt="Hinbor project" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**Project / Paper Slot 01**
+**Hinbor - Campus Group Ordering Food Platform for North America**
 
-Your Name, Collaborator Name, Advisor Name
+Teemo Weng and team
 
-A one- or two-sentence summary works best here. State the problem, your contribution, and why it matters. Keep the writing concrete and specific.
+Hinbor is a pickup-plus-group-ordering platform built for university students. The model reduces delivery costs through self-pickup, improves order density through tiered group discounts, and integrates campus traffic to make unit economics more sustainable for student food ordering.
 
-<div class="inline-links">
-  <a href="https://arxiv.org/">Paper</a>
-  <a href="https://github.com/">Code</a>
-  <a href="/resume/">Notes</a>
-</div>
+My core contributions included full product design across both the customer and merchant sides, pricing and group-order mechanism design, merchant-first cold-start strategy, and end-to-end launch execution. Within three months, the platform reached **3,000+ users** and **30+ merchants** on a single campus.
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Selected Project</div><img src='images/project-lab.svg' alt="project lab" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">AI Product</div><img src='images/project-lab.svg' alt="AI product work" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**Project / Paper Slot 02**
+**AI Product Commercial Analysis at Beike**
 
-Your Name, Teammate Name
+Beike AI Product Team
 
-Use this card for a systems project, open-source tool, benchmark, or research prototype. The thumbnail can be a paper figure, architecture diagram, or screenshot.
-
-<div class="inline-links">
-  <a href="https://github.com/">GitHub</a>
-  <a href="https://huggingface.co/">Demo</a>
-  <a href="/resume/">Overview</a>
-</div>
+At Beike, I worked on overseas commercial analysis for AI product initiatives. My role focused on understanding business opportunities, evaluating commercialization logic, and supporting decisions on how AI-enabled products could fit platform growth and monetization goals in international contexts.
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">In Progress</div><img src='images/project-systems.svg' alt="project systems" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div><div class="badge">Strategy x Growth</div><img src='images/project-systems.svg' alt="strategy and growth work" width="100%"></div></div></div>
 <div class='paper-box-text' markdown="1">
 
-**Project / Paper Slot 03**
+**Strategy and Growth Work Across Consulting and Platforms**
 
-Your Name, Research Group
+BCG, ZS, JQ Consulting, POIZON, BDA, Caitong Securities
 
-This slot is useful for upcoming work, a thesis topic, or an application-focused project that represents your current direction.
-
-<div class="inline-links">
-  <a href="https://github.com/">Repository</a>
-  <a href="https://scholar.google.com/">Citation Profile</a>
-  <a href="/resume/">Summary</a>
-</div>
+These experiences strengthened one common capability: using structured methods to solve complex business questions and then driving those insights into action. My work covered new energy strategy, healthcare consulting, Southeast Asia market research, cross-border product operations, flavoring market strategy, and food-and-beverage equity research.
 </div>
 </div>
 
-# 📖 Educations
-- *2024.09 - Present*: M.S. or Ph.D. student in **Your Department**, **Your University**, City, Country.
-- *2020.09 - 2024.06*: B.S. in **Your Major**, **Your University**, City, Country.
+# 📖 Education
+- *2025 - 2026*: **Imperial College London**, MSc in Economics & Strategy for Business.
+- *2021 - 2025*: **The University of British Columbia**, Bachelor's degree in Finance.
+- *2023 - 2024*: **Fudan University School of Management**, Exchange program.
 
-# 💻 Internships
-- *2025.06 - 2025.09*: Research Intern, **Lab or Company Name**, team focus and a short description of your work.
-- *2024.07 - 2024.10*: Software Engineer / AI Intern, **Organization Name**, with a one-line outcome or responsibility.
+# 💻 Experience
+- *2025*: **Beike** - AI Product Intern, focused on overseas commercial analysis.
+- *2024*: **Boston Consulting Group (BCG)** - Strategy consulting projects in new energy.
+- *2024*: **ZS Consulting** - Healthcare consulting.
+- *2024*: **JQ Consulting** - Southeast Asia market research.
+- *2024*: **POIZON** - Overseas product operations and user growth.
+- *2024*: **BDA** - Strategic consulting on the compound seasoning market.
+- *2024*: **Caitong Securities** - Industry research in the food and beverage sector.
+
+# 🧰 Skills
+- **Data analysis:** SQL, R, Python, Excel
+- **Visualization:** Tableau, Power BI
+- **Product design:** Figma
+- **Problem-solving frameworks:** MECE, issue trees
+- **Growth frameworks:** AARRR, LTV, funnel analysis
 
 # 🎖 Honors and Awards
-- *2026.01*: Add your scholarship, fellowship, competition result, or best paper nomination here.
-- *2025.05*: Add another award with the awarding institution or event name.
+- **International Student Scholarship**, The University of British Columbia.
+- **Kenneth G. Young Memorial Scholarship**, The University of British Columbia.

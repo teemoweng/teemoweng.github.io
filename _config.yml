@@ -6,9 +6,9 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Your Name"
-description              : "Research-focused personal homepage starter for GitHub Pages."
-repository               : "USERNAME/USERNAME.github.io"
+title                    : "Teemo Weng"
+description              : "Strategy-minded product builder with consulting, platform, and startup experience."
+repository               : "teemoweng/teemoweng.github.io"
 google_scholar_stats_use_cdn : true
 
 # google analytics
@@ -21,14 +21,14 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 
 # Site Author
 author:
-  name             : "Your Name"
+  name             : "Teemo Weng"
   avatar           : "images/avatar-placeholder.svg"
-  bio              : "Researcher | Builder | Future PhD Applicant"
-  location         : "London, UK"
-  employer         : "Your University or Lab"
+  bio              : "MSc Economics & Strategy for Business, Imperial College London"
+  location         : "Hangzhou, Zhejiang, China"
+  employer         : "Imperial College London"
   pubmed           : 
   googlescholar    :
-  email            : "your.email@example.com"
+  email            : "teemow0106@163.com"
   researchgate     :  # e.g., "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -37,14 +37,14 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : # e.g., "github username"
+  github           : "teemoweng"
   huggingface      :
   google_plus      :
   keybase          :
   instagram        :
   impactstory      : # e.g., "https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : # e.g., "linkedin username"
+  linkedin         : "teemoweng"
   dblp             : # e.g., "https://dblp.org/pid/xx/xxxx.html"
   orcid            : # e.g., "https://orcid.org/xxxx"
   pinterest        :

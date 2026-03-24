@@ -1,40 +1,48 @@
 ---
 permalink: /resume/
 title: "Resume"
-excerpt: "Resume placeholder page"
+excerpt: "Resume overview"
 author_profile: true
 ---
 
 # Resume
 
-This page gives you a visible resume entry from the sidebar even before you upload a final PDF.
-
-## Quick Replace Checklist
-
-- Replace your name, title, and contact details in `_config.yml`.
-- Replace the section content below with your own experience.
-- If you prefer a downloadable PDF, upload it to `files/` and point `author.cv` to that file instead of `/resume/`.
+This page serves as a web version of my resume. A downloadable PDF can be added later.
 
 ## Summary
 
-Write a short 3-4 sentence profile here describing your background, strengths, and current goals.
+I am a strategy-minded product builder with experience across consulting, platform product, growth, and startup execution. My background combines structured problem solving from strategy work with hands-on product and commercialization experience in internet and AI-related settings. I am particularly interested in AI-native products, workflow redesign, platform growth, and turning complex business questions into clear, actionable plans.
 
 ## Education
 
-- `2024 - Present`: Degree, institution, advisor, research focus.
-- `2020 - 2024`: Degree, institution, GPA or rank if useful.
+- `2025 - 2026`: Imperial College London, MSc Economics & Strategy for Business.
+- `2021 - 2025`: The University of British Columbia, Bachelor's degree in Finance.
+- `2023 - 2024`: Fudan University School of Management, exchange program.
 
 ## Experience
 
-- `2025`: Research or engineering internship with impact statement.
-- `2024`: Lab experience, teaching assistance, or open-source work.
+- `2025`: Beike, AI Product Intern, overseas commercial analysis.
+- `2024`: Boston Consulting Group (BCG), strategy consulting in new energy.
+- `2024`: ZS Consulting, healthcare consulting.
+- `2024`: JQ Consulting, Southeast Asia market research.
+- `2024`: POIZON, overseas product operations and user growth.
+- `2024`: BDA, strategy consulting on the compound seasoning market.
+- `2024`: Caitong Securities, food and beverage industry research.
 
 ## Projects
 
-- Project name, one-line description, and link.
-- Project name, one-line description, and link.
+- `Hinbor`: Led the 0-to-1 design and launch of a campus group-ordering food platform in North America.
+- `AI product commercialization`: Supported analysis on overseas commercialization opportunities at Beike's AI product team.
+- `Strategy x growth workstreams`: Worked across consulting and platform environments on growth, market entry, and business problem solving.
+
+## Skills
+
+- `Data analysis`: SQL, R, Python, Excel
+- `Visualization`: Tableau, Power BI
+- `Product design`: Figma
+- `Frameworks`: MECE, issue tree, AARRR, LTV, funnel analysis
 
 ## Awards
 
-- Scholarship, fellowship, competition, or paper award.
-- Scholarship, fellowship, competition, or paper award.
+- International Student Scholarship, The University of British Columbia.
+- Kenneth G. Young Memorial Scholarship, The University of British Columbia.

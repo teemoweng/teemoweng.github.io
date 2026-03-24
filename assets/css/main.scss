@@ -55,7 +55,12 @@
         display: flex;
         width: 100%;
         order: 2;
-        margin-top: 1.25rem;
+        margin-top: 1.75rem;
+        > div {
+            position: relative;
+            width: 100%;
+            padding-top: 0.75rem;
+        }
         img {
             max-width: 400px;
             box-shadow: 3px 3px 6px #888;
@@ -76,6 +81,9 @@
             max-width: 40%;
             order: 1;
             margin-top: 0;
+            > div {
+                padding-top: 0;
+            }
         }
         
         .paper-box-text{

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Project thumbnail">
+  <rect width="800" height="520" rx="32" fill="#eff6ff"/>
+  <rect x="52" y="52" width="696" height="416" rx="24" fill="#0f172a"/>
+  <rect x="96" y="104" width="192" height="20" rx="10" fill="#5eead4"/>
+  <rect x="96" y="152" width="608" height="10" rx="5" fill="#334155"/>
+  <rect x="96" y="184" width="468" height="10" rx="5" fill="#334155"/>
+  <rect x="96" y="246" width="160" height="152" rx="18" fill="#0f766e"/>
+  <rect x="280" y="246" width="160" height="152" rx="18" fill="#155e75"/>
+  <rect x="464" y="246" width="160" height="152" rx="18" fill="#1d4ed8"/>
+  <text x="96" y="92" font-family="Avenir Next, Trebuchet MS, sans-serif" font-size="28" fill="#f8fafc">PROJECT SLOT</text>
+</svg>

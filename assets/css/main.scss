@@ -1,0 +1,173 @@
+---
+---
+
+/*
+ *    Minimal Mistakes Jekyll Theme
+ *
+ *  - Michael Rose
+ *  - mademistakes.com
+ *  - https://twitter.com/mmistakes
+ *
+*/
+
+@import "vendor/breakpoint/breakpoint"; // media query mixins
+@import "variables";
+@import "mixins";
+@import "vendor/susy/susy";
+
+@import "reset";
+@import "base";
+
+@import "utilities";
+@import "animations";
+@import "tables";
+@import "buttons";
+@import "notices";
+@import "masthead";
+@import "navigation";
+@import "footer";
+@import "syntax";
+
+@import "forms";
+
+@import "page";
+@import "archive";
+@import "sidebar";
+
+@import "vendor/font-awesome/fontawesome";
+@import "vendor/font-awesome/solid";
+@import "vendor/font-awesome/brands";
+@import "vendor/magnific-popup/magnific-popup";
+@import "print";
+
+.paper-box {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-bottom: 1px #dbe4ea solid;
+    padding: 2em 0 2em 0;
+    
+
+    .paper-box-image{
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        order: 2;
+        img {
+            max-width: 400px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+            border-radius: 18px;
+            object-fit: cover;
+        }
+    }
+    
+    .paper-box-text{
+        max-width: 100%;
+        order: 1;
+    }
+    
+    @include breakpoint($medium) {
+        .paper-box-image{
+            justify-content: left;
+            min-width: 200px;
+            max-width: 40%;
+            order: 1;
+        }
+        
+        .paper-box-text{
+            justify-content: left;
+            padding-left: 2em;
+            max-width: 60%;
+            order: 2;
+        }
+
+    }
+
+
+}
+
+$scroll_offset : 2em;
+h1:before, .anchor:before { 
+    content: ''; 
+    display: block; 
+    position: relative; 
+    width: 0; 
+    height: $scroll_offset; 
+    margin-top: -$scroll_offset;
+}
+
+.badge {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    position: absolute;
+    margin-top: .5em;
+    margin-left: -.5em;
+    color: white;
+    background: linear-gradient(135deg, #0f766e, #155e75);
+    font-size: .8em;
+    border-radius: 999px;
+}
+
+.page__content {
+    h1 {
+        color: #0f172a;
+        border-bottom: 1px solid #dbe4ea;
+    }
+}
+
+.starter-note,
+.section-intro {
+    border-radius: 18px;
+    padding: 1rem 1.2rem;
+    margin: 1.25rem 0;
+}
+
+.starter-note {
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.1), rgba(21, 94, 117, 0.06));
+    border: 1px solid rgba(15, 118, 110, 0.18);
+}
+
+.section-intro {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.paper-box-text p:last-child {
+    margin-bottom: 0;
+}
+
+.inline-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.inline-links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    background: #eff6ff;
+    text-decoration: none !important;
+}
+
+.inline-links a:hover {
+    background: #dbeafe;
+}
+
+.author__urls .author__resume a {
+    margin-top: 0.4rem;
+    padding: 0.65rem 0.9rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #0f766e, #155e75);
+    color: #fff;
+    text-decoration: none;
+}
+
+.author__urls .author__resume a:hover {
+    text-decoration: none;
+    filter: brightness(1.05);
+}

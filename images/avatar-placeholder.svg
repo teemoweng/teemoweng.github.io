@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Profile placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="480" rx="56" fill="url(#bg)"/>
+  <circle cx="240" cy="176" r="88" fill="#e2e8f0"/>
+  <path d="M114 388c22-67 69-104 126-104s104 37 126 104" fill="#e2e8f0"/>
+  <text x="240" y="440" text-anchor="middle" font-family="Avenir Next, Trebuchet MS, sans-serif" font-size="30" fill="#f8fafc">YOUR PHOTO</text>
+</svg>

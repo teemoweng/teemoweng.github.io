@@ -33,7 +33,7 @@ Hi!👋 My name is **Teemo Weng**. I am currently pursuing an **MSc in Economics
 
 # 📝 Projects
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">0-to-1 Startup</div><img src='images/combined_hd.png' alt="Hinbor project" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Prototype</div><img src='images/combined_hd.png' alt="Hinbor project" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **Hinbor - Campus Group Ordering Food Platform for North America**

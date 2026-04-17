@@ -1,24 +1,28 @@
-# Academic Homepage Starter
+# Teemo Weng Personal Website
 
-This repository is now a ready-to-customize GitHub Pages academic homepage with the same overall structure as [xuyan923r.github.io](https://xuyan923r.github.io/): sticky profile sidebar, one-page anchor navigation, and clean sections for research, experience, and achievements.
+Live site: https://teemoweng.github.io/
 
-## What to edit first
+This repository contains the source code for Teemo Weng's personal website, hosted with GitHub Pages and built with Jekyll. The site serves as a personal homepage, portfolio, and resume hub, with sections for background, news, projects, education, internships, skills, and awards.
 
-1. Update personal metadata in `_config.yml`.
-2. Replace the placeholder content in `_pages/about.md`.
-3. Swap the placeholder graphics in `images/` with your own avatar, project figures, and favicon.
-4. Change `repository` in `_config.yml` to `USERNAME/USERNAME.github.io`.
-5. Push to a GitHub repository named `USERNAME.github.io` and enable GitHub Pages.
+## What is in this repo
 
-## Main sections included
+- `/_pages/about.md`: homepage content
+- `/_pages/resume.md`: resume page
+- `/_config.yml`: site-wide metadata and configuration
+- `/images`: avatar, project visuals, favicon, and other static assets
+- `/_includes`, `/_layouts`, `/_sass`: shared templates and styling
+- `/google_scholar_crawler`: optional script for generating Google Scholar citation data
 
-- `About Me`
-- `News`
-- `Publications`
-- `Educations`
-- `Internships`
-- `Honors and Awards`
-- `Resume` page linked from the sidebar
+## Main sections on the site
+
+- About Me
+- News
+- Projects
+- Education
+- Internships
+- Skills
+- Honors and Awards
+- Resume
 
 ## Local preview
 
@@ -27,18 +31,28 @@ bundle install
 bundle exec jekyll serve
 ```
 
-Then open [http://127.0.0.1:4000](http://127.0.0.1:4000).
+Then open `http://127.0.0.1:4000`.
+
+If you prefer the helper script in this repo, you can also run:
+
+```bash
+bash run_server.sh
+```
+
+## Deployment
+
+The site is intended to be deployed through GitHub Pages at:
+
+https://teemoweng.github.io/
+
+After pushing changes to the connected GitHub Pages repository, the updated site can be published online.
 
 ## Optional Google Scholar automation
 
-If you want automatic citation data:
+If you want to generate citation data automatically:
 
-1. Find your Google Scholar ID from the `user=` parameter in your Scholar URL.
+1. Find your Google Scholar ID from the `user=` parameter in your Scholar profile URL.
 2. Add a repository secret named `GOOGLE_SCHOLAR_ID`.
 3. Fill in `author.googlescholar` in `_config.yml`.
 
-The workflow now skips itself when that secret is not set, so the homepage works fine without Scholar integration.
-
-## Credits
-
-This starter is based on [RayeRen/acad-homepage.github.io](https://github.com/RayeRen/acad-homepage.github.io), which in turn builds on Minimal Mistakes and Academic Pages.
+The optional crawler in `/google_scholar_crawler` writes citation data files that can be displayed on the site when configured.

@@ -1,6 +1,6 @@
 # Academic Homepage Starter
 
-This repository is now a ready-to-customize GitHub Pages academic homepage with the same overall structure as [xuyan923r.github.io](https://xuyan923r.github.io/): sticky profile sidebar, one-page anchor navigation, and clean sections for research, experience, and achievements.
+This repository is now a ready-to-customize GitHub Pages academic homepage with the overall structure: sticky profile sidebar, one-page anchor navigation, and clean sections for research, experience, and achievements.
 
 ## What to edit first
 

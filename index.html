@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teemo Weng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #faf6f0;
+  --bg2: #f3ece1;
+  --bg3: #e9dfd1;
+  --fg: #1c1208;
+  --fg2: #6b5440;
+  --fg3: #b09a82;
+  --accent: oklch(62% 0.19 42);
+  --accent2: oklch(52% 0.19 42);
+  --border: rgba(180,120,60,0.15);
+  --card: rgba(255,255,255,0.7);
+  --card-hover: rgba(255,255,255,0.9);
+  --shadow: 0 8px 32px rgba(100,60,20,0.10);
+  --radius: 12px;
+}
+[data-theme="dark"] {
+  --bg: #1a1410;
+  --bg2: #231c15;
+  --bg3: #2d241a;
+  --fg: #f5ede0;
+  --fg2: #b09a82;
+  --fg3: #6b5440;
+  --accent: oklch(68% 0.19 42);
+  --accent2: oklch(58% 0.19 42);
+  --border: rgba(180,120,60,0.18);
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,200,120,0.07);
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  transition: background 0.4s, color 0.4s;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  height: 60px;
+  background: rgba(250,246,240,0.82);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s;
+}
+[data-theme="dark"] nav {
+  background: rgba(26,20,16,0.82);
+}
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+.nav-links {
+  display: flex; gap: 32px; list-style: none;
+}
+.nav-links a {
+  color: var(--fg2); text-decoration: none; font-size: 13px;
+  font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+.nav-controls { display: flex; align-items: center; gap: 12px; }
+
+.btn-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--fg2); cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; font-family: 'JetBrains Mono', monospace;
+}
+.btn-icon:hover { border-color: var(--accent); color: var(--accent); }
+
+.lang-toggle {
+  display: flex; gap: 4px; background: var(--bg3);
+  border-radius: 8px; padding: 3px;
+}
+.lang-btn {
+  padding: 4px 10px; border-radius: 5px; font-size: 11px;
+  font-weight: 600; cursor: pointer; border: none;
+  background: transparent; color: var(--fg3);
+  transition: all 0.2s; letter-spacing: 0.05em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.lang-btn.active { background: var(--accent); color: #000; }
+
+/* ── HERO ── */
+#hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+canvas#particles {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-content {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 340px;
+  gap: 80px; align-items: center;
+  max-width: 1100px; width: 100%; padding: 0 40px;
+}
+.hero-text { }
+.hero-tag {
+  display: inline-block; font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--accent); letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 20px;
+  padding: 4px 12px; border: 1px solid var(--border);
+  border-radius: 99px;
+}
+.hero-name {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 700; line-height: 1.05;
+  letter-spacing: -0.02em; margin-bottom: 20px;
+}
+.hero-name span { color: var(--accent); }
+.hero-typing {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px; color: var(--fg2);
+  margin-bottom: 28px; min-height: 24px;
+}
+.cursor {
+  display: inline-block; width: 2px; height: 1em;
+  background: var(--accent); margin-left: 2px;
+  vertical-align: middle; animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.hero-desc {
+  font-size: 15px; line-height: 1.75; color: var(--fg2);
+  max-width: 520px; margin-bottom: 36px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  padding: 12px 28px; background: var(--accent); color: #000;
+  border: none; border-radius: 8px; font-weight: 600;
+  font-size: 14px; cursor: pointer; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: all 0.2s; text-decoration: none; display: inline-flex;
+  align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+.btn-outline {
+  padding: 12px 28px; background: transparent;
+  border: 1px solid var(--border); color: var(--fg);
+  border-radius: 8px; font-weight: 500; font-size: 14px;
+  cursor: pointer; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: all 0.2s; text-decoration: none; display: inline-flex;
+  align-items: center; gap: 8px;
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-avatar {
+  display: flex; align-items: center; justify-content: center;
+}
+.avatar-wrap {
+  position: relative; width: 260px; height: 260px;
+}
+.avatar-wrap::before {
+  content: '';
+  position: absolute; inset: -8px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0.3;
+  animation: pulse-ring 3s ease-in-out infinite;
+}
+.avatar-wrap::after {
+  content: '';
+  position: absolute; inset: -20px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0.1;
+  animation: pulse-ring 3s ease-in-out infinite 0.5s;
+}
+@keyframes pulse-ring {
+  0%,100%{transform:scale(1);opacity:0.3}
+  50%{transform:scale(1.04);opacity:0.15}
+}
+.avatar-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  filter: grayscale(10%);
+}
+.avatar-badge {
+  position: absolute; bottom: 8px; right: 8px;
+  background: var(--accent); color: #000;
+  font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 99px;
+  white-space: nowrap;
+}
+
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--fg3); font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; font-family: 'JetBrains Mono', monospace;
+  animation: float 2s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); }
+
+/* ── SECTIONS ── */
+section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+.section-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 42px); font-weight: 700;
+  letter-spacing: -0.02em; margin-bottom: 48px;
+}
+.section-title span { color: var(--accent); }
+
+/* ── NEWS ── */
+.news-list { display: flex; flex-direction: column; gap: 0; }
+.news-item {
+  display: grid; grid-template-columns: 120px 1fr;
+  gap: 24px; align-items: start;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.5s;
+}
+.news-item.visible { opacity: 1; transform: none; }
+.news-date {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--fg3); padding-top: 3px;
+}
+.news-text { font-size: 15px; line-height: 1.6; color: var(--fg2); }
+.news-text strong { color: var(--fg); }
+
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+.project-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: all 0.3s; cursor: pointer;
+  opacity: 0; transform: translateY(24px);
+}
+.project-card.visible { opacity: 1; transform: none; }
+.project-card:hover {
+  border-color: var(--accent);
+  background: var(--card-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.project-img {
+  width: 100%; height: 180px; object-fit: cover;
+  background: var(--bg3); display: flex; align-items: center;
+  justify-content: center; color: var(--fg3);
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+}
+.project-img-placeholder {
+  width: 100%; height: 180px; background: var(--bg3);
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 8px; position: relative;
+  overflow: hidden;
+}
+.project-img-placeholder::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    45deg, transparent, transparent 8px,
+    rgba(255,255,255,0.015) 8px, rgba(255,255,255,0.015) 16px
+  );
+}
+.project-img-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--fg3); z-index: 1;
+}
+.project-badge {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--accent); color: #000;
+  font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 4px; letter-spacing: 0.05em;
+}
+.project-body { padding: 20px; }
+.project-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+.project-sub { font-size: 12px; color: var(--fg3); margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace; }
+.project-desc { font-size: 13px; color: var(--fg2); line-height: 1.6; margin-bottom: 16px; }
+.project-links { display: flex; gap: 8px; }
+.project-link {
+  font-size: 12px; color: var(--accent); text-decoration: none;
+  padding: 4px 10px; border: 1px solid var(--border);
+  border-radius: 6px; transition: all 0.2s;
+  font-family: 'JetBrains Mono', monospace;
+}
+.project-link:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+  width: 1px; background: linear-gradient(to bottom, var(--accent), transparent);
+}
+.tl-item {
+  position: relative; padding-bottom: 40px;
+  opacity: 0; transform: translateX(-16px);
+  transition: all 0.5s;
+}
+.tl-item.visible { opacity: 1; transform: none; }
+.tl-item::before {
+  content: ''; position: absolute; left: -36px; top: 6px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--accent);
+  transition: background 0.3s;
+}
+.tl-item:hover::before { background: var(--accent); }
+.tl-period {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--accent); margin-bottom: 4px; letter-spacing: 0.05em;
+}
+.tl-role { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+.tl-company { font-size: 14px; color: var(--fg2); margin-bottom: 6px; }
+.tl-desc { font-size: 13px; color: var(--fg3); line-height: 1.6; }
+
+/* ── EDUCATION ── */
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.edu-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px;
+  transition: all 0.3s;
+  opacity: 0; transform: translateY(20px);
+}
+.edu-card.visible { opacity: 1; transform: none; }
+.edu-card:hover { border-color: var(--accent); background: var(--card-hover); }
+.edu-period { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 8px; }
+.edu-school { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.edu-degree { font-size: 13px; color: var(--fg2); }
+
+/* ── SKILLS ── */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+.skill-group {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.4s;
+}
+.skill-group.visible { opacity: 1; transform: none; }
+.skill-group:hover { border-color: var(--accent); }
+.skill-cat {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-tag {
+  font-size: 12px; padding: 4px 10px;
+  background: var(--bg3); color: var(--fg2);
+  border-radius: 6px; border: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── CONTACT ── */
+.contact-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+}
+.contact-info { }
+.contact-info p { color: var(--fg2); line-height: 1.75; margin-bottom: 28px; font-size: 15px; }
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-link {
+  display: flex; align-items: center; gap: 12px;
+  color: var(--fg2); text-decoration: none; font-size: 14px;
+  padding: 12px 16px; background: var(--card);
+  border: 1px solid var(--border); border-radius: 8px;
+  transition: all 0.2s;
+}
+.contact-link:hover { border-color: var(--accent); color: var(--accent); }
+.contact-link-icon { width: 20px; text-align: center; color: var(--accent); }
+
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 12px; color: var(--fg3); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+.form-input, .form-textarea {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 14px; color: var(--fg);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px;
+  transition: border-color 0.2s; outline: none;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+.form-textarea { min-height: 120px; resize: vertical; }
+.form-submit {
+  padding: 12px; background: var(--accent); color: #000;
+  border: none; border-radius: 8px; font-weight: 700;
+  font-size: 14px; cursor: pointer; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: all 0.2s; margin-top: 4px;
+}
+.form-submit:hover { background: var(--accent2); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 40px; text-align: center;
+  color: var(--fg3); font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+footer span { color: var(--accent); }
+
+/* ── REVEAL ── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 0 20px; text-align: center; }
+  .hero-avatar { order: -1; }
+  .hero-actions { justify-content: center; }
+  .hero-desc { margin: 0 auto 36px; }
+  section { padding: 60px 20px; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ── TWEAKS PANEL ── */
+.tweaks-panel {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px; width: 260px;
+  box-shadow: var(--shadow); display: none;
+}
+.tweaks-panel.open { display: block; }
+.tweaks-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent);
+  font-family: 'JetBrains Mono', monospace; margin-bottom: 16px;
+}
+.tweak-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.tweak-label { font-size: 12px; color: var(--fg2); }
+.tweak-select, .tweak-color {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--fg); border-radius: 6px; padding: 4px 8px;
+  font-size: 12px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">tw<span style="color:var(--fg3)">.</span>dev</div>
+  <ul class="nav-links">
+    <li><a href="#news" data-i18n="nav_news">News</a></li>
+    <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+    <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
+    <li><a href="#education" data-i18n="nav_education">Education</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="nav-controls">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('zh')">中</button>
+    </div>
+    <button class="btn-icon" onclick="toggleTheme()" title="Toggle theme" id="theme-btn">☀</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="particles"></canvas>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-tag" data-i18n="hero_tag">Strategy · Product · AI</div>
+      <h1 class="hero-name">Teemo<br><span>Weng.</span></h1>
+      <div class="hero-typing"><span id="typing-text"></span><span class="cursor"></span></div>
+      <p class="hero-desc" data-i18n="hero_desc">
+        MSc student at Imperial College London. Experienced in strategy consulting (BCG), internet product (Beike, POIZON), and startup building. Seeking product & strategy roles in China.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#" onclick="downloadResume()" data-i18n="btn_resume">
+          ↓ Download Resume
+        </a>
+        <a class="btn-outline" href="#contact" data-i18n="btn_contact">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-avatar">
+      <div class="avatar-wrap">
+        <img src="uploads/avatar-1776542946551.jpg" alt="Teemo Weng">
+        <div class="avatar-badge" data-i18n="avatar_badge">@ Imperial College</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span data-i18n="scroll_hint">scroll</span>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="section-label" data-i18n="section_news">Latest</div>
+  <h2 class="section-title reveal">What's <span>New</span></h2>
+  <div class="news-list">
+    <div class="news-item">
+      <div class="news-date">2026.03</div>
+      <div class="news-text" data-i18n="news_1">🔍 Actively seeking <strong>product, AI, and strategy roles in China</strong> — excited to explore new opportunities.</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">2025.09</div>
+      <div class="news-text" data-i18n="news_2">🎓 Started <strong>MSc in Economics & Strategy for Business</strong> at Imperial College London.</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">2025.07</div>
+      <div class="news-text" data-i18n="news_3">🤖 Joined <strong>Beike's AI product team</strong> as a Business Analyst, focusing on overseas commercialization.</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">2024.08</div>
+      <div class="news-text" data-i18n="news_4">📊 Worked at <strong>BCG</strong>, analyzing Huawei's strategic positioning in the new energy vehicle industry.</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">2023.10</div>
+      <div class="news-text" data-i18n="news_5">🌍 First internet internship at <strong>POIZON (得物)</strong>, overseas product operations & user growth.</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date">2022.03</div>
+      <div class="news-text" data-i18n="news_6">🚀 Led 0-to-1 launch of <strong>Hinbor</strong>, a North America campus group-ordering food platform.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label" data-i18n="section_projects">Work</div>
+  <h2 class="section-title reveal">Selected <span>Projects</span></h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div style="position:relative;height:180px;overflow:hidden;">
+        <div class="project-badge">Competition</div>
+        <img src="uploads/Project2.png" style="width:100%;height:100%;object-fit:cover;" alt="LuxePop">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-i18n="proj1_title">LuxePop — L'Oreal Brandstorm 2026</div>
+        <div class="project-sub">Shanghai, China</div>
+        <div class="project-desc" data-i18n="proj1_desc">Strategic YSL fragrance innovation: micro-encapsulated solid fragrance balm targeting urban professionals aged 25–39, with touch-activated release, alcohol-free formula, and refillable design.</div>
+        <div class="project-links">
+          <a class="project-link" href="https://drive.google.com/file/d/14uT5YCMrzA3ab5zLMBuhzVeRDOuSm8id/view" target="_blank">🗂 Slides</a>
+          <a class="project-link" href="https://www.bilibili.com/video/BV1GTQQBcEHR/" target="_blank">📺 Video</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div style="position:relative;height:180px;overflow:hidden;">
+        <div class="project-badge">Startup</div>
+        <img src="uploads/combined_hd.png" style="width:100%;height:100%;object-fit:cover;" alt="Hinbor">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-i18n="proj2_title">Hinbor — Campus Group Ordering</div>
+        <div class="project-sub">Vancouver, Canada</div>
+        <div class="project-desc" data-i18n="proj2_desc">0-to-1 pickup + group-ordering platform for university students. Reduces delivery costs via self-pickup and improves order density with tiered group discounts.</div>
+        <div class="project-links">
+          <a class="project-link" href="https://apps.apple.com/us/app/hinbor/id1561569206" target="_blank">🍎 App Store</a>
+          <a class="project-link" href="https://play.google.com/store/apps/details?id=com.hinbor" target="_blank">▶ Play</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div style="position:relative;height:180px;overflow:hidden;">
+        <div class="project-badge">AI Product</div>
+        <img src="uploads/pasted-1776544288128-0.png" style="width:100%;height:100%;object-fit:cover;" alt="Beike AI">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-i18n="proj3_title">Beike AI — Overseas Commercialization</div>
+        <div class="project-sub">Beijing, China · 2025</div>
+        <div class="project-desc" data-i18n="proj3_desc">Analyzed overseas commercialization opportunities for Beike's AI product team, focusing on market entry strategies and AI-native product positioning in global markets.</div>
+        <div class="project-links">
+          <a class="project-link" href="#contact">Contact for details</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label" data-i18n="section_exp">Career</div>
+  <h2 class="section-title reveal">Experience <span>Timeline</span></h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-period">2025.07 – 2025.09</div>
+      <div class="tl-role" data-i18n="exp1_role">AI Product Intern · Overseas Commercialization</div>
+      <div class="tl-company">Beike 贝壳找房</div>
+      <div class="tl-desc" data-i18n="exp1_desc">Supported overseas commercialization analysis for AI products; researched global market entry strategies and competitive positioning.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">2024.08 – 2024.10</div>
+      <div class="tl-role" data-i18n="exp2_role">Strategy Consulting Intern · New Energy Sector</div>
+      <div class="tl-company">Boston Consulting Group (BCG)</div>
+      <div class="tl-desc" data-i18n="exp2_desc">Analyzed Huawei's strategic positioning and business dynamics in the new energy vehicle industry.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">2023.12 – 2024.03</div>
+      <div class="tl-role" data-i18n="exp3_role">Healthcare Consulting Intern · Orthopedics</div>
+      <div class="tl-company">ZS Consulting</div>
+      <div class="tl-desc" data-i18n="exp3_desc">Conducted orthopedics market research in the pharmaceutical industry; exposure to healthcare strategy and industry insights.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">2023.09 – 2023.11</div>
+      <div class="tl-role" data-i18n="exp4_role">Product Operations Intern · Overseas User Growth</div>
+      <div class="tl-company">POIZON (得物 DeWu)</div>
+      <div class="tl-desc" data-i18n="exp4_desc">Worked in the overseas business team on product operations and user growth strategies.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">2023.04 – 2023.08</div>
+      <div class="tl-role" data-i18n="exp5_role">Strategy Consulting Intern · Southeast Asia</div>
+      <div class="tl-company">JQ Consulting</div>
+      <div class="tl-desc" data-i18n="exp5_desc">Overseas market analysis and go-to-market strategy for Southeast Asia market research.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">2022.09 – 2022.12</div>
+      <div class="tl-role" data-i18n="exp6_role">Industry Research Intern · Food & Beverage</div>
+      <div class="tl-company">Caitong Securities 财通证券</div>
+      <div class="tl-desc" data-i18n="exp6_desc">Food and beverage sector industry research and analysis.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-period">2021.05 – 2021.12</div>
+      <div class="tl-role" data-i18n="exp7_role">Strategy Consulting Intern · Compound Seasoning</div>
+      <div class="tl-company">BDA Consulting</div>
+      <div class="tl-desc" data-i18n="exp7_desc">Strategy consulting focusing on compound seasoning market research and business development.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label" data-i18n="section_edu">Academia</div>
+  <h2 class="section-title reveal">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-period">2025 – 2026</div>
+      <div class="edu-school" data-i18n="edu1_school">Imperial College London</div>
+      <div class="edu-degree" data-i18n="edu1_degree">MSc Economics & Strategy for Business</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-period">2023 – 2024</div>
+      <div class="edu-school" data-i18n="edu2_school">Fudan University 复旦大学</div>
+      <div class="edu-degree" data-i18n="edu2_degree">Exchange Program · School of Management</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-period">2021 – 2025</div>
+      <div class="edu-school" data-i18n="edu3_school">University of British Columbia</div>
+      <div class="edu-degree" data-i18n="edu3_degree">Bachelor's Degree in Finance</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label" data-i18n="section_skills">Tools</div>
+  <h2 class="section-title reveal">Skills & <span>Stack</span></h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-cat" data-i18n="skill_cat1">Data Analysis</div>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">Excel</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-cat" data-i18n="skill_cat2">Visualization</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Power BI</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-cat" data-i18n="skill_cat3">Product Design</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Axure</span>
+        <span class="skill-tag">Stitch</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-cat" data-i18n="skill_cat4">Vibe Coding</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Claude Code</span>
+        <span class="skill-tag">CodeX</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label" data-i18n="section_contact">Connect</div>
+  <h2 class="section-title reveal">Get in <span>Touch</span></h2>
+  <div class="contact-wrap">
+    <div class="contact-info reveal">
+      <p data-i18n="contact_desc">I'm actively seeking product, AI, and strategy roles in China. If you have an opportunity or just want to chat, feel free to reach out!</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:teemow0106@163.com">
+          <span class="contact-link-icon">✉</span>
+          teemow0106@163.com
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/teemoweng" target="_blank">
+          <span class="contact-link-icon">in</span>
+          linkedin.com/in/teemoweng
+        </a>
+        <a class="contact-link" href="https://github.com/teemoweng" target="_blank">
+          <span class="contact-link-icon">⌥</span>
+          github.com/teemoweng
+        </a>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-group">
+        <label class="form-label" data-i18n="form_name">Name</label>
+        <input class="form-input" type="text" placeholder="Your name" id="f-name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="form_email">Email</label>
+        <input class="form-input" type="email" placeholder="your@email.com" id="f-email">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="form_msg">Message</label>
+        <textarea class="form-textarea" placeholder="Hello Teemo, I'd like to connect..." id="f-msg"></textarea>
+      </div>
+      <button class="form-submit" onclick="sendMsg()" data-i18n="form_send">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Teemo Weng</span> · Designed with intention · <span>2026</span>
+</footer>
+
+<!-- TWEAKS PANEL -->
+<div class="tweaks-panel" id="tweaks-panel">
+  <div class="tweaks-title">// Tweaks</div>
+  <div class="tweak-row">
+    <span class="tweak-label">Accent Color</span>
+    <input type="color" class="tweak-color" value="#00e87a" onchange="setAccent(this.value)">
+  </div>
+  <div class="tweak-row">
+    <span class="tweak-label">Font</span>
+    <select class="tweak-select" onchange="setFont(this.value)">
+      <option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Space Grotesk</option>
+      <option value="'DM Sans', sans-serif">DM Sans</option>
+      <option value="'Helvetica Neue', sans-serif">Helvetica</option>
+    </select>
+  </div>
+  <div class="tweak-row">
+    <span class="tweak-label">Particles</span>
+    <select class="tweak-select" id="particle-style" onchange="setParticleStyle(this.value)">
+      <option value="dots">Dots</option>
+      <option value="mesh">Mesh</option>
+      <option value="off">Off</option>
+    </select>
+  </div>
+</div>
+
+<script>
+// ── i18n ──
+const i18n = {
+  en: {
+    nav_news: 'News', nav_projects: 'Projects', nav_experience: 'Experience',
+    nav_education: 'Education', nav_contact: 'Contact',
+    hero_tag: 'Strategy · Product · AI',
+    hero_desc: 'MSc student at Imperial College London. Experienced in strategy consulting (BCG), internet product (Beike, POIZON), and startup building. Seeking product & strategy roles in China.',
+    btn_resume: '↓ Download Resume', btn_contact: 'Get in Touch',
+    avatar_badge: '@ Imperial College', scroll_hint: 'scroll',
+    section_news: 'Latest', section_projects: 'Work', section_exp: 'Career',
+    section_edu: 'Academia', section_skills: 'Tools', section_contact: 'Connect',
+    news_1: '🔍 Actively seeking <strong>product, AI, and strategy roles in China</strong> — excited to explore new opportunities.',
+    news_2: '🎓 Started <strong>MSc in Economics & Strategy for Business</strong> at Imperial College London.',
+    news_3: '🤖 Joined <strong>Beike\'s AI product team</strong> as a Business Analyst, focusing on overseas commercialization.',
+    news_4: '📊 Worked at <strong>BCG</strong>, analyzing Huawei\'s strategic positioning in the new energy vehicle industry.',
+    news_5: '🌍 First internet internship at <strong>POIZON (得物)</strong>, overseas product operations & user growth.',
+    news_6: '🚀 Led 0-to-1 launch of <strong>Hinbor</strong>, a North America campus group-ordering food platform.',
+    proj1_title: 'LuxePop — L\'Oreal Brandstorm 2026',
+    proj1_desc: 'Strategic YSL fragrance innovation: micro-encapsulated solid fragrance balm targeting urban professionals aged 25–39, with touch-activated release, alcohol-free formula, and refillable design.',
+    proj2_title: 'Hinbor — Campus Group Ordering',
+    proj2_desc: '0-to-1 pickup + group-ordering platform for university students. Reduces delivery costs via self-pickup and improves order density with tiered group discounts.',
+    proj3_title: 'Beike AI — Overseas Commercialization',
+    proj3_desc: 'Analyzed overseas commercialization opportunities for Beike\'s AI product team, focusing on market entry strategies and AI-native product positioning.',
+    exp1_role: 'AI Product Intern · Overseas Commercialization',
+    exp1_desc: 'Supported overseas commercialization analysis for AI products; researched global market entry strategies and competitive positioning.',
+    exp2_role: 'Strategy Consulting Intern · New Energy Sector',
+    exp2_desc: 'Analyzed Huawei\'s strategic positioning and business dynamics in the new energy vehicle industry.',
+    exp3_role: 'Healthcare Consulting Intern · Orthopedics',
+    exp3_desc: 'Conducted orthopedics market research in the pharmaceutical industry; exposure to healthcare strategy.',
+    exp4_role: 'Product Operations Intern · Overseas User Growth',
+    exp4_desc: 'Worked in the overseas business team on product operations and user growth strategies.',
+    exp5_role: 'Strategy Consulting Intern · Southeast Asia',
+    exp5_desc: 'Overseas market analysis and go-to-market strategy for Southeast Asia market research.',
+    exp6_role: 'Industry Research Intern · Food & Beverage',
+    exp6_desc: 'Food and beverage sector industry research and analysis.',
+    exp7_role: 'Strategy Consulting Intern · Compound Seasoning',
+    exp7_desc: 'Strategy consulting focusing on compound seasoning market research and business development.',
+    edu1_school: 'Imperial College London', edu1_degree: 'MSc Economics & Strategy for Business',
+    edu2_school: 'Fudan University 复旦大学', edu2_degree: 'Exchange Program · School of Management',
+    edu3_school: 'University of British Columbia', edu3_degree: 'Bachelor\'s Degree in Finance',
+    skill_cat1: 'Data Analysis', skill_cat2: 'Visualization',
+    skill_cat3: 'Product Design', skill_cat4: 'Vibe Coding', skill_cat5: 'Frameworks',
+    contact_desc: 'I\'m actively seeking product, AI, and strategy roles in China. If you have an opportunity or just want to chat, feel free to reach out!',
+    form_name: 'Name', form_email: 'Email', form_msg: 'Message', form_send: 'Send Message →',
+    typing_roles: ['Strategy Consultant', 'Product Builder', 'Startup Founder', 'AI Enthusiast', 'MSc @ Imperial']
+  },
+  zh: {
+    nav_news: '动态', nav_projects: '项目', nav_experience: '经历',
+    nav_education: '教育', nav_contact: '联系',
+    hero_tag: '战略 · 产品 · AI',
+    hero_desc: '帝国理工学院经济与战略硕士在读。拥有战略咨询（BCG）、互联网产品（贝壳、得物）及初创公司（Hinbor）经验。正积极寻求中国互联网、咨询或消费品产品/战略岗位。',
+    btn_resume: '↓ 下载简历', btn_contact: '联系我',
+    avatar_badge: '@ 帝国理工', scroll_hint: '向下滚动',
+    section_news: '最新动态', section_projects: '精选项目', section_exp: '实习经历',
+    section_edu: '教育背景', section_skills: '技能工具', section_contact: '联系方式',
+    news_1: '🔍 正积极寻找<strong>中国互联网/AI/战略方向</strong>的产品或策略岗位，欢迎交流！',
+    news_2: '🎓 入读<strong>帝国理工学院经济与商业战略硕士</strong>项目。',
+    news_3: '🤖 加入<strong>贝壳 AI 产品团队</strong>担任商业分析师，专注海外商业化。',
+    news_4: '📊 在<strong>BCG</strong>实习，分析华为在新能源汽车行业的战略定位。',
+    news_5: '🌍 在<strong>POIZON（得物）</strong>完成首段互联网实习，负责海外产品运营与用户增长。',
+    news_6: '🚀 主导<strong>Hinbor</strong> 0 到 1 上线，北美高校团购外卖平台。',
+    proj1_title: 'LuxePop — 欧莱雅品牌风暴 2026',
+    proj1_desc: 'YSL 香水创新战略：面向城市专业人士（25-39岁）的微胶囊固体香膏，具备触感激活释放、无酒精配方与可补充设计。',
+    proj2_title: 'Hinbor — 高校团购外卖平台',
+    proj2_desc: '面向大学生的自取+团购外卖平台。通过自取降低配送成本，阶梯团购折扣提升订单密度。',
+    proj3_title: '贝壳 AI — 海外商业化分析',
+    proj3_desc: '为贝壳 AI 产品团队分析海外商业化机会，聚焦市场进入策略与 AI 原生产品全球定位。',
+    exp1_role: 'AI 产品实习生 · 海外商业化', exp1_desc: '支持 AI 产品海外商业化分析，研究全球市场进入策略与竞争定位。',
+    exp2_role: '战略咨询实习生 · 新能源行业', exp2_desc: '分析华为在新能源汽车行业的战略定位与业务动态。',
+    exp3_role: '医疗咨询实习生 · 骨科市场', exp3_desc: '在制药行业开展骨科市场调研，深入了解医疗战略与行业洞察。',
+    exp4_role: '产品运营实习生 · 海外用户增长', exp4_desc: '在海外业务团队负责产品运营与用户增长策略。',
+    exp5_role: '战略咨询实习生 · 东南亚市场', exp5_desc: '东南亚市场调研与市场进入策略分析。',
+    exp6_role: '行业研究实习生 · 食品饮料', exp6_desc: '食品饮料行业研究与分析。',
+    exp7_role: '战略咨询实习生 · 复合调味品', exp7_desc: '复合调味品市场调研与战略咨询。',
+    edu1_school: '帝国理工学院', edu1_degree: '经济与商业战略理学硕士',
+    edu2_school: '复旦大学管理学院', edu2_degree: '交换生项目',
+    edu3_school: '不列颠哥伦比亚大学 (UBC)', edu3_degree: '金融学学士',
+    skill_cat1: '数据分析', skill_cat2: '数据可视化',
+    skill_cat3: '产品设计', skill_cat4: 'AI 编程', skill_cat5: '方法论框架',
+    contact_desc: '我正积极寻求中国互联网/AI/战略方向的产品或策略岗位，如有机会或想交流，欢迎联系！',
+    form_name: '姓名', form_email: '邮箱', form_msg: '留言', form_send: '发送消息 →',
+    typing_roles: ['战略咨询师', '产品构建者', '初创创始人', 'AI 爱好者', '帝国理工 MSc']
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  const t = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // restart typing
+  startTyping();
+  localStorage.setItem('tw-lang', lang);
+}
+
+// ── TYPING ──
+let typingTimer;
+function startTyping() {
+  clearTimeout(typingTimer);
+  const el = document.getElementById('typing-text');
+  const roles = i18n[currentLang].typing_roles;
+  let ri = 0, ci = 0, deleting = false;
+  el.textContent = '';
+
+  function tick() {
+    const word = roles[ri];
+    if (!deleting) {
+      el.textContent = word.slice(0, ci + 1);
+      ci++;
+      if (ci === word.length) { deleting = true; typingTimer = setTimeout(tick, 1800); return; }
+    } else {
+      el.textContent = word.slice(0, ci - 1);
+      ci--;
+      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+    }
+    typingTimer = setTimeout(tick, deleting ? 60 : 90);
+  }
+  tick();
+}
+
+// ── THEME ──
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = isDark ? '☾' : '☀';
+  localStorage.setItem('tw-theme', isDark ? 'light' : 'dark');
+}
+
+
+// ── PARTICLES ──
+let particleStyle = 'dots';
+function initParticles() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, dots = [];
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    dots = Array.from({length: 80}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3,
+      r: Math.random()*1.5+0.5
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    if (particleStyle === 'off') { requestAnimationFrame(draw); return; }
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const accent = isDark ? '210,130,60' : '180,100,40';
+
+    dots.forEach(d => {
+      d.x += d.vx; d.y += d.vy;
+      if (d.x < 0) d.x = W; if (d.x > W) d.x = 0;
+      if (d.y < 0) d.y = H; if (d.y > H) d.y = 0;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${accent},0.5)`;
+      ctx.fill();
+    });
+
+    if (particleStyle === 'mesh') {
+      dots.forEach((a, i) => {
+        dots.slice(i+1).forEach(b => {
+          const dx = a.x-b.x, dy = a.y-b.y;
+          const dist = Math.sqrt(dx*dx+dy*dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(${accent},${0.12*(1-dist/120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        });
+      });
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize(); draw();
+}
+
+function setParticleStyle(v) { particleStyle = v; }
+
+// ── SCROLL REVEAL ──
+function initReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .news-item, .project-card, .tl-item, .edu-card, .skill-group').forEach(el => obs.observe(el));
+}
+
+// ── STAGGER project cards ──
+document.querySelectorAll('.project-card').forEach((card, i) => {
+  card.style.transitionDelay = (i * 0.1) + 's';
+});
+document.querySelectorAll('.tl-item').forEach((item, i) => {
+  item.style.transitionDelay = (i * 0.07) + 's';
+});
+
+// ── CONTACT FORM ──
+function sendMsg() {
+  const name = document.getElementById('f-name').value;
+  const email = document.getElementById('f-email').value;
+  const msg = document.getElementById('f-msg').value;
+  if (!name || !email || !msg) { alert('Please fill in all fields.'); return; }
+  const subject = encodeURIComponent(`Message from ${name} via portfolio`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${msg}`);
+  window.open(`mailto:teemow0106@163.com?subject=${subject}&body=${body}`);
+}
+
+// ── RESUME DOWNLOAD ──
+function downloadResume() {
+  const a = document.createElement('a');
+  a.href = 'uploads/Resume CW.pdf';
+  a.download = 'Teemo_Weng_Resume.pdf';
+  a.click();
+}
+
+// ── TWEAKS ──
+function setAccent(color) {
+  document.documentElement.style.setProperty('--accent', color);
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{accentColor: color}}, '*');
+}
+function setFont(f) {
+  document.body.style.fontFamily = f;
+}
+
+window.addEventListener('message', e => {
+  if (e.data?.type === '__activate_edit_mode') document.getElementById('tweaks-panel').classList.add('open');
+  if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').classList.remove('open');
+});
+window.parent.postMessage({type:'__edit_mode_available'}, '*');
+
+// ── INIT ──
+const savedTheme = localStorage.getItem('tw-theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '☀' : '☾';
+
+const savedLang = localStorage.getItem('tw-lang') || 'en';
+setLang(savedLang);
+initParticles();
+initReveal();
+</script>
+
+</body>
+</html>

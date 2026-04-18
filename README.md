@@ -2,57 +2,30 @@
 
 Live site: https://teemoweng.github.io/
 
-This repository contains the source code for Teemo Weng's personal website, hosted with GitHub Pages and built with Jekyll. The site serves as a personal homepage, portfolio, and resume hub, with sections for background, news, projects, education, internships, skills, and awards.
+Single-page personal homepage designed in [Claude Design](https://claude.ai/design) and served as static HTML via GitHub Pages.
 
-## What is in this repo
+## Structure
 
-- `/_pages/about.md`: homepage content
-- `/_pages/resume.md`: resume page
-- `/_config.yml`: site-wide metadata and configuration
-- `/images`: avatar, project visuals, favicon, and other static assets
-- `/_includes`, `/_layouts`, `/_sass`: shared templates and styling
-- `/google_scholar_crawler`: optional script for generating Google Scholar citation data
+- `index.html` — the full homepage (styles and scripts inlined)
+- `uploads/` — avatar, project images, and downloadable resume PDF
+- `.nojekyll` — tells GitHub Pages to skip Jekyll and serve files as-is
 
-## Main sections on the site
+## Features
 
-- About Me
-- News
-- Projects
-- Education
-- Internships
-- Skills
-- Honors and Awards
-- Resume
+- Light / dark theme toggle
+- English / 中文 language switch
+- Particle background, typing animation, scroll reveal
+- News, Projects, Experience timeline, Education, Skills, Contact
+- Downloadable PDF resume
 
 ## Local preview
 
 ```bash
-bundle install
-bundle exec jekyll serve
+python3 -m http.server 8000
 ```
 
-Then open `http://127.0.0.1:4000`.
-
-If you prefer the helper script in this repo, you can also run:
-
-```bash
-bash run_server.sh
-```
+Then open `http://127.0.0.1:8000`.
 
 ## Deployment
 
-The site is intended to be deployed through GitHub Pages at:
-
-https://teemoweng.github.io/
-
-After pushing changes to the connected GitHub Pages repository, the updated site can be published online.
-
-## Optional Google Scholar automation
-
-If you want to generate citation data automatically:
-
-1. Find your Google Scholar ID from the `user=` parameter in your Scholar profile URL.
-2. Add a repository secret named `GOOGLE_SCHOLAR_ID`.
-3. Fill in `author.googlescholar` in `_config.yml`.
-
-The optional crawler in `/google_scholar_crawler` writes citation data files that can be displayed on the site when configured.
+Push to the `main` branch of `teemoweng/teemoweng.github.io`. GitHub Pages (Settings → Pages → Source: `main`) will serve the site at https://teemoweng.github.io/ within a minute or two.

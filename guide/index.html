@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用 AI 做个人主页 · Teemo 教程</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1a1410;
+  --bg2: #231c15;
+  --bg3: #2d241a;
+  --fg: #f5ede0;
+  --fg2: #b09a82;
+  --fg3: #6b5440;
+  --accent: oklch(68% 0.19 42);
+  --accent2: oklch(58% 0.19 42);
+  --border: rgba(180,120,60,0.18);
+  --radius: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body {
+  font-family: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* ── DECK ── */
+.deck {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.slide-prompt {
+  justify-content: flex-start;
+  padding-top: 36px;
+  padding-bottom: 56px;
+}
+
+/* ── COMMON ── */
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+h2 {
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 36px;
+}
+h2 span { color: var(--accent); }
+
+/* ── PROGRESS ── */
+.progress {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--fg3);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.dot.active { background: var(--accent); width: 22px; border-radius: 3px; }
+
+/* ── COUNTER ── */
+.counter {
+  position: fixed;
+  top: 22px; right: 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--fg3);
+  z-index: 100;
+}
+.counter em { color: var(--accent); font-style: normal; }
+
+/* ── NAV ARROWS ── */
+.nav-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  color: var(--fg3);
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.2s;
+  z-index: 100;
+}
+.nav-arrow:hover { color: var(--accent); border-color: var(--accent); background: rgba(200,100,40,0.07); }
+.nav-prev { left: 16px; }
+.nav-next { right: 16px; }
+.nav-arrow.hidden { opacity: 0; pointer-events: none; }
+
+.hint {
+  position: fixed;
+  bottom: 52px; right: 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--fg3);
+  opacity: 0.4;
+  z-index: 100;
+}
+
+/* ── SLIDE 1: TITLE ── */
+.slide-title { text-align: center; }
+.title-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  margin-bottom: 28px;
+}
+.title-h1 {
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+.title-h1 span { color: var(--accent); }
+.title-sub {
+  font-size: 16px;
+  color: var(--fg2);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.04em;
+  margin-bottom: 32px;
+}
+.title-by {
+  font-size: 13px;
+  color: var(--fg3);
+  font-family: 'JetBrains Mono', monospace;
+}
+.title-by a { color: var(--accent); text-decoration: none; }
+
+/* ── SLIDE 2: DEMO ── */
+.feature-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+.feature-item { display: flex; align-items: center; gap: 14px; font-size: 17px; color: var(--fg2); }
+.feature-icon {
+  width: 34px; height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--accent); flex-shrink: 0;
+}
+.demo-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px;
+  background: var(--accent); color: #000;
+  border-radius: 10px; font-weight: 700; font-size: 15px;
+  text-decoration: none; font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s;
+}
+.demo-link:hover { background: var(--accent2); transform: translateY(-1px); }
+
+/* ── SLIDE 3: PREP ── */
+.prep-list { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 540px; }
+.prep-item {
+  display: flex; align-items: center; gap: 20px;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.prep-num { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--accent); width: 28px; flex-shrink: 0; }
+.prep-text { font-size: 16px; }
+.prep-text small { display: block; font-size: 13px; color: var(--fg3); margin-top: 3px; }
+
+/* ── SLIDE 4: TOOLS ── */
+.tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 700px; }
+.tool-card { padding: 28px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius); }
+.tool-card.featured { border-color: var(--accent); }
+.tool-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 4px; margin-bottom: 12px; letter-spacing: 0.06em;
+}
+.tool-badge.primary { background: var(--accent); color: #000; }
+.tool-badge.secondary { background: var(--bg3); color: var(--fg3); border: 1px solid var(--border); }
+.tool-name { font-size: 22px; font-weight: 700; margin-bottom: 14px; }
+.tool-points { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.tool-points li { font-size: 13px; color: var(--fg2); padding-left: 16px; position: relative; line-height: 1.5; }
+.tool-points li::before { content: '·'; position: absolute; left: 0; color: var(--accent); }
+.tool-tip { margin-top: 24px; text-align: center; font-size: 13px; color: var(--fg3); font-family: 'JetBrains Mono', monospace; }
+
+/* ── SLIDE 5: STEPS ── */
+.steps-list { display: flex; flex-direction: column; width: 100%; max-width: 620px; }
+.step-item {
+  display: grid; grid-template-columns: 76px 1fr; gap: 24px;
+  padding: 22px 0; border-bottom: 1px solid var(--border); align-items: start;
+}
+.step-item:first-child { border-top: 1px solid var(--border); }
+.step-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.1em; padding-top: 2px; }
+.step-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.step-desc { font-size: 14px; color: var(--fg3); line-height: 1.6; }
+.step-note {
+  margin-top: 24px; padding: 14px 20px;
+  background: rgba(200,100,40,0.07);
+  border: 1px solid rgba(200,100,40,0.2);
+  border-radius: 8px; font-size: 13px; color: var(--fg2); max-width: 620px; line-height: 1.6;
+}
+.step-note strong { color: var(--accent); }
+
+/* ── SLIDE 6: PROMPT ── */
+.prompt-header {
+  width: 100%; max-width: 840px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 14px; flex-shrink: 0;
+}
+.copy-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 22px; background: var(--accent); color: #000;
+  border: none; border-radius: 8px; font-weight: 700; font-size: 13px;
+  cursor: pointer; font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s; flex-shrink: 0; white-space: nowrap;
+}
+.copy-btn:hover { background: var(--accent2); }
+.copy-btn.copied { background: #2a6049; color: #a8f0c8; }
+.prompt-box {
+  width: 100%; max-width: 840px; flex: 1; min-height: 0;
+  overflow-y: auto;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; line-height: 1.8;
+  color: var(--fg2); white-space: pre-wrap; word-break: break-word;
+}
+.prompt-box::-webkit-scrollbar { width: 4px; }
+.prompt-box::-webkit-scrollbar-track { background: transparent; }
+.prompt-box::-webkit-scrollbar-thumb { background: var(--fg3); border-radius: 2px; }
+
+/* ── SLIDE 7: WHAT AI DOES ── */
+.flow {
+  display: flex; align-items: center; gap: 0;
+  margin-bottom: 36px; flex-wrap: wrap; justify-content: center;
+}
+.flow-step {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  min-width: 120px; text-align: center;
+}
+.flow-icon { font-size: 22px; }
+.flow-label { font-size: 13px; font-weight: 600; }
+.flow-arrow { font-size: 18px; color: var(--fg3); padding: 0 10px; }
+.ai-points { display: flex; flex-direction: column; gap: 12px; max-width: 520px; }
+.ai-point { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--fg2); line-height: 1.5; }
+.ai-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+
+/* ── SLIDE 8: DONE ── */
+.done-emoji { font-size: 68px; margin-bottom: 20px; }
+.done-url {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(18px, 2.8vw, 30px);
+  color: var(--accent); margin: 8px 0 28px; letter-spacing: 0.04em;
+}
+.done-links { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.done-link {
+  padding: 10px 22px; border: 1px solid var(--border);
+  border-radius: 8px; font-size: 13px; color: var(--fg2);
+  text-decoration: none; font-family: 'JetBrains Mono', monospace; transition: all 0.2s;
+}
+.done-link:hover { border-color: var(--accent); color: var(--accent); }
+.done-note { margin-top: 20px; font-size: 14px; color: var(--fg3); }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ① TITLE -->
+  <div class="slide slide-title">
+    <div class="title-tag">Vibe Coding 教程</div>
+    <h1 class="title-h1">用 AI 做<br><span>个人主页</span></h1>
+    <div class="title-sub">无需编程基础 · 30 分钟上线</div>
+    <div class="title-by">by <a href="https://teemoweng.github.io" target="_blank">Teemo Weng</a></div>
+  </div>
+
+  <!-- ② DEMO -->
+  <div class="slide">
+    <div style="max-width:660px;width:100%;">
+      <div class="label">你将做出这样的效果</div>
+      <h2>先看<span>成品</span></h2>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-icon">◑</div>深色 / 浅色主题一键切换</div>
+        <div class="feature-item"><div class="feature-icon">文</div>中英双语无缝切换</div>
+        <div class="feature-item"><div class="feature-icon">✦</div>粒子动效 + 打字动画</div>
+        <div class="feature-item"><div class="feature-icon">▤</div>项目、经历、教育、技能全展示</div>
+        <div class="feature-item"><div class="feature-icon">↗</div>GitHub Pages 自动部署，永久免费</div>
+      </div>
+      <a class="demo-link" href="https://teemoweng.github.io/template/" target="_blank">查看模板 ↗</a>
+    </div>
+  </div>
+
+  <!-- ③ PREP -->
+  <div class="slide">
+    <div class="label">开始之前</div>
+    <h2>你需要<span>准备</span></h2>
+    <div class="prep-list">
+      <div class="prep-item">
+        <div class="prep-num">①</div>
+        <div class="prep-text">一台电脑<small>Windows 或 Mac 均可</small></div>
+      </div>
+      <div class="prep-item">
+        <div class="prep-num">②</div>
+        <div class="prep-text">一个邮箱<small>用于注册 GitHub 账号，AI 会教你怎么做</small></div>
+      </div>
+      <div class="prep-item">
+        <div class="prep-num">③</div>
+        <div class="prep-text">Claude Code 或 Cursor<small>Vibe Coding 工具，下一页介绍</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ TOOLS -->
+  <div class="slide">
+    <div class="label">Vibe Coding 工具</div>
+    <h2>选一个<span>就够</span></h2>
+    <div class="tools-grid">
+      <div class="tool-card featured">
+        <div class="tool-badge primary">首选 · SOTA</div>
+        <div class="tool-name">Claude Code</div>
+        <ul class="tool-points">
+          <li>目前公认能力最强的 AI 编程助手</li>
+          <li>可直接操作本地文件、执行终端命令</li>
+          <li>需要 Anthropic 账号（谷歌邮箱注册）</li>
+        </ul>
+      </div>
+      <div class="tool-card">
+        <div class="tool-badge secondary">备选</div>
+        <div class="tool-name">Cursor</div>
+        <ul class="tool-points">
+          <li>可视化 IDE 界面，操作更直观</li>
+          <li>注册门槛较低，不易封号</li>
+          <li>适合网络环境有限制的用户</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tool-tip">搜索「Claude Code 安装教程」或「Cursor 安装教程」，按步骤操作即可</div>
+  </div>
+
+  <!-- ⑤ STEPS -->
+  <div class="slide">
+    <div class="label">操作流程</div>
+    <h2>就<span>三步</span></h2>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num">Step 01</div>
+        <div class="step-content">
+          <div class="step-title">安装 Claude Code 或 Cursor</div>
+          <div class="step-desc">搜索安装教程，按步骤完成，10 分钟搞定</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">Step 02</div>
+        <div class="step-content">
+          <div class="step-title">打开工具，粘贴下一页的 Prompt</div>
+          <div class="step-desc">AI 会自动读取模板，然后引导你提供个人信息</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">Step 03</div>
+        <div class="step-content">
+          <div class="step-title">按 AI 的引导操作，主页上线</div>
+          <div class="step-desc">AI 生成 HTML，帮你部署到 GitHub Pages</div>
+        </div>
+      </div>
+    </div>
+    <div class="step-note">
+      <strong>唯一需要手动做的：</strong>在浏览器注册 GitHub 账号——AI 会告诉你点哪里、填什么，全程陪跑。
+    </div>
+  </div>
+
+  <!-- ⑥ PROMPT -->
+  <div class="slide slide-prompt">
+    <div class="prompt-header">
+      <div>
+        <div class="label" style="margin-bottom:4px;">复制这段提示词</div>
+        <div style="font-size:13px;color:var(--fg3);">粘贴给 Claude Code 或 Cursor，然后按 AI 的问题回答即可</div>
+      </div>
+      <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">
+        <span id="copy-icon">⎘</span>
+        <span id="copy-text">复制 Prompt</span>
+      </button>
+    </div>
+    <div class="prompt-box" id="prompt-content">你好！我想基于一个现有的网站模板，做一个属于自己的个人主页并部署上线。请你全程帮助我完成这件事。
+
+【模板地址】
+https://teemoweng.github.io/template/
+
+请先访问这个地址，理解模板的结构、设计风格和功能（包括深色/浅色切换、中英双语、粒子动效等）。
+
+【任务流程】
+
+─────────────────────────────
+第一阶段：收集素材
+─────────────────────────────
+
+首先询问我是否有以下现成材料，有的话直接发给你，你来提取信息，避免我从零填写：
+
+① 简历（PDF / Word / 图片均可）
+   → 可以直接从中提取姓名、教育、实习经历、技能等
+
+② 项目或成果文档
+   → 比赛 PPT、产品方案、论文、作品集等，帮助你了解我做过的项目
+
+③ 现有的 AI 对话记录或个人简介
+   → 如果你在其他 AI 工具里有过自我介绍或让 AI 帮你写过个人简介，可以直接粘贴过来
+
+④ LinkedIn 主页链接或其他社交主页
+   → 可以访问后自动提取信息
+
+收到材料后，先告诉我你提取到了哪些内容，哪些还需要我补充。
+
+─────────────────────────────
+第二阶段：逐项确认信息
+─────────────────────────────
+
+对于材料里没有覆盖到的部分，以对话方式向我提问，每次最多问 3 个问题。
+提问时主动给例子，帮我理解该写什么。具体引导方式如下：
+
+【姓名 & 定位】
+→ 询问中英文姓名，以及一句话标签（例如"战略 · 产品 · AI"或"设计 · 用户体验 · 创业"）
+
+【自我介绍】
+→ 2-3 句话，介绍背景和求职方向
+→ 引导语举例："可以参考这个格式：[学校/项目] 在读/毕业，有 [X] 年 [行业/职能] 经验，正在寻找 [方向] 岗位。"
+
+【打字动画标签】
+→ 4-5 个描述自己的词，用于首页滚动展示
+→ 引导语举例："比如：产品经理、战略分析师、创业者、AI 爱好者、UX 设计师——选你最想被人记住的标签"
+
+【个人动态】
+→ 时间线里程碑，最多 6 条，从近到远
+→ 引导语举例："可以包括：入学/毕业、实习入职、项目上线、比赛获奖、出国经历等，有时间点就行"
+
+【项目经历】
+→ 最多 3 个，优先展示有成果的
+→ 引导语举例："比如：参加过什么比赛？自己做过什么产品或工具？有没有课程大项目或研究成果？有外部链接（App Store、演示页面、视频）最好"
+
+【工作 / 实习经历】
+→ 按时间倒序，每段包含公司、职位、时间、1-2 句描述
+→ 引导语举例："重点写你具体做了什么、产出是什么，不需要写得很正式，口语化也没关系，我来帮你整理"
+
+【教育背景】
+→ 最多 3 条，包含学校、专业、时间
+
+【技能】
+→ 按类别列出，不确定怎么分可以直接列清单，我来归类
+→ 引导语举例："比如：数据分析（SQL、Python）、设计工具（Figma、Axure）、语言（普通话、英语、粤语）"
+
+【联系方式】
+→ 邮箱（必填）、LinkedIn 链接（选填）、GitHub 用户名（选填）
+→ 提醒用户：这些信息会公开显示在网页上，只填愿意公开的
+
+【头像】
+→ 询问是否有个人照片，如有请提供文件（建议方形或接近方形）
+→ 如无照片，使用姓名首字母作为占位，告知用户后续可以随时替换
+
+语言处理规则：
+- 用户只提供中文 → 帮他翻译成英文
+- 用户只提供英文 → 帮他翻译成中文
+- 口语化表达 → 帮他整理成适合展示的语气
+
+─────────────────────────────
+第三阶段：生成定制 HTML
+─────────────────────────────
+
+将收集到的信息填入模板，保留原有的所有设计、动效和 JS 逻辑，生成完整的 index.html 文件并保存到本地。生成后告诉我文件保存在哪里。
+
+─────────────────────────────
+第四阶段：部署到 GitHub Pages
+─────────────────────────────
+
+引导我完成以下步骤（能直接执行的命令请帮我执行，需要浏览器操作的步骤请详细说明点哪里）：
+
+1. 注册 GitHub 账号（如果我还没有）
+2. 创建名为「GitHub用户名.github.io」的仓库（选 Public）
+3. 将 index.html 上传到仓库
+4. 开启 GitHub Pages
+5. 确认网站上线，告诉我访问地址
+
+【全程注意事项】
+- 假设我完全不懂技术，所有步骤用最简单的语言说明
+- 每完成一个环节，确认我操作成功后再进入下一步
+- 遇到报错或卡住，帮我排查解决
+
+请先打个招呼，然后问我有哪些现成材料可以提供。</div>
+  </div>
+
+  <!-- ⑦ WHAT AI DOES -->
+  <div class="slide">
+    <div class="label">AI 全程负责</div>
+    <h2>它帮你<span>做什么</span></h2>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-icon">📄</div><div class="flow-label">读取模板</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon">💬</div><div class="flow-label">收集信息</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon">⚙️</div><div class="flow-label">生成 HTML</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon">🚀</div><div class="flow-label">部署上线</div></div>
+    </div>
+    <div class="ai-points">
+      <div class="ai-point"><div class="ai-dot"></div>上传简历或成果文档，AI 自动提取，不用手动填</div>
+      <div class="ai-point"><div class="ai-dot"></div>每个字段都有例子引导，不知道怎么写也没关系</div>
+      <div class="ai-point"><div class="ai-dot"></div>只用中文说，AI 帮你生成对应的英文版本</div>
+      <div class="ai-point"><div class="ai-dot"></div>注册 GitHub、创建仓库、开启 Pages，步步指导</div>
+    </div>
+  </div>
+
+  <!-- ⑧ DONE -->
+  <div class="slide" style="text-align:center;">
+    <div class="done-emoji">🎉</div>
+    <div class="label">完成后你的主页地址</div>
+    <div class="done-url">yourusername.github.io</div>
+    <div class="done-note" style="margin-bottom:28px;max-width:480px;">想改内容随时改 — 直接打开 Claude Code，告诉它你要改什么就好。</div>
+    <div class="done-links">
+      <a class="done-link" href="https://teemoweng.github.io/template/" target="_blank">模板地址 ↗</a>
+      <a class="done-link" href="https://teemoweng.github.io" target="_blank">作者主页 ↗</a>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- UI CHROME -->
+<div class="counter"><em id="cur">1</em> / <span id="total">8</span></div>
+<div class="progress" id="progress"></div>
+<button class="nav-arrow nav-prev hidden" id="prev" onclick="go(-1)">‹</button>
+<button class="nav-arrow nav-next" id="next" onclick="go(1)">›</button>
+<div class="hint">← → 空格切换页面</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const TOTAL = slides.length;
+document.getElementById('total').textContent = TOTAL;
+let cur = 0;
+
+// Build progress dots
+const prog = document.getElementById('progress');
+for (let i = 0; i < TOTAL; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  prog.appendChild(d);
+}
+
+function goTo(n) {
+  cur = Math.max(0, Math.min(TOTAL - 1, n));
+  document.getElementById('deck').style.transform = `translateX(-${cur * 100}vw)`;
+  document.getElementById('cur').textContent = cur + 1;
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  document.getElementById('prev').classList.toggle('hidden', cur === 0);
+  document.getElementById('next').classList.toggle('hidden', cur === TOTAL - 1);
+}
+
+function go(d) { goTo(cur + d); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); }
+  if (e.key === 'ArrowLeft') go(-1);
+});
+
+// Touch swipe
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const dx = tx - e.changedTouches[0].clientX;
+  if (Math.abs(dx) > 50) go(dx > 0 ? 1 : -1);
+});
+
+// Copy prompt
+function copyPrompt() {
+  const text = document.getElementById('prompt-content').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    document.getElementById('copy-icon').textContent = '✓';
+    document.getElementById('copy-text').textContent = '已复制！';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      document.getElementById('copy-icon').textContent = '⎘';
+      document.getElementById('copy-text').textContent = '复制 Prompt';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  width: 1200px; height: 630px; overflow: hidden;
+  background: #1a1410;
+  font-family: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+  color: #f5ede0;
+  position: relative;
+}
+
+/* subtle grid texture */
+.grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(180,120,60,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180,120,60,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* warm radial glow */
+.glow {
+  position: absolute;
+  width: 700px; height: 500px;
+  left: -80px; top: -60px;
+  background: radial-gradient(ellipse, rgba(180,100,40,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  right: 80px; bottom: -60px;
+  background: radial-gradient(ellipse, rgba(180,100,40,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* border frame */
+.frame {
+  position: absolute; inset: 24px;
+  border: 1px solid rgba(180,120,60,0.2);
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+/* corner marks */
+.corner {
+  position: absolute; width: 12px; height: 12px;
+  border-color: rgba(180,120,60,0.5); border-style: solid;
+}
+.corner.tl { top: 36px; left: 36px; border-width: 1.5px 0 0 1.5px; }
+.corner.tr { top: 36px; right: 36px; border-width: 1.5px 1.5px 0 0; }
+.corner.bl { bottom: 36px; left: 36px; border-width: 0 0 1.5px 1.5px; }
+.corner.br { bottom: 36px; right: 36px; border-width: 0 1.5px 1.5px 0; }
+
+/* main content */
+.content {
+  position: absolute; inset: 0;
+  display: flex; align-items: center;
+  padding: 0 96px;
+  gap: 80px;
+}
+
+.left { flex: 1; }
+
+.tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; color: #c8793a;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 5px 14px;
+  border: 1px solid rgba(180,120,60,0.3);
+  border-radius: 99px;
+  margin-bottom: 28px;
+}
+
+.name {
+  font-size: 80px; font-weight: 700;
+  letter-spacing: -0.03em; line-height: 1.0;
+  margin-bottom: 24px;
+}
+.name .accent { color: #c8793a; }
+
+.roles {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px; color: #b09a82;
+  letter-spacing: 0.02em;
+  display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap;
+}
+.roles .sep { color: #6b5440; }
+
+/* right side: avatar placeholder + favicon letter */
+.right {
+  width: 220px; flex-shrink: 0;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 24px;
+}
+
+.avatar-box {
+  width: 160px; height: 160px;
+  border-radius: 20px;
+  background: #231c15;
+  border: 1px solid rgba(180,120,60,0.25);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-letter {
+  font-family: Georgia, serif;
+  font-size: 96px;
+  font-weight: 700;
+  font-style: italic;
+  color: #c8793a;
+  line-height: 1;
+  margin-top: 12px;
+}
+
+.url-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; color: #6b5440;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+.url-tag span { color: #c8793a; }
+
+/* bottom strip */
+.strip {
+  position: absolute; bottom: 40px; left: 96px; right: 96px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.strip-line {
+  height: 1px; background: rgba(180,120,60,0.2);
+  flex: 1;
+}
+.strip-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #6b5440;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0 16px;
+}
+</style>
+</head>
+<body>
+
+<div class="grid"></div>
+<div class="glow"></div>
+<div class="glow2"></div>
+<div class="frame"></div>
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+<div class="content">
+  <div class="left">
+    <div class="tag">Portfolio · 2026</div>
+    <div class="name">Teemo<br><span class="accent">Weng</span></div>
+    <div class="roles">
+      <span>Product</span>
+      <span class="sep">/</span>
+      <span>AI</span>
+      <span class="sep">/</span>
+      <span>Builder</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="avatar-box">
+      <span class="avatar-letter">t</span>
+    </div>
+    <div class="url-tag"><span>teemoweng</span>.github.io</div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="strip-line"></div>
+  <div class="strip-text">teemoweng.github.io</div>
+  <div class="strip-line"></div>
+</div>
+
+</body>
+</html>

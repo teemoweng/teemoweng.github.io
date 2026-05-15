@@ -1013,6 +1013,7 @@ function setLang(lang) {
   // restart typing
   startTyping();
   localStorage.setItem('tw-lang', lang);
+  if (_githubReposCache) renderGithubRepos();
 }
 
 // ── TYPING ──
@@ -1156,6 +1157,123 @@ window.addEventListener('message', e => {
   if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').classList.remove('open');
 });
 window.parent.postMessage({type:'__edit_mode_available'}, '*');
+
+// ── GITHUB MODAL ──
+let _githubReposCache = null;
+
+function openGithubModal() {
+  const modal = document.getElementById('github-modal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  modal.addEventListener('keydown', handleGithubEsc);
+  if (!_githubReposCache) {
+    loadGithubRepos();
+  }
+}
+
+function closeGithubModal() {
+  const modal = document.getElementById('github-modal');
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  modal.removeEventListener('keydown', handleGithubEsc);
+}
+
+function handleGithubModalBackdrop(e) {
+  if (e.target === document.getElementById('github-modal')) closeGithubModal();
+}
+
+function handleGithubEsc(e) {
+  if (e.key === 'Escape') closeGithubModal();
+}
+
+async function loadGithubRepos() {
+  const body = document.getElementById('github-repos-body');
+  const t = i18n[currentLang];
+  body.innerHTML = `<div class="github-status">${t.github_loading}</div>`;
+  try {
+    const res = await fetch('https://api.github.com/users/teemoweng/repos?sort=updated&per_page=30');
+    if (!res.ok) throw new Error('API error');
+    const repos = await res.json();
+    _githubReposCache = repos.filter(r => r.name !== 'teemoweng.github.io' && !r.fork);
+    renderGithubRepos();
+  } catch (err) {
+    body.innerHTML = `<div class="github-status">${t.github_error}</div>`;
+  }
+}
+
+function getLiveUrl(repo) {
+  if (repo.homepage) return repo.homepage;
+  if (repo.has_pages) return `https://teemoweng.github.io/${repo.name}`;
+  return null;
+}
+
+function renderGithubRepos() {
+  if (!_githubReposCache) return;
+  const t = i18n[currentLang];
+  const body = document.getElementById('github-repos-body');
+  const grid = document.createElement('div');
+  grid.className = 'github-repos-grid';
+
+  _githubReposCache.forEach(repo => {
+    const liveUrl = getLiveUrl(repo);
+    const lang = repo.language || '';
+    const stars = repo.stargazers_count;
+
+    const card = document.createElement('div');
+    card.className = 'github-repo-card';
+
+    const nameEl = document.createElement('div');
+    nameEl.className = 'github-repo-name';
+    nameEl.textContent = repo.name;
+
+    const descEl = document.createElement('div');
+    descEl.className = 'github-repo-desc';
+    descEl.textContent = repo.description || '—';
+
+    const metaEl = document.createElement('div');
+    metaEl.className = 'github-repo-meta';
+    if (lang) {
+      const langBadge = document.createElement('span');
+      langBadge.className = 'github-lang-badge';
+      langBadge.textContent = lang;
+      metaEl.appendChild(langBadge);
+    }
+    if (stars > 0) {
+      const starsEl = document.createElement('span');
+      starsEl.className = 'github-stars';
+      starsEl.textContent = `⭐ ${stars}`;
+      metaEl.appendChild(starsEl);
+    }
+
+    const linksEl = document.createElement('div');
+    linksEl.className = 'github-repo-links';
+
+    const codeLink = document.createElement('a');
+    codeLink.className = 'github-link-code';
+    codeLink.href = repo.html_url;
+    codeLink.target = '_blank';
+    codeLink.textContent = t.github_repo_code;
+    linksEl.appendChild(codeLink);
+
+    if (liveUrl) {
+      const liveLink = document.createElement('a');
+      liveLink.className = 'github-link-live';
+      liveLink.href = liveUrl;
+      liveLink.target = '_blank';
+      liveLink.textContent = t.github_repo_live;
+      linksEl.appendChild(liveLink);
+    }
+
+    card.appendChild(nameEl);
+    card.appendChild(descEl);
+    card.appendChild(metaEl);
+    card.appendChild(linksEl);
+    grid.appendChild(card);
+  });
+
+  body.innerHTML = '';
+  body.appendChild(grid);
+}
 
 // ── INIT ──
 const savedTheme = localStorage.getItem('tw-theme') || 'light';

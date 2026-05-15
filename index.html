@@ -1165,7 +1165,7 @@ function openGithubModal() {
   const modal = document.getElementById('github-modal');
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
-  modal.addEventListener('keydown', handleGithubEsc);
+  document.addEventListener('keydown', handleGithubEsc);
   if (!_githubReposCache) {
     loadGithubRepos();
   }
@@ -1175,7 +1175,7 @@ function closeGithubModal() {
   const modal = document.getElementById('github-modal');
   modal.classList.remove('open');
   document.body.style.overflow = '';
-  modal.removeEventListener('keydown', handleGithubEsc);
+  document.removeEventListener('keydown', handleGithubEsc);
 }
 
 function handleGithubModalBackdrop(e) {
@@ -1202,7 +1202,12 @@ async function loadGithubRepos() {
 }
 
 function getLiveUrl(repo) {
-  if (repo.homepage) return repo.homepage;
+  if (repo.homepage) {
+    try {
+      const u = new URL(repo.homepage);
+      if (u.protocol === 'https:' || u.protocol === 'http:') return repo.homepage;
+    } catch (_) {}
+  }
   if (repo.has_pages) return `https://teemoweng.github.io/${repo.name}`;
   return null;
 }
@@ -1252,6 +1257,7 @@ function renderGithubRepos() {
     codeLink.className = 'github-link-code';
     codeLink.href = repo.html_url;
     codeLink.target = '_blank';
+    codeLink.rel = 'noopener noreferrer';
     codeLink.textContent = t.github_repo_code;
     linksEl.appendChild(codeLink);
 
@@ -1260,6 +1266,7 @@ function renderGithubRepos() {
       liveLink.className = 'github-link-live';
       liveLink.href = liveUrl;
       liveLink.target = '_blank';
+      liveLink.rel = 'noopener noreferrer';
       liveLink.textContent = t.github_repo_live;
       linksEl.appendChild(liveLink);
     }

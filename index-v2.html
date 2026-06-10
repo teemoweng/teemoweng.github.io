@@ -92,18 +92,18 @@ nav > * { pointer-events: auto; }
   border: 1px solid rgba(255,255,255,0.5);
   color: var(--ink-2); font-size: 13.5px; font-weight: 700;
   text-decoration: none; cursor: pointer; font-family: var(--font-sans);
-  transition: color 0.25s, background 0.25s, transform 0.25s;
+  transition: color 0.25s, background 0.25s, translate 0.25s, rotate 0.25s;
   box-shadow: 0 2px 14px rgba(150, 90, 40, 0.07);
 }
-.pill:hover { color: var(--peach-deep); background: rgba(255,252,246,0.85); transform: translateY(-1px); }
+.pill:hover { color: var(--peach-deep); background: rgba(255,252,246,0.85); translate: 0 -1px; }
 .pill-logo {
   padding: 10px 14px; border-radius: 14px;
   background: rgba(255,252,246,0.92);
   font-weight: 800; color: var(--peach-deep); font-size: 15px;
   letter-spacing: -0.02em;
 }
-.pill-logo:hover { transform: rotate(-4deg); }
-.nav-right { display: flex; align-items: center; gap: 8px; }
+.pill-logo:hover { rotate: -4deg; }
+.nav-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 .pill-sm {
   padding: 9px 14px; font-size: 12.5px;
 }
@@ -230,9 +230,9 @@ html[data-lang="zh"] .statement { letter-spacing: 0.01em; max-width: 15ch; }
   box-shadow: 0 10px 36px rgba(160, 95, 45, 0.10);
   overflow: hidden;
   display: flex; flex-direction: column;
-  transition: transform 0.35s cubic-bezier(.2,.7,.3,1), box-shadow 0.35s;
+  transition: translate 0.35s cubic-bezier(.2,.7,.3,1), rotate 0.35s, box-shadow 0.35s;
 }
-.ccard:hover { transform: translateY(-8px) rotate(-0.5deg); box-shadow: 0 22px 54px rgba(160,95,45,0.18); }
+.ccard:hover { translate: 0 -8px; rotate: -0.5deg; box-shadow: 0 22px 54px rgba(160,95,45,0.18); }
 .ccard-img { height: 175px; overflow: hidden; position: relative; }
 .ccard-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ccard-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
@@ -318,9 +318,9 @@ html[data-lang="zh"] .statement { letter-spacing: 0.01em; max-width: 15ch; }
   margin: 0 -14px;
   border-bottom: 1px solid rgba(122, 106, 88, 0.16);
   border-radius: 10px;
-  transition: background 0.3s, transform 0.3s;
+  transition: background 0.3s, scale 0.3s;
 }
-.rec-row:hover { background: linear-gradient(90deg, rgba(240,168,104,0.13), rgba(240,168,104,0.02)); transform: scale(1.012); }
+.rec-row:hover { background: linear-gradient(90deg, rgba(240,168,104,0.13), rgba(240,168,104,0.02)); scale: 1.012; }
 .rec-row:hover .rec-year { color: var(--peach-deep); }
 .rec-org { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--peach-deep); }
 .rec-main { display: flex; flex-direction: column; gap: 3px; }
@@ -341,9 +341,9 @@ html[data-lang="zh"] .statement { letter-spacing: 0.01em; max-width: 15ch; }
   padding: 13px 26px; border-radius: 99px;
   background: var(--ink); color: var(--cream);
   font-size: 14px; font-weight: 700; text-decoration: none;
-  transition: all 0.3s; white-space: nowrap;
+  transition: background 0.3s, translate 0.3s; white-space: nowrap;
 }
-.rec-cta:hover { background: var(--peach-deep); transform: translateY(-2px); }
+.rec-cta:hover { background: var(--peach-deep); translate: 0 -2px; }
 @media (max-width: 760px) {
   .rec-row { grid-template-columns: 1fr auto; }
   .rec-org { grid-column: 1 / -1; }
@@ -380,9 +380,9 @@ html[data-lang="zh"] .f-talk { letter-spacing: 0; }
   color: var(--ink); font-size: 14px; font-weight: 700;
   text-decoration: none; cursor: pointer; font-family: var(--font-sans);
   box-shadow: 0 3px 16px rgba(150,90,40,0.08);
-  transition: all 0.25s;
+  transition: background 0.25s, color 0.25s, translate 0.25s;
 }
-.f-chip:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
+.f-chip:hover { background: var(--ink); color: var(--cream); translate: 0 -2px; }
 .f-credits {
   margin-top: 34px; font-family: var(--font-mono); font-size: 10.5px;
   letter-spacing: 0.08em; color: #a06a3c; line-height: 2;
@@ -470,7 +470,7 @@ html.motion .f-wave { animation: wave-tilt 2.6s ease-in-out infinite; transform-
   display: flex; flex-direction: column; gap: 8px;
   transition: all 0.2s;
 }
-.github-repo-card:hover { border-color: var(--peach); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(160,95,45,0.12); }
+.github-repo-card:hover { border-color: var(--peach); translate: 0 -2px; box-shadow: 0 10px 28px rgba(160,95,45,0.12); }
 .github-repo-name { font-family: var(--font-mono); font-size: 13.5px; font-weight: 500; color: var(--ink); }
 .github-repo-desc { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; flex: 1; }
 .github-repo-meta { display: flex; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 11px; }
@@ -485,7 +485,8 @@ html.motion .f-wave { animation: wave-tilt 2.6s ease-in-out infinite; transform-
 /* ════════ RESPONSIVE NAV ════════ */
 @media (max-width: 760px) {
   nav { padding: 14px 14px; }
-  .nav-center .pill-link { display: none; } /* keep logo only */
+  .nav-center { display: none; }  /* anchors live in the scroll itself */
+  .nav-email { display: none; }   /* email lives in the finale */
   .pill { padding: 9px 14px; font-size: 12.5px; }
 }
 </style>
@@ -498,7 +499,7 @@ html.motion .f-wave { animation: wave-tilt 2.6s ease-in-out infinite; transform-
 
 <!-- NAV -->
 <nav>
-  <a class="pill pill-sm" href="mailto:teemow0106@163.com" data-i18n="nav_email">Email</a>
+  <a class="pill pill-sm nav-email" href="mailto:teemow0106@163.com" data-i18n="nav_email">Email</a>
   <div class="nav-center">
     <a class="pill pill-link" href="#why" data-i18n="nav_about">About</a>
     <a class="pill pill-logo" href="#top" aria-label="Top">tw</a>
@@ -1084,7 +1085,7 @@ function initRecord() {
   });
   document.querySelectorAll('.rec-group').forEach(group => {
     gsap.from(group.querySelectorAll('.rec-group-h, .rec-row'), {
-      y: 34, opacity: 0, stagger: 0.06, duration: 0.8, ease: 'power3.out',
+      y: 34, opacity: 0, stagger: 0.06, duration: 0.8, ease: 'power3.out', clearProps: 'transform',
       scrollTrigger: { trigger: group, start: 'top 82%' }
     });
   });
@@ -1120,7 +1121,7 @@ function initChapters() {
       scrollTrigger: { trigger: ch, start: 'top 72%' }
     });
     gsap.from(ch.querySelectorAll('.ccard'), {
-      y: 90, opacity: 0, stagger: 0.09, duration: 1.1, ease: 'power3.out',
+      y: 90, opacity: 0, stagger: 0.09, duration: 1.1, ease: 'power3.out', clearProps: 'transform',
       scrollTrigger: { trigger: ch.querySelector('.strip-wrap'), start: 'top 88%' }
     });
   });
@@ -1156,7 +1157,7 @@ function initChapters() {
 function initS1() {
   gsap.from('.s1-name', { y: 90, opacity: 0, duration: 1.4, ease: 'power3.out', delay: 0.15 });
   gsap.from('.s1-sub', { y: 30, opacity: 0, duration: 1.1, ease: 'power3.out', delay: 0.55 });
-  gsap.from('nav .pill, nav .lang-pill', { y: -26, opacity: 0, duration: 0.9, stagger: 0.06, ease: 'power3.out', delay: 0.8 });
+  gsap.from('nav .pill, nav .lang-pill', { y: -26, opacity: 0, duration: 0.9, stagger: 0.06, ease: 'power3.out', delay: 0.8, clearProps: 'transform' });
 
   gsap.to('.s1-stage', {
     scale: 0.82, y: -60, opacity: 0, transformOrigin: '50% 100%', ease: 'none',

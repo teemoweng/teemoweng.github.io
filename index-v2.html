@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teemo Weng | Strategy × Product × AI</title>
+<meta name="description" content="Teemo Weng — Imperial College MSc. I turn strategy into products people love. BCG, Beike AI, POIZON, founder of Hinbor. Seeking product & strategy roles in China." />
+<meta property="og:title" content="Teemo Weng | Strategy × Product × AI" />
+<meta property="og:description" content="Imperial College MSc. I turn strategy into products people love. BCG, Beike AI, POIZON, founder of Hinbor." />
+<meta property="og:url" content="https://teemoweng.github.io/" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://teemoweng.github.io/og-cover.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Teemo Weng | Strategy × Product × AI" />
+<meta name="twitter:description" content="Imperial College MSc. I turn strategy into products people love." />
+<meta name="twitter:image" content="https://teemoweng.github.io/og-cover.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23faf3ea'/><text x='16' y='24' font-family='Helvetica,Arial,sans-serif' font-size='20' font-weight='800' fill='%23d9854a' text-anchor='middle'>t</text></svg>">
+
+<style>
+/* ════════ TOKENS ════════ */
+:root {
+  --cream: #faf3ea;
+  --cream-2: #f6e8d7;
+  --sky-1: #f7b98f;
+  --sky-2: #f8e8d8;
+  --peach: #f0a868;
+  --peach-deep: #d9854a;
+  --peach-soft: #f7c9a0;
+  --ink: #3e3228;
+  --ink-2: #7a6a58;
+  --ink-3: #c4b29c;
+  --dusk-1: #4a3a30;
+  --dusk-2: #8a6a52;
+  --radius: 16px;
+  --font-sans: 'Hanken Grotesk', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+html.motion { scroll-behavior: auto; } /* Lenis takes over */
+
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--peach); color: #fff; }
+
+/* ════════ ATMOSPHERE: vignette + grain ════════ */
+.vignette {
+  position: fixed; inset: 0; pointer-events: none; z-index: 80;
+  box-shadow: inset 0 0 18vmin 5vmin rgba(140, 80, 40, 0.14);
+}
+.grain {
+  position: fixed; inset: -50%; width: 200%; height: 200%;
+  pointer-events: none; z-index: 81; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html.motion .grain { animation: grain-shift 1.2s steps(4) infinite; }
+@keyframes grain-shift {
+  0% { transform: translate(0,0); } 25% { transform: translate(-2%,1%); }
+  50% { transform: translate(1%,-2%); } 75% { transform: translate(-1%,2%); } 100% { transform: translate(0,0); }
+}
+
+/* ════════ NAV ════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 28px;
+  pointer-events: none;
+}
+nav > * { pointer-events: auto; }
+.nav-center {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px;
+}
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 20px; border-radius: 99px;
+  background: rgba(255, 252, 246, 0.55);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.5);
+  color: var(--ink-2); font-size: 13.5px; font-weight: 700;
+  text-decoration: none; cursor: pointer; font-family: var(--font-sans);
+  transition: color 0.25s, background 0.25s, transform 0.25s;
+  box-shadow: 0 2px 14px rgba(150, 90, 40, 0.07);
+}
+.pill:hover { color: var(--peach-deep); background: rgba(255,252,246,0.85); transform: translateY(-1px); }
+.pill-logo {
+  padding: 10px 14px; border-radius: 14px;
+  background: rgba(255,252,246,0.92);
+  font-weight: 800; color: var(--peach-deep); font-size: 15px;
+  letter-spacing: -0.02em;
+}
+.pill-logo:hover { transform: rotate(-4deg); }
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.pill-sm {
+  padding: 9px 14px; font-size: 12.5px;
+}
+.lang-pill { display: inline-flex; border-radius: 99px; overflow: hidden;
+  background: rgba(255,252,246,0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 2px 14px rgba(150,90,40,0.07); }
+.lang-pill button {
+  padding: 9px 13px; border: none; background: transparent;
+  font-family: var(--font-sans); font-size: 12px; font-weight: 800;
+  color: var(--ink-3); cursor: pointer; transition: all 0.25s;
+}
+.lang-pill button.active { background: var(--peach-deep); color: #fff8f0; }
+
+/* ════════ SCENE HELPERS ════════ */
+.scene { position: relative; }
+.kicker {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--peach-deep);
+}
+.scene-inner { max-width: 1280px; margin: 0 auto; padding: 0 6vw; }
+
+/* ════════ RESPONSIVE NAV ════════ */
+@media (max-width: 760px) {
+  nav { padding: 14px 14px; }
+  .nav-center .pill-link { display: none; } /* keep logo only */
+  .pill { padding: 9px 14px; font-size: 12.5px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="vignette"></div>
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="pill pill-sm" href="mailto:teemow0106@163.com" data-i18n="nav_email">Email</a>
+  <div class="nav-center">
+    <a class="pill pill-link" href="#why" data-i18n="nav_about">About</a>
+    <a class="pill pill-logo" href="#top" aria-label="Top">tw</a>
+    <a class="pill pill-link" href="#chapters" data-i18n="nav_work">Work</a>
+  </div>
+  <div class="nav-right">
+    <a class="pill pill-sm" href="https://linkedin.com/in/teemoweng" target="_blank" rel="noopener">in</a>
+    <button type="button" class="pill pill-sm" onclick="openGithubModal()">gh</button>
+    <div class="lang-pill">
+      <button type="button" id="lang-en" onclick="setLang('en')" class="active">EN</button>
+      <button type="button" id="lang-zh" onclick="setLang('zh')">中</button>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <!-- scenes injected per task: s1-opening … s8-finale -->
+</main>
+
+<!-- GitHub modal: ported in Task 8 -->
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
+
+<script>
+// ════════ I18N ════════
+const i18n = {
+  en: {
+    nav_email: 'Email', nav_about: 'About', nav_work: 'Work',
+  },
+  zh: {
+    nav_email: '邮箱', nav_about: '关于', nav_work: '作品',
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-zh').classList.toggle('active', lang === 'zh');
+  const t = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  localStorage.setItem('tw-lang', lang);
+  document.dispatchEvent(new CustomEvent('langchange'));
+}
+
+// ════════ MOTION GATE (progressive enhancement) ════════
+let motionOK = false;
+let lenis = null;
+
+window.addEventListener('DOMContentLoaded', () => {
+  setLang(localStorage.getItem('tw-lang') || 'en');
+
+  motionOK = matchMedia('(prefers-reduced-motion: no-preference)').matches
+    && !!window.gsap && !!window.ScrollTrigger && !!window.Lenis;
+
+  if (motionOK) {
+    document.documentElement.classList.add('motion');
+    gsap.registerPlugin(ScrollTrigger);
+    lenis = new Lenis();
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    initScenes();
+  }
+
+  // smooth anchor links (Lenis or native fallback)
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(target, { offset: 0 }); else target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+});
+
+// ════════ SCENES (populated per task) ════════
+function initScenes() {
+  // per-scene init functions appended in later tasks
+}
+</script>
+
+</body>
+</html>

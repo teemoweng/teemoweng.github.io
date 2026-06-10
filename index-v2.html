@@ -299,6 +299,56 @@ html[data-lang="zh"] .statement { letter-spacing: 0.01em; max-width: 15ch; }
   font-size: 13px; color: var(--peach);
 }
 
+/* ════════ SCENE 7: THE RECORD ════════ */
+#record { padding: 16vh 0 12vh; }
+.rec-head { text-align: center; margin-bottom: 8vh; }
+.rec-title {
+  font-size: clamp(40px, 6.5vw, 92px); font-weight: 800;
+  letter-spacing: -0.035em; color: var(--ink); margin-top: 12px;
+}
+.rec-group { max-width: 1080px; margin: 0 auto 7vh; padding: 0 6vw; }
+.rec-group-h {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 14px; border-bottom: 2px solid var(--ink);
+}
+.rec-count { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); }
+.rec-row {
+  display: grid; grid-template-columns: 150px 1fr auto; gap: 20px;
+  align-items: baseline; padding: 19px 14px;
+  margin: 0 -14px;
+  border-bottom: 1px solid rgba(122, 106, 88, 0.16);
+  border-radius: 10px;
+  transition: background 0.3s, transform 0.3s;
+}
+.rec-row:hover { background: linear-gradient(90deg, rgba(240,168,104,0.13), rgba(240,168,104,0.02)); transform: scale(1.012); }
+.rec-row:hover .rec-year { color: var(--peach-deep); }
+.rec-org { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--peach-deep); }
+.rec-main { display: flex; flex-direction: column; gap: 3px; }
+.rec-role { font-size: clamp(15.5px, 1.6vw, 19px); font-weight: 800; color: var(--ink); letter-spacing: -0.01em; }
+.rec-desc { font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+.rec-year { font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-3); white-space: nowrap; transition: color 0.3s; }
+.rec-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.rec-tag {
+  font-family: var(--font-mono); font-size: 11.5px;
+  padding: 5px 11px; border-radius: 7px;
+  background: var(--cream-2); color: var(--ink-2);
+  border: 1px solid rgba(217,133,74,0.14);
+}
+.rec-cta-wrap { display: flex; align-items: center; gap: 18px; max-width: 1080px; margin: 2vh auto 0; padding: 0 6vw; }
+.rec-cta-line { flex: 1; height: 1px; background: rgba(122,106,88,0.25); }
+.rec-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 99px;
+  background: var(--ink); color: var(--cream);
+  font-size: 14px; font-weight: 700; text-decoration: none;
+  transition: all 0.3s; white-space: nowrap;
+}
+.rec-cta:hover { background: var(--peach-deep); transform: translateY(-2px); }
+@media (max-width: 760px) {
+  .rec-row { grid-template-columns: 1fr auto; }
+  .rec-org { grid-column: 1 / -1; }
+}
+
 /* ════════ RESPONSIVE NAV ════════ */
 @media (max-width: 760px) {
   nav { padding: 14px 14px; }
@@ -484,6 +534,56 @@ html[data-lang="zh"] .statement { letter-spacing: 0.01em; max-width: 15ch; }
     </div>
   </section>
 
+  <!-- SCENE 7: THE RECORD -->
+  <section class="scene" id="record">
+    <div class="rec-head">
+      <div class="kicker" data-i18n="rec_kicker">The full record</div>
+      <h2 class="rec-title" data-i18n="rec_title">Everything, on one page.</h2>
+    </div>
+
+    <div class="rec-group" id="rec-exp">
+      <div class="rec-group-h"><span class="kicker" data-i18n="rec_h_exp">Experience</span><span class="rec-count">7</span></div>
+      <div class="rec-row"><span class="rec-org">Beike 贝壳</span><span class="rec-main"><span class="rec-role" data-i18n="exp1_r">AI Product Intern · Overseas Commercialization</span><span class="rec-desc" data-i18n="exp1_d">Overseas commercialization analysis for AI products; global market entry and competitive positioning.</span></span><span class="rec-year">2025.07 – 2025.09</span></div>
+      <div class="rec-row"><span class="rec-org">BCG</span><span class="rec-main"><span class="rec-role" data-i18n="exp2_r">Strategy Consulting Intern · New Energy</span><span class="rec-desc" data-i18n="exp2_d">Huawei's strategic positioning and business dynamics in the NEV industry.</span></span><span class="rec-year">2024.08 – 2024.10</span></div>
+      <div class="rec-row"><span class="rec-org">ZS Consulting</span><span class="rec-main"><span class="rec-role" data-i18n="exp3_r">Healthcare Consulting Intern · Orthopedics</span><span class="rec-desc" data-i18n="exp3_d">Orthopedics market research in pharma; healthcare strategy exposure.</span></span><span class="rec-year">2023.12 – 2024.03</span></div>
+      <div class="rec-row"><span class="rec-org">POIZON 得物</span><span class="rec-main"><span class="rec-role" data-i18n="exp4_r">Product Operations Intern · Overseas Growth</span><span class="rec-desc" data-i18n="exp4_d">Product operations and user growth strategies on the overseas business team.</span></span><span class="rec-year">2023.09 – 2023.11</span></div>
+      <div class="rec-row"><span class="rec-org">JQ Consulting</span><span class="rec-main"><span class="rec-role" data-i18n="exp5_r">Strategy Consulting Intern · Southeast Asia</span><span class="rec-desc" data-i18n="exp5_d">Overseas market analysis and go-to-market strategy for Southeast Asia.</span></span><span class="rec-year">2023.04 – 2023.08</span></div>
+      <div class="rec-row"><span class="rec-org">Caitong 财通证券</span><span class="rec-main"><span class="rec-role" data-i18n="exp6_r">Industry Research Intern · Food & Beverage</span><span class="rec-desc" data-i18n="exp6_d">Food and beverage sector industry research and analysis.</span></span><span class="rec-year">2022.09 – 2022.12</span></div>
+      <div class="rec-row"><span class="rec-org">BDA Consulting</span><span class="rec-main"><span class="rec-role" data-i18n="exp7_r">Strategy Consulting Intern · Compound Seasoning</span><span class="rec-desc" data-i18n="exp7_d">Compound seasoning market research and business development.</span></span><span class="rec-year">2021.05 – 2021.12</span></div>
+    </div>
+
+    <div class="rec-group" id="rec-edu">
+      <div class="rec-group-h"><span class="kicker" data-i18n="rec_h_edu">Education</span><span class="rec-count">3</span></div>
+      <div class="rec-row"><span class="rec-org" data-i18n="edu1_s">Imperial College London</span><span class="rec-main"><span class="rec-role" data-i18n="edu1_g">MSc Economics & Strategy for Business</span></span><span class="rec-year">2025 – 2026</span></div>
+      <div class="rec-row"><span class="rec-org" data-i18n="edu2_s">Fudan University 复旦</span><span class="rec-main"><span class="rec-role" data-i18n="edu2_g">Exchange Program · School of Management</span></span><span class="rec-year">2023 – 2024</span></div>
+      <div class="rec-row"><span class="rec-org" data-i18n="edu3_s">UBC</span><span class="rec-main"><span class="rec-role" data-i18n="edu3_g">Bachelor's Degree in Finance</span></span><span class="rec-year">2021 – 2025</span></div>
+    </div>
+
+    <div class="rec-group" id="rec-skills">
+      <div class="rec-group-h"><span class="kicker" data-i18n="rec_h_skills">Toolkit</span><span class="rec-count">4</span></div>
+      <div class="rec-row"><span class="rec-org" data-i18n="sk1_c">Data Analysis</span><span class="rec-tags"><span class="rec-tag">SQL</span><span class="rec-tag">Python</span><span class="rec-tag">R</span><span class="rec-tag">Excel</span></span><span class="rec-year"></span></div>
+      <div class="rec-row"><span class="rec-org" data-i18n="sk2_c">Visualization</span><span class="rec-tags"><span class="rec-tag">Tableau</span><span class="rec-tag">Power BI</span></span><span class="rec-year"></span></div>
+      <div class="rec-row"><span class="rec-org" data-i18n="sk3_c">Product Design</span><span class="rec-tags"><span class="rec-tag">Figma</span><span class="rec-tag">Axure</span><span class="rec-tag">Stitch</span></span><span class="rec-year"></span></div>
+      <div class="rec-row"><span class="rec-org" data-i18n="sk4_c">Vibe Coding</span><span class="rec-tags"><span class="rec-tag">Claude Code</span><span class="rec-tag">Codex</span></span><span class="rec-year"></span></div>
+    </div>
+
+    <div class="rec-group" id="rec-news">
+      <div class="rec-group-h"><span class="kicker" data-i18n="rec_h_news">Latest</span><span class="rec-count">6</span></div>
+      <div class="rec-row"><span class="rec-org">2026.03</span><span class="rec-main"><span class="rec-desc" data-i18n="news_1">🔍 Actively seeking <strong>product, AI, and strategy roles in China</strong> — excited to explore new opportunities.</span></span><span class="rec-year"></span></div>
+      <div class="rec-row"><span class="rec-org">2025.09</span><span class="rec-main"><span class="rec-desc" data-i18n="news_2">🎓 Started <strong>MSc in Economics & Strategy for Business</strong> at Imperial College London.</span></span><span class="rec-year"></span></div>
+      <div class="rec-row"><span class="rec-org">2025.07</span><span class="rec-main"><span class="rec-desc" data-i18n="news_3">🤖 Joined <strong>Beike's AI product team</strong> as a Business Analyst, focusing on overseas commercialization.</span></span><span class="rec-year"></span></div>
+      <div class="rec-row"><span class="rec-org">2024.08</span><span class="rec-main"><span class="rec-desc" data-i18n="news_4">📊 Worked at <strong>BCG</strong>, analyzing Huawei's strategic positioning in the new energy vehicle industry.</span></span><span class="rec-year"></span></div>
+      <div class="rec-row"><span class="rec-org">2023.10</span><span class="rec-main"><span class="rec-desc" data-i18n="news_5">🌍 First internet internship at <strong>POIZON (得物)</strong>, overseas product operations & user growth.</span></span><span class="rec-year"></span></div>
+      <div class="rec-row"><span class="rec-org">2022.03</span><span class="rec-main"><span class="rec-desc" data-i18n="news_6">🚀 Led 0-to-1 launch of <strong>Hinbor</strong>, a North America campus group-ordering food platform.</span></span><span class="rec-year"></span></div>
+    </div>
+
+    <div class="rec-cta-wrap">
+      <div class="rec-cta-line"></div>
+      <a class="rec-cta" href="https://teemoweng.github.io/html-lab/tech-stack/tech-stack-v2.html" target="_blank" rel="noopener" data-i18n="rec_cta">View full tool stack & workflows ↗</a>
+      <div class="rec-cta-line"></div>
+    </div>
+  </section>
+
 </main>
 
 <!-- GitHub modal: ported in Task 8 -->
@@ -521,6 +621,26 @@ const i18n = {
     why_1: 'Consulting-grade frameworks meet internet-grade product sense — I speak both languages.',
     why_2: 'From BCG strategy decks to shipping a 0→1 app on both stores — I don\'t stop at the slide.',
     why_3: 'Bilingual across China and global markets — UBC, Fudan, Imperial, and teams in between.',
+    rec_kicker: 'The full record', rec_title: 'Everything, on one page.',
+    rec_h_exp: 'Experience', rec_h_edu: 'Education', rec_h_skills: 'Toolkit', rec_h_news: 'Latest',
+    exp1_r: 'AI Product Intern · Overseas Commercialization', exp1_d: 'Overseas commercialization analysis for AI products; global market entry and competitive positioning.',
+    exp2_r: 'Strategy Consulting Intern · New Energy', exp2_d: 'Huawei\'s strategic positioning and business dynamics in the NEV industry.',
+    exp3_r: 'Healthcare Consulting Intern · Orthopedics', exp3_d: 'Orthopedics market research in pharma; healthcare strategy exposure.',
+    exp4_r: 'Product Operations Intern · Overseas Growth', exp4_d: 'Product operations and user growth strategies on the overseas business team.',
+    exp5_r: 'Strategy Consulting Intern · Southeast Asia', exp5_d: 'Overseas market analysis and go-to-market strategy for Southeast Asia.',
+    exp6_r: 'Industry Research Intern · Food & Beverage', exp6_d: 'Food and beverage sector industry research and analysis.',
+    exp7_r: 'Strategy Consulting Intern · Compound Seasoning', exp7_d: 'Compound seasoning market research and business development.',
+    edu1_s: 'Imperial College London', edu1_g: 'MSc Economics & Strategy for Business',
+    edu2_s: 'Fudan University 复旦', edu2_g: 'Exchange Program · School of Management',
+    edu3_s: 'UBC', edu3_g: 'Bachelor\'s Degree in Finance',
+    sk1_c: 'Data Analysis', sk2_c: 'Visualization', sk3_c: 'Product Design', sk4_c: 'Vibe Coding',
+    news_1: '🔍 Actively seeking <strong>product, AI, and strategy roles in China</strong> — excited to explore new opportunities.',
+    news_2: '🎓 Started <strong>MSc in Economics & Strategy for Business</strong> at Imperial College London.',
+    news_3: '🤖 Joined <strong>Beike\'s AI product team</strong> as a Business Analyst, focusing on overseas commercialization.',
+    news_4: '📊 Worked at <strong>BCG</strong>, analyzing Huawei\'s strategic positioning in the new energy vehicle industry.',
+    news_5: '🌍 First internet internship at <strong>POIZON (得物)</strong>, overseas product operations & user growth.',
+    news_6: '🚀 Led 0-to-1 launch of <strong>Hinbor</strong>, a North America campus group-ordering food platform.',
+    rec_cta: 'View full tool stack & workflows ↗',
   },
   zh: {
     nav_email: '邮箱', nav_about: '关于', nav_work: '作品',
@@ -548,6 +668,26 @@ const i18n = {
     why_1: '咨询级的分析框架 × 互联网级的产品直觉——两种语言我都说。',
     why_2: '从 BCG 的战略报告，到亲手把 App 推上双端应用商店——我不止步于 PPT。',
     why_3: '中英双语，横跨中国与全球市场——UBC、复旦、帝国理工，以及一路上的团队。',
+    rec_kicker: '完整档案', rec_title: '所有经历，尽在一页。',
+    rec_h_exp: '实习经历', rec_h_edu: '教育背景', rec_h_skills: '技能工具', rec_h_news: '最新动态',
+    exp1_r: 'AI 产品实习生 · 海外商业化', exp1_d: 'AI 产品海外商业化分析；全球市场进入策略与竞争定位。',
+    exp2_r: '战略咨询实习生 · 新能源行业', exp2_d: '华为在新能源汽车行业的战略定位与业务动态分析。',
+    exp3_r: '医疗咨询实习生 · 骨科市场', exp3_d: '制药行业骨科市场调研，医疗战略与行业洞察。',
+    exp4_r: '产品运营实习生 · 海外用户增长', exp4_d: '海外业务团队的产品运营与用户增长策略。',
+    exp5_r: '战略咨询实习生 · 东南亚市场', exp5_d: '东南亚市场调研与市场进入策略分析。',
+    exp6_r: '行业研究实习生 · 食品饮料', exp6_d: '食品饮料行业研究与分析。',
+    exp7_r: '战略咨询实习生 · 复合调味品', exp7_d: '复合调味品市场调研与战略咨询。',
+    edu1_s: '帝国理工学院', edu1_g: '经济与商业战略理学硕士',
+    edu2_s: '复旦大学', edu2_g: '管理学院 · 交换生项目',
+    edu3_s: '不列颠哥伦比亚大学', edu3_g: '金融学学士',
+    sk1_c: '数据分析', sk2_c: '数据可视化', sk3_c: '产品设计', sk4_c: 'AI 编程',
+    news_1: '🔍 正积极寻找<strong>中国互联网 / AI / 战略方向</strong>的产品或策略岗位，欢迎交流！',
+    news_2: '🎓 入读<strong>帝国理工学院经济与商业战略硕士</strong>项目。',
+    news_3: '🤖 加入<strong>贝壳 AI 产品团队</strong>担任商业分析师，专注海外商业化。',
+    news_4: '📊 在 <strong>BCG</strong> 实习，分析华为在新能源汽车行业的战略定位。',
+    news_5: '🌍 在 <strong>POIZON（得物）</strong>完成首段互联网实习，负责海外产品运营与用户增长。',
+    news_6: '🚀 主导 <strong>Hinbor</strong> 从 0 到 1 上线，北美高校团购外卖平台。',
+    rec_cta: '查看完整工具站 & 工作流 ↗',
   }
 };
 
@@ -605,6 +745,25 @@ function initScenes() {
   initS2();
   initChapters();
   initWhy();
+  initRecord();
+}
+
+// Scene 7: ledger rows reveal in staggered batches
+function initRecord() {
+  gsap.from('.rec-head > *', {
+    y: 50, opacity: 0, stagger: 0.1, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: '#record', start: 'top 75%' }
+  });
+  document.querySelectorAll('.rec-group').forEach(group => {
+    gsap.from(group.querySelectorAll('.rec-group-h, .rec-row'), {
+      y: 34, opacity: 0, stagger: 0.06, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: group, start: 'top 82%' }
+    });
+  });
+  gsap.from('.rec-cta-wrap', {
+    y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: { trigger: '.rec-cta-wrap', start: 'top 90%' }
+  });
 }
 
 // Scene 6: pinned; title rises, checklist items light up one by one

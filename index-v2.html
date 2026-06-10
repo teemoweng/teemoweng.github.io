@@ -173,6 +173,28 @@ html.motion .s1-scroll { animation: bob 2.4s ease-in-out infinite; }
   .s1-sub { letter-spacing: 0.18em; padding: 0 18px; line-height: 1.8; }
 }
 
+/* ════════ SCENE 2: STATEMENT ════════ */
+#s2 { background: var(--cream); }
+.s2-pin {
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.s2-kicker { margin-bottom: 28px; }
+.statement {
+  font-size: clamp(38px, 6.2vw, 96px);
+  font-weight: 800; letter-spacing: -0.035em; line-height: 1.08;
+  max-width: 16ch;
+  color: var(--ink);
+}
+.statement em { font-style: normal; color: var(--peach-deep); }
+/* word spans (built by splitStatement) */
+.statement .w { color: inherit; }
+html[data-lang="zh"] .statement { letter-spacing: 0.01em; max-width: 15ch; }
+
+@media (max-width: 760px) {
+  .statement { font-size: clamp(34px, 9.5vw, 54px); }
+}
+
 /* ════════ RESPONSIVE NAV ════════ */
 @media (max-width: 760px) {
   nav { padding: 14px 14px; }
@@ -217,6 +239,16 @@ html.motion .s1-scroll { animation: bob 2.4s ease-in-out infinite; }
     <div class="s1-scroll" data-i18n="s1_scroll">scroll</div>
   </section>
 
+  <!-- SCENE 2: STATEMENT -->
+  <section class="scene" id="s2">
+    <div class="s2-pin">
+      <div class="scene-inner">
+        <div class="kicker s2-kicker" data-i18n="s2_kicker">Strategy · Product · AI</div>
+        <h2 class="statement" data-i18n="s2_statement">I turn <em>strategy</em> into products people <em>love</em>:</h2>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- GitHub modal: ported in Task 8 -->
@@ -232,11 +264,15 @@ const i18n = {
     nav_email: 'Email', nav_about: 'About', nav_work: 'Work',
     s1_sub: 'Strategy × Product × AI — Imperial College London',
     s1_scroll: 'scroll',
+    s2_kicker: 'Strategy · Product · AI',
+    s2_statement: 'I turn <em>strategy</em> into products people <em>love</em>:',
   },
   zh: {
     nav_email: '邮箱', nav_about: '关于', nav_work: '作品',
     s1_sub: '战略 × 产品 × AI — 伦敦帝国理工学院',
     s1_scroll: '向下滚动',
+    s2_kicker: '战略 · 产品 · AI',
+    s2_statement: '我把<em>战略</em>，做成<em>被人喜爱的产品</em>：',
   }
 };
 
@@ -291,6 +327,7 @@ window.addEventListener('DOMContentLoaded', () => {
 // ════════ SCENES (populated per task) ════════
 function initScenes() {
   initS1();
+  initS2();
 }
 
 // Scene 1: load-in rise, then name shrinks & lifts away on scroll
@@ -303,6 +340,48 @@ function initS1() {
     scale: 0.82, y: -60, opacity: 0, transformOrigin: '50% 100%', ease: 'none',
     scrollTrigger: { trigger: '#s1', start: 'bottom 92%', end: 'bottom 30%', scrub: 0.4 }
   });
+}
+
+// Scene 2: statement words light up under a pinned scrub
+let s2tl = null;
+function initS2() {
+  document.getElementById('s2').style.height = '260vh';
+  buildStatement();
+  document.addEventListener('langchange', buildStatement);
+}
+
+function buildStatement() {
+  if (!motionOK) return; // static page keeps plain <em> highlighting
+  const el = document.querySelector('.statement');
+  if (!el) return;
+  const frag = document.createDocumentFragment();
+  [...el.childNodes].forEach(node => {
+    const hl = node.nodeName === 'EM';
+    const text = node.textContent;
+    const tokens = /[一-鿿]/.test(text) ? [...text] : text.split(/(?<= )/);
+    tokens.forEach(tk => {
+      if (!tk) return;
+      const s = document.createElement('span');
+      s.className = 'w' + (hl ? ' hl' : '');
+      s.textContent = tk;
+      frag.appendChild(s);
+    });
+  });
+  el.replaceChildren(frag);
+
+  if (s2tl) { if (s2tl.scrollTrigger) s2tl.scrollTrigger.kill(); s2tl.kill(); s2tl = null; }
+  const spans = el.querySelectorAll('.w');
+  gsap.set(spans, { color: '#ddccb4' });
+  s2tl = gsap.timeline({
+    scrollTrigger: { trigger: '#s2', start: 'top top', end: 'bottom bottom', scrub: 0.35, pin: '.s2-pin' }
+  });
+  spans.forEach((s, i) => {
+    s2tl.to(s, {
+      color: s.classList.contains('hl') ? '#d9854a' : '#3e3228',
+      duration: 0.5, ease: 'none'
+    }, i * 0.14);
+  });
+  ScrollTrigger.refresh();
 }
 </script>
 

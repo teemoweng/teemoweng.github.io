@@ -195,6 +195,71 @@ html[data-lang="zh"] .statement { letter-spacing: 0.01em; max-width: 15ch; }
   .statement { font-size: clamp(34px, 9.5vw, 54px); }
 }
 
+/* ════════ SCENES 3-5: CHAPTERS ════════ */
+.chapter { padding: 18vh 0 14vh; overflow: hidden; }
+.chapter-head { text-align: center; margin-bottom: 7vh; }
+.chapter-title {
+  font-size: clamp(56px, 11vw, 170px);
+  font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+  color: var(--peach);
+  text-shadow: 0 2px 0 rgba(255,255,255,0.6), 0 14px 50px rgba(217,133,74,0.18);
+  margin: 14px 0 18px;
+}
+.chapter-sub {
+  font-size: clamp(15px, 1.4vw, 18px); font-weight: 500;
+  color: var(--ink-2); max-width: 52ch; margin: 0 auto; line-height: 1.65;
+  padding: 0 6vw;
+}
+.strip-wrap { position: relative; }
+.strip {
+  display: flex; gap: 22px; align-items: stretch;
+  padding: 26px 6vw;
+  width: max-content;
+}
+/* mobile: swipeable */
+@media (max-width: 760px) {
+  .strip-wrap { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .strip-wrap::-webkit-scrollbar { display: none; }
+  .strip > * { scroll-snap-align: center; }
+}
+.ccard {
+  width: 330px; flex-shrink: 0;
+  background: rgba(255, 252, 246, 0.72);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 22px;
+  box-shadow: 0 10px 36px rgba(160, 95, 45, 0.10);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform 0.35s cubic-bezier(.2,.7,.3,1), box-shadow 0.35s;
+}
+.ccard:hover { transform: translateY(-8px) rotate(-0.5deg); box-shadow: 0 22px 54px rgba(160,95,45,0.18); }
+.ccard-img { height: 175px; overflow: hidden; position: relative; }
+.ccard-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ccard-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+.ccard-meta { display: flex; justify-content: space-between; align-items: baseline; }
+.ccard-org { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--peach-deep); }
+.ccard-year { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3); }
+.ccard-title { font-size: 18.5px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); line-height: 1.25; }
+.ccard-desc { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; flex: 1; }
+.ccard-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 7px 14px; border-radius: 99px;
+  background: var(--cream-2); color: var(--peach-deep);
+  font-size: 12px; font-weight: 700; text-decoration: none;
+  border: 1px solid rgba(217,133,74,0.18);
+  transition: all 0.25s;
+}
+.chip:hover { background: var(--peach-deep); color: #fff8f0; }
+.ccard-wide { width: 560px; }
+.ccard-wide .ccard-img { height: 230px; }
+@media (max-width: 760px) {
+  .ccard { width: 78vw; }
+  .ccard-wide { width: 84vw; }
+  .ccard-wide .ccard-img { height: 175px; }
+  .chapter { padding: 12vh 0 9vh; }
+}
+
 /* ════════ RESPONSIVE NAV ════════ */
 @media (max-width: 760px) {
   nav { padding: 14px 14px; }
@@ -249,6 +314,120 @@ html[data-lang="zh"] .statement { letter-spacing: 0.01em; max-width: 15ch; }
     </div>
   </section>
 
+  <!-- SCENE 3: CHAPTER — STRATEGY -->
+  <section class="scene chapter" id="chapters">
+    <div class="chapter-head">
+      <div class="kicker" data-i18n="ch1_kicker">Chapter 01 — Consulting</div>
+      <h2 class="chapter-title" data-i18n="ch1_title">Strategy</h2>
+      <p class="chapter-sub" data-i18n="ch1_sub">Five consulting seats across strategy, healthcare and equity research — from Huawei's NEV play at BCG to Southeast Asia go-to-market.</p>
+    </div>
+    <div class="strip-wrap">
+      <div class="strip">
+        <div class="ccard">
+          <div class="ccard-body">
+            <div class="ccard-meta"><span class="ccard-org">BCG</span><span class="ccard-year">2024.08 – 2024.10</span></div>
+            <div class="ccard-title" data-i18n="c_bcg_t">Strategy Intern · New Energy</div>
+            <div class="ccard-desc" data-i18n="c_bcg_d">Analyzed Huawei's strategic positioning and business dynamics in the new energy vehicle industry.</div>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-body">
+            <div class="ccard-meta"><span class="ccard-org">ZS Consulting</span><span class="ccard-year">2023.12 – 2024.03</span></div>
+            <div class="ccard-title" data-i18n="c_zs_t">Healthcare Intern · Orthopedics</div>
+            <div class="ccard-desc" data-i18n="c_zs_d">Orthopedics market research in the pharmaceutical industry; healthcare strategy and industry insights.</div>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-body">
+            <div class="ccard-meta"><span class="ccard-org">JQ Consulting</span><span class="ccard-year">2023.04 – 2023.08</span></div>
+            <div class="ccard-title" data-i18n="c_jq_t">Strategy Intern · Southeast Asia</div>
+            <div class="ccard-desc" data-i18n="c_jq_d">Overseas market analysis and go-to-market strategy for the Southeast Asia market.</div>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-body">
+            <div class="ccard-meta"><span class="ccard-org">Caitong Securities 财通</span><span class="ccard-year">2022.09 – 2022.12</span></div>
+            <div class="ccard-title" data-i18n="c_ct_t">Industry Research · F&B</div>
+            <div class="ccard-desc" data-i18n="c_ct_d">Food and beverage sector industry research and analysis.</div>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-body">
+            <div class="ccard-meta"><span class="ccard-org">BDA Consulting</span><span class="ccard-year">2021.05 – 2021.12</span></div>
+            <div class="ccard-title" data-i18n="c_bda_t">Strategy Intern · Seasoning</div>
+            <div class="ccard-desc" data-i18n="c_bda_d">Compound seasoning market research and business development strategy.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 4: CHAPTER — PRODUCT -->
+  <section class="scene chapter" id="s4">
+    <div class="chapter-head">
+      <div class="kicker" data-i18n="ch2_kicker">Chapter 02 — Building</div>
+      <h2 class="chapter-title" data-i18n="ch2_title">Product</h2>
+      <p class="chapter-sub" data-i18n="ch2_sub">From Beike's AI commercialization to POIZON's overseas growth and an award-run L'Oréal Brandstorm concept.</p>
+    </div>
+    <div class="strip-wrap">
+      <div class="strip">
+        <div class="ccard">
+          <div class="ccard-img"><img src="uploads/pasted-1776544288128-0.png" alt="Beike AI" loading="lazy"></div>
+          <div class="ccard-body">
+            <div class="ccard-meta"><span class="ccard-org">Beike 贝壳</span><span class="ccard-year">2025.07 – 2025.09</span></div>
+            <div class="ccard-title" data-i18n="c_bk_t">Beike AI — Overseas Commercialization</div>
+            <div class="ccard-desc" data-i18n="c_bk_d">Analyzed overseas commercialization opportunities for Beike's AI product team: market entry strategy and AI-native product positioning.</div>
+            <div class="ccard-links"><a class="chip" href="#s8" data-i18n="c_bk_link">Contact for details</a></div>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-img"><img src="uploads/Project2.png" alt="LuxePop" loading="lazy"></div>
+          <div class="ccard-body">
+            <div class="ccard-meta"><span class="ccard-org">L'Oréal Brandstorm</span><span class="ccard-year">2026</span></div>
+            <div class="ccard-title" data-i18n="c_lp_t">LuxePop — YSL Fragrance Innovation</div>
+            <div class="ccard-desc" data-i18n="c_lp_d">Micro-encapsulated solid fragrance balm for urban professionals 25–39: touch-activated release, alcohol-free, refillable.</div>
+            <div class="ccard-links">
+              <a class="chip" href="https://drive.google.com/file/d/14uT5YCMrzA3ab5zLMBuhzVeRDOuSm8id/view" target="_blank" rel="noopener" data-i18n="c_lp_l1">Slides ↗</a>
+              <a class="chip" href="https://www.bilibili.com/video/BV1GTQQBcEHR/" target="_blank" rel="noopener" data-i18n="c_lp_l2">Video ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-body">
+            <div class="ccard-meta"><span class="ccard-org">POIZON 得物</span><span class="ccard-year">2023.09 – 2023.11</span></div>
+            <div class="ccard-title" data-i18n="c_pz_t">Product Ops · Overseas Growth</div>
+            <div class="ccard-desc" data-i18n="c_pz_d">First internet seat: product operations and user growth strategies on the overseas business team.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 5: CHAPTER — FOUNDER -->
+  <section class="scene chapter" id="s5">
+    <div class="chapter-head">
+      <div class="kicker" data-i18n="ch3_kicker">Chapter 03 — Zero to One</div>
+      <h2 class="chapter-title" data-i18n="ch3_title">Founder</h2>
+      <p class="chapter-sub" data-i18n="ch3_sub">Led the 0-to-1 launch of Hinbor, a campus group-ordering food platform in North America — shipped to both app stores.</p>
+    </div>
+    <div class="strip-wrap">
+      <div class="strip" style="margin: 0 auto;">
+        <div class="ccard ccard-wide">
+          <div class="ccard-img"><img src="uploads/combined_hd.png" alt="Hinbor app" loading="lazy"></div>
+          <div class="ccard-body">
+            <div class="ccard-meta"><span class="ccard-org">Hinbor · Vancouver</span><span class="ccard-year">2022.03 →</span></div>
+            <div class="ccard-title" data-i18n="c_hb_t">Hinbor — Campus Group Ordering</div>
+            <div class="ccard-desc" data-i18n="c_hb_d">Pickup + group-ordering platform for university students: self-pickup cuts delivery costs, tiered group discounts lift order density.</div>
+            <div class="ccard-links">
+              <a class="chip" href="https://apps.apple.com/us/app/hinbor/id1561569206" target="_blank" rel="noopener" data-i18n="c_hb_l1">App Store ↗</a>
+              <a class="chip" href="https://play.google.com/store/apps/details?id=com.hinbor" target="_blank" rel="noopener" data-i18n="c_hb_l2">Google Play ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- GitHub modal: ported in Task 8 -->
@@ -266,6 +445,21 @@ const i18n = {
     s1_scroll: 'scroll',
     s2_kicker: 'Strategy · Product · AI',
     s2_statement: 'I turn <em>strategy</em> into products people <em>love</em>:',
+    ch1_kicker: 'Chapter 01 — Consulting', ch1_title: 'Strategy',
+    ch1_sub: 'Five consulting seats across strategy, healthcare and equity research — from Huawei\'s NEV play at BCG to Southeast Asia go-to-market.',
+    c_bcg_t: 'Strategy Intern · New Energy', c_bcg_d: 'Analyzed Huawei\'s strategic positioning and business dynamics in the new energy vehicle industry.',
+    c_zs_t: 'Healthcare Intern · Orthopedics', c_zs_d: 'Orthopedics market research in the pharmaceutical industry; healthcare strategy and industry insights.',
+    c_jq_t: 'Strategy Intern · Southeast Asia', c_jq_d: 'Overseas market analysis and go-to-market strategy for the Southeast Asia market.',
+    c_ct_t: 'Industry Research · F&B', c_ct_d: 'Food and beverage sector industry research and analysis.',
+    c_bda_t: 'Strategy Intern · Seasoning', c_bda_d: 'Compound seasoning market research and business development strategy.',
+    ch2_kicker: 'Chapter 02 — Building', ch2_title: 'Product',
+    ch2_sub: 'From Beike\'s AI commercialization to POIZON\'s overseas growth and an award-run L\'Oréal Brandstorm concept.',
+    c_bk_t: 'Beike AI — Overseas Commercialization', c_bk_d: 'Analyzed overseas commercialization opportunities for Beike\'s AI product team: market entry strategy and AI-native product positioning.', c_bk_link: 'Contact for details',
+    c_lp_t: 'LuxePop — YSL Fragrance Innovation', c_lp_d: 'Micro-encapsulated solid fragrance balm for urban professionals 25–39: touch-activated release, alcohol-free, refillable.', c_lp_l1: 'Slides ↗', c_lp_l2: 'Video ↗',
+    c_pz_t: 'Product Ops · Overseas Growth', c_pz_d: 'First internet seat: product operations and user growth strategies on the overseas business team.',
+    ch3_kicker: 'Chapter 03 — Zero to One', ch3_title: 'Founder',
+    ch3_sub: 'Led the 0-to-1 launch of Hinbor, a campus group-ordering food platform in North America — shipped to both app stores.',
+    c_hb_t: 'Hinbor — Campus Group Ordering', c_hb_d: 'Pickup + group-ordering platform for university students: self-pickup cuts delivery costs, tiered group discounts lift order density.', c_hb_l1: 'App Store ↗', c_hb_l2: 'Google Play ↗',
   },
   zh: {
     nav_email: '邮箱', nav_about: '关于', nav_work: '作品',
@@ -273,6 +467,21 @@ const i18n = {
     s1_scroll: '向下滚动',
     s2_kicker: '战略 · 产品 · AI',
     s2_statement: '我把<em>战略</em>，做成<em>被人喜爱的产品</em>：',
+    ch1_kicker: '第一幕 — 咨询', ch1_title: '战略',
+    ch1_sub: '横跨战略、医疗与行研的五段咨询经历——从 BCG 的华为新能源汽车课题，到东南亚市场进入策略。',
+    c_bcg_t: '战略咨询实习 · 新能源', c_bcg_d: '分析华为在新能源汽车行业的战略定位与业务动态。',
+    c_zs_t: '医疗咨询实习 · 骨科', c_zs_d: '制药行业骨科市场调研，深入医疗战略与行业洞察。',
+    c_jq_t: '战略咨询实习 · 东南亚', c_jq_d: '东南亚市场调研与市场进入（GTM）策略分析。',
+    c_ct_t: '行业研究实习 · 食品饮料', c_ct_d: '食品饮料行业研究与分析。',
+    c_bda_t: '战略咨询实习 · 复合调味品', c_bda_d: '复合调味品市场调研与商业拓展战略。',
+    ch2_kicker: '第二幕 — 产品', ch2_title: '产品',
+    ch2_sub: '从贝壳 AI 的海外商业化，到得物的海外增长，再到欧莱雅 Brandstorm 的参赛方案。',
+    c_bk_t: '贝壳 AI — 海外商业化', c_bk_d: '为贝壳 AI 产品团队分析海外商业化机会：市场进入策略与 AI 原生产品定位。', c_bk_link: '联系了解详情',
+    c_lp_t: 'LuxePop — YSL 香氛创新', c_lp_d: '面向 25–39 岁城市专业人士的微胶囊固体香膏：触感激活释放、无酒精配方、可补充设计。', c_lp_l1: '方案 ↗', c_lp_l2: '视频 ↗',
+    c_pz_t: '产品运营 · 海外增长', c_pz_d: '首段互联网经历：在海外业务团队负责产品运营与用户增长策略。',
+    ch3_kicker: '第三幕 — 从零到一', ch3_title: '创业',
+    ch3_sub: '主导 Hinbor 从 0 到 1 上线——北美高校团购外卖平台，双端应用商店同步发布。',
+    c_hb_t: 'Hinbor — 高校团购外卖', c_hb_d: '面向大学生的自取 + 团购平台：自取降低配送成本，阶梯团购折扣提升订单密度。', c_hb_l1: 'App Store ↗', c_hb_l2: 'Google Play ↗',
   }
 };
 
@@ -328,6 +537,47 @@ window.addEventListener('DOMContentLoaded', () => {
 function initScenes() {
   initS1();
   initS2();
+  initChapters();
+}
+
+// Scenes 3-5: chapter titles rise in; card strips drift sideways (desktop)
+function initChapters() {
+  document.querySelectorAll('.chapter').forEach((ch, idx) => {
+    gsap.from(ch.querySelectorAll('.chapter-head > *'), {
+      y: 70, opacity: 0, stagger: 0.08, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: ch, start: 'top 72%' }
+    });
+    gsap.from(ch.querySelectorAll('.ccard'), {
+      y: 90, opacity: 0, stagger: 0.09, duration: 1.1, ease: 'power3.out',
+      scrollTrigger: { trigger: ch.querySelector('.strip-wrap'), start: 'top 88%' }
+    });
+  });
+
+  ScrollTrigger.matchMedia({
+    '(min-width: 761px)': function () {
+      document.querySelectorAll('.chapter').forEach(ch => {
+        const strip = ch.querySelector('.strip');
+        const overflow = () => Math.max(0, strip.scrollWidth + 40 - window.innerWidth);
+        if (overflow() > 60) {
+          // strip wider than viewport: pin chapter, ride the whole strip across
+          gsap.to(strip, {
+            x: () => -overflow(), ease: 'none',
+            scrollTrigger: {
+              trigger: ch, start: 'top top',
+              end: () => '+=' + (overflow() + 200),
+              pin: true, scrub: 0.5, invalidateOnRefresh: true, anticipatePin: 1
+            }
+          });
+        } else {
+          // fits on screen: gentle parallax drift
+          gsap.fromTo(strip, { x: 50 }, {
+            x: -50, ease: 'none',
+            scrollTrigger: { trigger: ch, start: 'top bottom', end: 'bottom top', scrub: 0.6 }
+          });
+        }
+      });
+    }
+  });
 }
 
 // Scene 1: load-in rise, then name shrinks & lifts away on scroll

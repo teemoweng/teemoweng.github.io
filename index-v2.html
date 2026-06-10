@@ -260,6 +260,45 @@ html[data-lang="zh"] .statement { letter-spacing: 0.01em; max-width: 15ch; }
   .chapter { padding: 12vh 0 9vh; }
 }
 
+/* ════════ SCENE 6: WHY ME ════════ */
+#why { position: relative; color: #f3ddc4; overflow: hidden; }
+.why-bg { /* future photo mount: set background-image here */
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120vmin 70vmin at 78% 18%, rgba(240,168,104,0.30), transparent 60%),
+    radial-gradient(90vmin 60vmin at 12% 85%, rgba(240,168,104,0.16), transparent 65%),
+    linear-gradient(115deg, #3c2f26 0%, #4a3a30 38%, #6b5443 72%, #84644c 100%);
+}
+.why-pin {
+  position: relative;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.why-kicker { color: #e8c4a0; font-size: clamp(15px, 1.6vw, 20px); font-weight: 700; margin-bottom: 14px; }
+.why-title {
+  font-size: clamp(44px, 7.4vw, 110px);
+  font-weight: 800; letter-spacing: -0.035em; line-height: 1.02;
+  color: #f7c9a0;
+  text-shadow: 0 10px 50px rgba(0,0,0,0.25);
+  max-width: 14ch;
+}
+.why-rule { height: 1px; background: rgba(247,201,160,0.35); margin: 5vh 0 4.5vh; max-width: 980px; }
+.why-list { display: flex; flex-direction: column; gap: 0; max-width: 760px; }
+.why-item {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 22px 0;
+  font-size: clamp(15.5px, 1.7vw, 20px); font-weight: 600; line-height: 1.55;
+  color: #ecd6bb;
+  border-bottom: 1px solid rgba(247,201,160,0.16);
+}
+.why-item:last-child { border-bottom: none; }
+.why-check {
+  flex-shrink: 0; width: 26px; height: 26px; margin-top: 2px;
+  border-radius: 50%; border: 1.5px solid rgba(247,201,160,0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: var(--peach);
+}
+
 /* ════════ RESPONSIVE NAV ════════ */
 @media (max-width: 760px) {
   nav { padding: 14px 14px; }
@@ -428,6 +467,23 @@ html[data-lang="zh"] .statement { letter-spacing: 0.01em; max-width: 15ch; }
     </div>
   </section>
 
+  <!-- SCENE 6: WHY ME (typography scene; .why-bg reserved for a future photo) -->
+  <section class="scene" id="why">
+    <div class="why-bg"></div>
+    <div class="why-pin">
+      <div class="scene-inner">
+        <div class="why-kicker" data-i18n="why_kicker">Teams work with me because of my</div>
+        <h2 class="why-title" data-i18n="why_title">rigor + builder's instinct</h2>
+        <div class="why-rule"></div>
+        <div class="why-list">
+          <div class="why-item"><span class="why-check">✓</span><span data-i18n="why_1">Consulting-grade frameworks meet internet-grade product sense — I speak both languages.</span></div>
+          <div class="why-item"><span class="why-check">✓</span><span data-i18n="why_2">From BCG strategy decks to shipping a 0→1 app on both stores — I don't stop at the slide.</span></div>
+          <div class="why-item"><span class="why-check">✓</span><span data-i18n="why_3">Bilingual across China and global markets — UBC, Fudan, Imperial, and teams in between.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- GitHub modal: ported in Task 8 -->
@@ -460,6 +516,11 @@ const i18n = {
     ch3_kicker: 'Chapter 03 — Zero to One', ch3_title: 'Founder',
     ch3_sub: 'Led the 0-to-1 launch of Hinbor, a campus group-ordering food platform in North America — shipped to both app stores.',
     c_hb_t: 'Hinbor — Campus Group Ordering', c_hb_d: 'Pickup + group-ordering platform for university students: self-pickup cuts delivery costs, tiered group discounts lift order density.', c_hb_l1: 'App Store ↗', c_hb_l2: 'Google Play ↗',
+    why_kicker: 'Teams work with me because of my',
+    why_title: 'rigor + builder\'s instinct',
+    why_1: 'Consulting-grade frameworks meet internet-grade product sense — I speak both languages.',
+    why_2: 'From BCG strategy decks to shipping a 0→1 app on both stores — I don\'t stop at the slide.',
+    why_3: 'Bilingual across China and global markets — UBC, Fudan, Imperial, and teams in between.',
   },
   zh: {
     nav_email: '邮箱', nav_about: '关于', nav_work: '作品',
@@ -482,6 +543,11 @@ const i18n = {
     ch3_kicker: '第三幕 — 从零到一', ch3_title: '创业',
     ch3_sub: '主导 Hinbor 从 0 到 1 上线——北美高校团购外卖平台，双端应用商店同步发布。',
     c_hb_t: 'Hinbor — 高校团购外卖', c_hb_d: '面向大学生的自取 + 团购平台：自取降低配送成本，阶梯团购折扣提升订单密度。', c_hb_l1: 'App Store ↗', c_hb_l2: 'Google Play ↗',
+    why_kicker: '团队选择和我合作，因为我有',
+    why_title: '咨询的严谨 + 产品的手感',
+    why_1: '咨询级的分析框架 × 互联网级的产品直觉——两种语言我都说。',
+    why_2: '从 BCG 的战略报告，到亲手把 App 推上双端应用商店——我不止步于 PPT。',
+    why_3: '中英双语，横跨中国与全球市场——UBC、复旦、帝国理工，以及一路上的团队。',
   }
 };
 
@@ -538,6 +604,25 @@ function initScenes() {
   initS1();
   initS2();
   initChapters();
+  initWhy();
+}
+
+// Scene 6: pinned; title rises, checklist items light up one by one
+function initWhy() {
+  const items = gsap.utils.toArray('#why .why-item');
+  gsap.set(items, { opacity: 0.22, y: 18 });
+  const tl = gsap.timeline({
+    scrollTrigger: { trigger: '#why', start: 'top top', end: '+=160%', pin: '.why-pin', scrub: 0.4, anticipatePin: 1 }
+  });
+  tl.from('#why .why-kicker', { y: 40, opacity: 0, duration: 0.5 })
+    .from('#why .why-title', { y: 70, opacity: 0, duration: 0.8 }, 0.1)
+    .from('#why .why-rule', { scaleX: 0, transformOrigin: '0 50%', duration: 0.7 }, 0.5);
+  items.forEach((item, i) => {
+    tl.to(item, { opacity: 1, y: 0, duration: 0.5 }, 1.0 + i * 0.55);
+    tl.fromTo(item.querySelector('.why-check'),
+      { backgroundColor: 'rgba(0,0,0,0)', borderColor: 'rgba(247,201,160,0.5)', color: '#f0a868' },
+      { backgroundColor: '#f0a868', borderColor: '#f0a868', color: '#3c2f26', duration: 0.3 }, 1.15 + i * 0.55);
+  });
 }
 
 // Scenes 3-5: chapter titles rise in; card strips drift sideways (desktop)

@@ -595,6 +595,7 @@ html.motion .f-wave { animation: wave-tilt 2.6s ease-in-out infinite; transform-
     <div class="strip-wrap">
       <div class="strip">
         <div class="ccard">
+          <div class="ccard-img"><img src="uploads/ccard-alibaba.png" alt="Alibaba" loading="lazy"></div>
           <div class="ccard-body">
             <div class="ccard-meta"><span class="ccard-org">Alibaba 阿里巴巴</span><span class="ccard-year" data-i18n="c_ali_y">2026.06 – present</span></div>
             <div class="ccard-title" data-i18n="c_ali_t">Alibaba — AI for Space Leasing</div>
@@ -623,6 +624,7 @@ html.motion .f-wave { animation: wave-tilt 2.6s ease-in-out infinite; transform-
           </div>
         </div>
         <div class="ccard">
+          <div class="ccard-img"><img src="uploads/ccard-poizon.png" alt="POIZON 得物" loading="lazy"></div>
           <div class="ccard-body">
             <div class="ccard-meta"><span class="ccard-org">POIZON 得物</span><span class="ccard-year">2023.09 – 2023.11</span></div>
             <div class="ccard-title" data-i18n="c_pz_t">Product Ops · Overseas Growth</div>
@@ -944,8 +946,13 @@ window.addEventListener('DOMContentLoaded', () => {
 // ════════ RESUME ════════
 function downloadResume() {
   const a = document.createElement('a');
-  a.href = 'uploads/Resume CW.pdf';
-  a.download = 'Teemo_Weng_Resume.pdf';
+  if (currentLang === 'zh') {
+    a.href = 'uploads/resume-cw-zh-202607.pdf';
+    a.download = '翁呈轩简历.pdf';
+  } else {
+    a.href = 'uploads/resume-cw-en-202607.pdf';
+    a.download = 'Chengxuan_Teemo_Weng_Resume.pdf';
+  }
   a.click();
 }
 

@@ -104,6 +104,16 @@ nav {
 }
 .btn-icon:hover { border-color: var(--accent); color: var(--accent); }
 
+.nav-v2 {
+  display: inline-flex; align-items: center;
+  padding: 5px 12px; border: 1px solid var(--border);
+  border-radius: 99px; background: var(--card);
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--fg2); text-decoration: none; white-space: nowrap;
+  transition: all 0.2s;
+}
+.nav-v2:hover { border-color: var(--accent); color: var(--accent); }
+
 .lang-toggle {
   display: flex; gap: 4px; background: var(--bg3);
   border-radius: 8px; padding: 3px;
@@ -600,6 +610,7 @@ footer span { color: var(--accent); }
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
   <div class="nav-controls">
+    <a class="nav-v2" href="/v2/" data-i18n="btn_v2">✨ Cinematic</a>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('zh')">中</button>
@@ -625,7 +636,6 @@ footer span { color: var(--accent); }
         </a>
         <a class="btn-outline" href="#contact" data-i18n="btn_contact">Get in Touch</a>
         <button type="button" class="btn-outline" onclick="openGithubModal()" data-i18n="btn_github">⌥ GitHub</button>
-        <a class="btn-outline" href="/v2/" data-i18n="btn_v2">✨ Cinematic version ↗</a>
       </div>
     </div>
     <div class="hero-avatar">
@@ -969,7 +979,7 @@ const i18n = {
     nav_education: 'Education', nav_contact: 'Contact',
     hero_tag: 'Strategy · Product · AI',
     hero_desc: 'MSc student at Imperial College London, currently an AI Product Intern at Alibaba (space-leasing product line). Experienced in strategy consulting (BCG), internet product (Beike, POIZON), and startup building. Seeking product & strategy roles in China.',
-    btn_resume: '↓ Download Resume', btn_contact: 'Get in Touch', btn_v2: '✨ Cinematic version ↗',
+    btn_resume: '↓ Download Resume', btn_contact: 'Get in Touch', btn_v2: '✨ Cinematic',
     avatar_badge: '@ Imperial College', scroll_hint: 'scroll',
     section_news: 'Latest', section_projects: 'Work', section_exp: 'Career',
     section_edu: 'Academia', section_skills: 'Tools', section_contact: 'Connect',
@@ -1027,7 +1037,7 @@ const i18n = {
     nav_education: '教育', nav_contact: '联系',
     hero_tag: '战略 · 产品 · AI',
     hero_desc: '帝国理工学院经济与战略硕士在读，现于阿里巴巴担任 AI 产品实习生（空间租赁产品线）。拥有战略咨询（BCG）、互联网产品（贝壳、得物）及初创公司（Hinbor）经验。正积极寻求中国互联网、咨询或消费品产品/战略岗位。',
-    btn_resume: '↓ 下载简历', btn_contact: '联系我', btn_v2: '✨ 动效版主页 ↗',
+    btn_resume: '↓ 下载简历', btn_contact: '联系我', btn_v2: '✨ 动效版',
     avatar_badge: '@ 帝国理工', scroll_hint: '向下滚动',
     section_news: '最新动态', section_projects: '精选项目', section_exp: '实习经历',
     section_edu: '教育背景', section_skills: '技能工具', section_contact: '联系方式',

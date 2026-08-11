@@ -695,6 +695,38 @@ footer span { color: var(--accent); }
 
     <div class="project-card">
       <div style="position:relative;height:180px;overflow:hidden;">
+        <div class="project-badge" data-i18n="repolens_badge">AI Agent</div>
+        <img src="https://raw.githubusercontent.com/teemoweng/repolens/main/artifacts/screenshots/repolens-analyze-desktop.jpg" style="width:100%;height:100%;object-fit:cover;" alt="RepoLens evidence-backed repository analysis">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-i18n="repolens_title">RepoLens — Evidence-backed GitHub Research</div>
+        <div class="project-sub" data-i18n="repolens_meta">HelloAgents · Tools · Evaluation · 2026</div>
+        <div class="project-desc" data-i18n="repolens_desc">A read-only GitHub research workbench for discovering, analyzing, asking and comparing AI repositories. Built on HelloAgents with typed tools, evidence-linked claims, traceable fallbacks and a 35-case offline evaluation.</div>
+        <div class="project-links">
+          <a class="project-link" href="https://repolens-hi6hjkfvkpqltmetdvxs4v.streamlit.app/" target="_blank" rel="noopener" data-i18n="project_live">Live demo ↗</a>
+          <a class="project-link" href="https://github.com/teemoweng/repolens" target="_blank" rel="noopener" data-i18n="project_code">Source code ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div style="position:relative;height:180px;overflow:hidden;">
+        <div class="project-badge" data-i18n="citecook_badge">RAG</div>
+        <img src="https://raw.githubusercontent.com/teemoweng/citecook-rag/main/artifacts/screenshots/citecook-ask-desktop.jpg" style="width:100%;height:100%;object-fit:cover;" alt="CiteCook grounded recipe answer with citations">
+      </div>
+      <div class="project-body">
+        <div class="project-title" data-i18n="citecook_title">CiteCook — Grounded Recipe RAG</div>
+        <div class="project-sub" data-i18n="citecook_meta">BM25 · Hybrid retrieval · Citations · 2026</div>
+        <div class="project-desc" data-i18n="citecook_desc">An evidence-grounded RAG app over 368 pinned HowToCook recipes. Supports search, cited Q&amp;A and filtered recommendations with hybrid retrieval, safety refusals and formal evaluation.</div>
+        <div class="project-links">
+          <a class="project-link" href="https://citecook-rag-6j2jfyw4c67synm8lpxvub.streamlit.app/" target="_blank" rel="noopener" data-i18n="project_live">Live demo ↗</a>
+          <a class="project-link" href="https://github.com/teemoweng/citecook-rag" target="_blank" rel="noopener" data-i18n="project_code">Source code ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div style="position:relative;height:180px;overflow:hidden;">
         <div class="project-badge">AI Product</div>
         <img src="uploads/ccard-alibaba.png" style="width:100%;height:100%;object-fit:cover;" alt="Alibaba">
       </div>
@@ -998,6 +1030,15 @@ const i18n = {
     proj2_desc: '0-to-1 pickup + group-ordering platform for university students. Reduces delivery costs via self-pickup and improves order density with tiered group discounts.',
     proj3_title: 'Beike AI — Overseas Commercialization',
     proj3_desc: 'Analyzed overseas commercialization opportunities for Beike\'s AI product team, focusing on market entry strategies and AI-native product positioning.',
+    repolens_badge: 'AI Agent',
+    repolens_title: 'RepoLens — Evidence-backed GitHub Research',
+    repolens_meta: 'HelloAgents · Tools · Evaluation · 2026',
+    repolens_desc: 'A read-only GitHub research workbench for discovering, analyzing, asking and comparing AI repositories. Built on HelloAgents with typed tools, evidence-linked claims, traceable fallbacks and a 35-case offline evaluation.',
+    citecook_badge: 'RAG',
+    citecook_title: 'CiteCook — Grounded Recipe RAG',
+    citecook_meta: 'BM25 · Hybrid retrieval · Citations · 2026',
+    citecook_desc: 'An evidence-grounded RAG app over 368 pinned HowToCook recipes. Supports search, cited Q&A and filtered recommendations with hybrid retrieval, safety refusals and formal evaluation.',
+    project_live: 'Live demo ↗', project_code: 'Source code ↗',
     exp0_role: 'AI Product Intern · Space Leasing',
     exp0_desc: 'Designing AI for the campus space-leasing business (MIS): a conversational billing-manager agent skill and a four-in-one AI operations workbench for frontline campus operators.',
     exp1_role: 'AI Product Intern · Overseas Commercialization',
@@ -1056,6 +1097,15 @@ const i18n = {
     proj2_desc: '面向大学生的自取+团购外卖平台。通过自取降低配送成本，阶梯团购折扣提升订单密度。',
     proj3_title: '贝壳 AI — 海外商业化分析',
     proj3_desc: '为贝壳 AI 产品团队分析海外商业化机会，聚焦市场进入策略与 AI 原生产品全球定位。',
+    repolens_badge: 'AI 智能体',
+    repolens_title: 'RepoLens — 有证据的 GitHub 项目研究 Agent',
+    repolens_meta: 'HelloAgents · 工具调用 · 正式评测 · 2026',
+    repolens_desc: '面向 AI 仓库的只读 GitHub 研究工作台，支持发现、分析、提问与对比。基于 HelloAgents 构建类型化工具、证据绑定结论、可追踪降级，并完成 35 条正式离线评测。',
+    citecook_badge: '检索增强生成',
+    citecook_title: 'CiteCook — 可溯源菜谱 RAG',
+    citecook_meta: 'BM25 · 混合检索 · 可追溯引用 · 2026',
+    citecook_desc: '基于 368 份固定 HowToCook 菜谱的证据型 RAG 应用，支持搜索、带引用问答和条件推荐，并覆盖混合检索、安全拒答与正式评测。',
+    project_live: '在线体验 ↗', project_code: '查看源码 ↗',
     exp0_role: 'AI 产品实习生 · 空间租赁',
     exp0_desc: '为园区空间租赁业务（MIS）设计 AI 能力：对话式账务管家 skill，以及面向一线运营的四合一 AI 运营工作台。',
     exp1_role: 'AI 产品实习生 · 海外商业化', exp1_desc: '支持 AI 产品海外商业化分析，研究全球市场进入策略与竞争定位。',
@@ -1090,6 +1140,7 @@ let currentLang = 'en';
 function setLang(lang) {
   currentLang = lang;
   document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
   const t = i18n[lang];

@@ -61,6 +61,19 @@ class AIProjectPortfolioTest(unittest.TestCase):
             self.assertTrue(cover_path.is_file(), f"missing portfolio cover: {cover}")
             self.assertGreater(cover_path.stat().st_size, 20_000, f"cover is suspiciously small: {cover}")
 
+    def test_project_cover_alts_describe_real_product_screens(self) -> None:
+        expected_alts = (
+            "RepoLens interface showing an evidence dossier",
+            "CiteCook interface showing a cited recipe answer",
+            "CareerBuddy application board with a sample role",
+            "TikTok-inspired AI shopping guide prototype",
+        )
+        for page in (CLASSIC, CINEMATIC):
+            self.assertNotIn("Abstract evidence pipeline", page)
+            self.assertNotIn("Abstract recipe retrieval", page)
+            for alt in expected_alts:
+                self.assertIn(f'alt="{alt}"', page)
+
     def test_both_versions_expose_bilingual_project_copy(self) -> None:
         expected_keys = (
             "repolens_badge",

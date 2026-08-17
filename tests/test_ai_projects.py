@@ -10,9 +10,32 @@ REPOLENS_DEMO = "https://repolens-hi6hjkfvkpqltmetdvxs4v.streamlit.app/"
 CITECOOK_DEMO = "https://citecook-rag-6j2jfyw4c67synm8lpxvub.streamlit.app/"
 REPOLENS_REPO = "https://github.com/teemoweng/repolens"
 CITECOOK_REPO = "https://github.com/teemoweng/citecook-rag"
+CAREERBUDDY_REPO = "https://github.com/teemoweng/CareerBuddy"
+SHOPPING_REPO = "https://github.com/teemoweng/ai-shopping-agent"
+CAREERBUDDY_DEMO = "https://careerdesk-production.up.railway.app/"
+SHOPPING_DEMO = "https://ai-shopping-agent.vercel.app/case-study"
+
+PROJECT_IDS = ("repolens", "citecook", "careerbuddy", "ai-shopping")
+PROJECT_COVERS = tuple(f"uploads/project-cover-{project_id}.webp" for project_id in PROJECT_IDS)
 
 
 class AIProjectPortfolioTest(unittest.TestCase):
+    def test_both_versions_present_exactly_the_four_independent_projects(self) -> None:
+        classic_projects = CLASSIC[
+            CLASSIC.index('id="projects"') : CLASSIC.index('id="experience"')
+        ]
+        cinematic_projects = CINEMATIC[
+            CINEMATIC.index('id="s4"') : CINEMATIC.index('id="s5"')
+        ]
+
+        for section in (classic_projects, cinematic_projects):
+            with self.subTest(page="classic" if section is classic_projects else "cinematic"):
+                self.assertEqual(section.count('data-project-id="'), 4)
+                for project_id in PROJECT_IDS:
+                    self.assertEqual(section.count(f'data-project-id="{project_id}"'), 1)
+                self.assertNotIn("Alibaba — AI for Space Leasing", section)
+                self.assertNotIn("Beike AI — Overseas Commercialization", section)
+
     def test_both_versions_link_each_demo_and_repository(self) -> None:
         for page in (CLASSIC, CINEMATIC):
             with self.subTest(page="classic" if page is CLASSIC else "cinematic"):
@@ -21,8 +44,22 @@ class AIProjectPortfolioTest(unittest.TestCase):
                     CITECOOK_DEMO,
                     REPOLENS_REPO,
                     CITECOOK_REPO,
+                    CAREERBUDDY_REPO,
+                    SHOPPING_REPO,
+                    CAREERBUDDY_DEMO,
+                    SHOPPING_DEMO,
                 ):
                     self.assertIn(url, page)
+
+    def test_project_covers_are_local_and_shared_by_both_versions(self) -> None:
+        for page in (CLASSIC, CINEMATIC):
+            for cover in PROJECT_COVERS:
+                self.assertIn(cover, page)
+
+        for cover in PROJECT_COVERS:
+            cover_path = ROOT / cover
+            self.assertTrue(cover_path.is_file(), f"missing portfolio cover: {cover}")
+            self.assertGreater(cover_path.stat().st_size, 20_000, f"cover is suspiciously small: {cover}")
 
     def test_both_versions_expose_bilingual_project_copy(self) -> None:
         expected_keys = (
@@ -34,6 +71,14 @@ class AIProjectPortfolioTest(unittest.TestCase):
             "citecook_title",
             "citecook_meta",
             "citecook_desc",
+            "careerbuddy_badge",
+            "careerbuddy_title",
+            "careerbuddy_meta",
+            "careerbuddy_desc",
+            "shopping_badge",
+            "shopping_title",
+            "shopping_meta",
+            "shopping_desc",
             "project_live",
             "project_code",
         )
@@ -46,10 +91,27 @@ class AIProjectPortfolioTest(unittest.TestCase):
                 )
                 self.assertIn(f'data-i18n="{key}"', page)
 
+        self.assertEqual(CLASSIC.count("projects_heading:"), 2)
+        self.assertIn('data-i18n="projects_heading"', CLASSIC)
+
     def test_external_project_links_are_safe(self) -> None:
         for page in (CLASSIC, CINEMATIC):
-            for url in (REPOLENS_DEMO, CITECOOK_DEMO, REPOLENS_REPO, CITECOOK_REPO):
-                link_start = page.index(f'href="{url}"')
+            for url in (
+                REPOLENS_DEMO,
+                CITECOOK_DEMO,
+                REPOLENS_REPO,
+                CITECOOK_REPO,
+                CAREERBUDDY_REPO,
+                SHOPPING_REPO,
+                CAREERBUDDY_DEMO,
+                SHOPPING_DEMO,
+            ):
+                href = f'href="{url}"'
+                with self.subTest(url=url):
+                    self.assertIn(href, page)
+                if href not in page:
+                    continue
+                link_start = page.index(href)
                 link_end = page.index(">", link_start)
                 opening_tag = page[link_start:link_end]
                 self.assertIn('target="_blank"', opening_tag)

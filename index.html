@@ -336,6 +336,56 @@ section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
 }
 .project-link:hover { background: var(--accent); color: #000; border-color: var(--accent); }
 
+/* ── RESEARCH ── */
+.research-card {
+  display: grid; grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.45fr);
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+.research-card:hover {
+  border-color: var(--accent); background: var(--card-hover); box-shadow: var(--shadow);
+}
+.research-signal {
+  position: relative; min-height: 330px; overflow: hidden;
+  display: flex; align-items: flex-end; padding: 28px;
+  background:
+    radial-gradient(circle at 38% 35%, color-mix(in oklch, var(--accent) 42%, transparent) 0 2px, transparent 3px),
+    radial-gradient(circle at 64% 58%, color-mix(in oklch, var(--accent) 32%, transparent) 0 1px, transparent 2px),
+    linear-gradient(145deg, var(--bg3), var(--bg2));
+}
+.research-signal::before,
+.research-signal::after {
+  content: ''; position: absolute; left: -12%; right: -12%;
+  border: 1px solid color-mix(in oklch, var(--accent) 58%, transparent);
+  border-radius: 50%; transform: rotate(-8deg);
+}
+.research-signal::before { top: 22%; height: 42%; box-shadow: 0 0 34px color-mix(in oklch, var(--accent) 16%, transparent); }
+.research-signal::after { top: 38%; height: 24%; border-style: dashed; opacity: 0.7; }
+.research-mark {
+  position: relative; z-index: 1;
+  font-family: 'JetBrains Mono', monospace; font-size: clamp(25px, 4vw, 40px);
+  line-height: 1; letter-spacing: -0.05em; color: var(--fg);
+}
+.research-mark span { display: block; margin-top: 9px; font-size: 10px; letter-spacing: 0.16em; color: var(--accent); }
+.research-content { padding: 34px; display: flex; flex-direction: column; justify-content: center; }
+.research-status {
+  align-self: flex-start; margin-bottom: 18px; padding: 5px 10px;
+  border: 1px solid var(--accent); border-radius: 99px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);
+}
+.research-title { font-size: clamp(23px, 3vw, 34px); line-height: 1.16; letter-spacing: -0.025em; margin-bottom: 12px; }
+.research-venue { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 20px; }
+.research-desc { color: var(--fg2); font-size: 14px; line-height: 1.75; max-width: 650px; margin-bottom: 24px; }
+.research-link {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px;
+  color: var(--fg); text-decoration: none; font-size: 12px;
+  font-family: 'JetBrains Mono', monospace; transition: all 0.2s;
+}
+.research-link:hover { border-color: var(--accent); background: var(--accent); color: #000; }
+
 /* ── TIMELINE ── */
 .timeline { position: relative; padding-left: 32px; }
 .timeline::before {
@@ -482,6 +532,8 @@ footer span { color: var(--accent); }
   .hero-desc { margin: 0 auto 36px; }
   section { padding: 60px 20px; }
   .projects-grid { grid-template-columns: 1fr; }
+  .research-card { grid-template-columns: 1fr; }
+  .research-signal { min-height: 190px; }
   .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
 }
 
@@ -608,6 +660,7 @@ footer span { color: var(--accent); }
   <ul class="nav-links">
     <li><a href="#news" data-i18n="nav_news">News</a></li>
     <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+    <li><a href="#research" data-i18n="nav_research">Research</a></li>
     <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
     <li><a href="#education" data-i18n="nav_education">Education</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
@@ -659,6 +712,10 @@ footer span { color: var(--accent); }
   <div class="section-label" data-i18n="section_news">Latest</div>
   <h2 class="section-title reveal">What's <span>New</span></h2>
   <div class="news-list">
+    <div class="news-item">
+      <div class="news-date">2026.08</div>
+      <div class="news-text" data-i18n="news_research">📄 <strong>SPARK</strong> was accepted at the British Machine Vision Conference (BMVC 2026).</div>
+    </div>
     <div class="news-item">
       <div class="news-date">2026.06</div>
       <div class="news-text" data-i18n="news_0">🏢 Joined <strong>Alibaba</strong> as an AI Product Intern on the space-leasing product line — designing AI agent skills and an AI operations workbench.</div>
@@ -761,6 +818,24 @@ footer span { color: var(--accent); }
     </div>
 
   </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-label" data-i18n="section_research">Research output</div>
+  <h2 class="section-title reveal" data-i18n="research_heading">Selected <span>Research</span></h2>
+  <article class="research-card reveal">
+    <div class="research-signal" aria-hidden="true">
+      <div class="research-mark" data-i18n="research_yearmark">BMVC 2026<span>UNDERWATER IMAGE ENHANCEMENT</span></div>
+    </div>
+    <div class="research-content">
+      <div class="research-status" data-i18n="research_status">Accepted paper</div>
+      <h3 class="research-title">SPARK: Spectral Post-Attention Repair Kernels for Underwater Image Enhancement</h3>
+      <div class="research-venue" data-i18n="research_venue">British Machine Vision Conference · 2026</div>
+      <p class="research-desc" data-i18n="research_desc">A frequency-aware post-attention repair module that separates low-frequency appearance restoration from high-frequency structural recovery, showing that placement inside a restoration block is a first-order design choice.</p>
+      <a class="research-link" href="uploads/papers/spark-spectral-post-attention-repair-kernels.pdf" target="_blank" rel="noopener" data-i18n="research_paper">Read paper ↗</a>
+    </div>
+  </article>
 </section>
 
 <!-- EXPERIENCE -->
@@ -984,13 +1059,14 @@ footer span { color: var(--accent); }
 const i18n = {
   en: {
     nav_news: 'News', nav_projects: 'Projects', nav_experience: 'Experience',
-    nav_education: 'Education', nav_contact: 'Contact',
+    nav_research: 'Research', nav_education: 'Education', nav_contact: 'Contact',
     hero_tag: 'Strategy · Product · AI',
     hero_desc: 'MSc student at Imperial College London, currently an AI Product Intern at Alibaba (space-leasing product line). Experienced in strategy consulting (BCG), internet product (Beike, POIZON), and startup building. Seeking product & strategy roles in China.',
     btn_resume: '↓ Download Resume', btn_contact: 'Get in Touch', btn_v2: 'Cinematic',
     avatar_badge: '@ Imperial College', scroll_hint: 'scroll',
-    section_news: 'Latest', section_projects: 'Open source', section_exp: 'Career',
+    section_news: 'Latest', section_projects: 'Open source', section_research: 'Research output', section_exp: 'Career',
     section_edu: 'Academia', section_skills: 'Tools', section_contact: 'Connect',
+    news_research: '📄 <strong>SPARK</strong> was accepted at the British Machine Vision Conference (BMVC 2026).',
     news_0: '🏢 Joined <strong>Alibaba</strong> as an AI Product Intern on the space-leasing product line — designing AI agent skills and an AI operations workbench.',
     news_1: '🔍 Actively seeking <strong>product, AI, and strategy roles in China</strong> — excited to explore new opportunities.',
     news_2: '🎓 Started <strong>MSc in Economics & Strategy for Business</strong> at Imperial College London.',
@@ -1016,6 +1092,12 @@ const i18n = {
     shopping_meta: 'Chat-first · Commerce workflow · 2026',
     shopping_desc: 'A TikTok Shop-inspired K-Beauty sunscreen prototype that turns shoppable content into evidence checks, constraint-aware comparisons, PDP selection and a simulated cart.',
     project_live: 'Live demo ↗', project_code: 'Source code ↗',
+    research_heading: 'Selected <span>Research</span>',
+    research_yearmark: 'BMVC 2026<span>UNDERWATER IMAGE ENHANCEMENT</span>',
+    research_status: 'Accepted paper',
+    research_venue: 'British Machine Vision Conference · 2026',
+    research_desc: 'A frequency-aware post-attention repair module that separates low-frequency appearance restoration from high-frequency structural recovery, showing that placement inside a restoration block is a first-order design choice.',
+    research_paper: 'Read paper ↗',
     exp0_role: 'AI Product Intern · Space Leasing',
     exp0_desc: 'Designing AI for the campus space-leasing business (MIS): a conversational billing-manager agent skill and a four-in-one AI operations workbench for frontline campus operators.',
     exp1_role: 'AI Product Intern · Overseas Commercialization',
@@ -1052,13 +1134,14 @@ const i18n = {
   },
   zh: {
     nav_news: '动态', nav_projects: '项目', nav_experience: '经历',
-    nav_education: '教育', nav_contact: '联系',
+    nav_research: '论文成果', nav_education: '教育', nav_contact: '联系',
     hero_tag: '战略 · 产品 · AI',
     hero_desc: '帝国理工学院经济与战略硕士在读，现于阿里巴巴担任 AI 产品实习生（空间租赁产品线）。拥有战略咨询（BCG）、互联网产品（贝壳、得物）及初创公司（Hinbor）经验。正积极寻求中国互联网、咨询或消费品产品/战略岗位。',
     btn_resume: '↓ 下载简历', btn_contact: '联系我', btn_v2: '动效版',
     avatar_badge: '@ 帝国理工', scroll_hint: '向下滚动',
-    section_news: '最新动态', section_projects: '开源作品', section_exp: '实习经历',
+    section_news: '最新动态', section_projects: '开源作品', section_research: '论文成果', section_exp: '实习经历',
     section_edu: '教育背景', section_skills: '技能工具', section_contact: '联系方式',
+    news_research: '📄 论文 <strong>SPARK</strong> 被英国机器视觉大会（BMVC 2026）接收。',
     news_0: '🏢 加入<strong>阿里巴巴</strong>空间租赁产品线担任 AI 产品实习生，设计 AI skill 与 AI 运营工作台。',
     news_1: '🔍 正积极寻找<strong>中国互联网/AI/战略方向</strong>的产品或策略岗位，欢迎交流！',
     news_2: '🎓 入读<strong>帝国理工学院经济与商业战略硕士</strong>项目。',
@@ -1084,6 +1167,12 @@ const i18n = {
     shopping_meta: '对话优先 · 交易工作流 · 2026',
     shopping_desc: '面向美国 K-Beauty 防晒场景的 TikTok Shop 风格导购原型，将短视频种草衔接至证据核验、约束比较、PDP 选购与模拟加购。',
     project_live: '在线体验 ↗', project_code: '查看源码 ↗',
+    research_heading: '精选<span>论文成果</span>',
+    research_yearmark: 'BMVC 2026<span>水下图像增强</span>',
+    research_status: '已接收论文',
+    research_venue: '英国机器视觉大会 · 2026',
+    research_desc: '提出一种频率感知的后注意力修复模块，分别处理低频全局外观退化与高频局部结构损失，并验证频率增强在修复模块中的插入位置本身就是一项关键设计选择。',
+    research_paper: '查看论文 ↗',
     exp0_role: 'AI 产品实习生 · 空间租赁',
     exp0_desc: '为园区空间租赁业务（MIS）设计 AI 能力：对话式账务管家 skill，以及面向一线运营的四合一 AI 运营工作台。',
     exp1_role: 'AI 产品实习生 · 海外商业化', exp1_desc: '支持 AI 产品海外商业化分析，研究全球市场进入策略与竞争定位。',

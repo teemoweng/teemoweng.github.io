@@ -17,6 +17,7 @@ SHOPPING_DEMO = "https://ai-shopping-agent.vercel.app/case-study"
 
 PROJECT_IDS = ("repolens", "citecook", "careerbuddy", "ai-shopping")
 PROJECT_COVERS = tuple(f"uploads/project-cover-{project_id}.webp" for project_id in PROJECT_IDS)
+PAPER_RELATIVE_PATH = "uploads/papers/spark-spectral-post-attention-repair-kernels.pdf"
 
 
 class AIProjectPortfolioTest(unittest.TestCase):
@@ -142,6 +143,53 @@ class AIProjectPortfolioTest(unittest.TestCase):
             location = CINEMATIC.index(key)
             self.assertGreater(location, product_start)
             self.assertLess(location, product_end)
+
+    def test_classic_page_exposes_the_accepted_paper_as_a_safe_link(self) -> None:
+        self.assertIn('href="#research" data-i18n="nav_research"', CLASSIC)
+        self.assertIn('<section id="research">', CLASSIC)
+
+        link_start = CLASSIC.index(f'href="{PAPER_RELATIVE_PATH}"')
+        link_end = CLASSIC.index(">", link_start)
+        opening_tag = CLASSIC[link_start:link_end]
+        self.assertIn('target="_blank"', opening_tag)
+        self.assertIn('rel="noopener"', opening_tag)
+
+        projects_position = CLASSIC.index('<section id="projects">')
+        research_position = CLASSIC.index('<section id="research">')
+        experience_position = CLASSIC.index('<section id="experience">')
+        self.assertLess(projects_position, research_position)
+        self.assertLess(research_position, experience_position)
+
+    def test_paper_asset_is_served_from_the_stable_public_path(self) -> None:
+        paper_path = ROOT / PAPER_RELATIVE_PATH
+        self.assertTrue(paper_path.is_file(), f"missing accepted paper: {PAPER_RELATIVE_PATH}")
+        self.assertGreater(paper_path.stat().st_size, 500_000)
+        self.assertEqual(paper_path.read_bytes()[:5], b"%PDF-")
+
+    def test_classic_research_section_has_complete_bilingual_copy(self) -> None:
+        expected_keys = (
+            "nav_research",
+            "section_research",
+            "research_heading",
+            "research_status",
+            "research_venue",
+            "research_desc",
+            "research_paper",
+        )
+        for key in expected_keys:
+            self.assertEqual(
+                CLASSIC.count(f"{key}:"),
+                2,
+                f"{key} must exist once in each language dictionary",
+            )
+            self.assertIn(f'data-i18n="{key}"', CLASSIC)
+
+    def test_acceptance_news_is_synchronized_across_both_site_versions(self) -> None:
+        for page in (CLASSIC, CINEMATIC):
+            with self.subTest(page="classic" if page is CLASSIC else "cinematic"):
+                self.assertEqual(page.count("news_research:"), 2)
+                self.assertIn('data-i18n="news_research"', page)
+                self.assertIn("2026.08", page)
 
 
 if __name__ == "__main__":

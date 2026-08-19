@@ -1559,15 +1559,8 @@ function setLang(lang) {
 
 // ── CAPABILITY PUZZLE ──
 function toggleCapability(piece) {
-  const shouldOpen = !piece.classList.contains('is-flipped');
-  document.querySelectorAll('.capability-piece').forEach(item => {
-    item.classList.remove('is-flipped');
-    item.setAttribute('aria-pressed', 'false');
-  });
-  if (shouldOpen) {
-    piece.classList.add('is-flipped');
-    piece.setAttribute('aria-pressed', 'true');
-  }
+  const isOpen = piece.classList.toggle('is-flipped');
+  piece.setAttribute('aria-pressed', String(isOpen));
 }
 
 // ── TYPING ──

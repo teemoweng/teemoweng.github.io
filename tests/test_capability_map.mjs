@@ -44,12 +44,20 @@ try {
   assert.equal(await sales.evaluate((piece) => piece.classList.contains('is-flipped')), true);
   assert.equal(
     await consulting.getAttribute('aria-pressed'),
-    'false',
-    'opening one piece should close the previously open piece'
+    'true',
+    'opening a second piece should preserve the first piece state'
   );
 
   await sales.click();
   assert.equal(await sales.getAttribute('aria-pressed'), 'false', 'selecting an open piece should close it');
+  assert.equal(
+    await consulting.getAttribute('aria-pressed'),
+    'true',
+    'closing one piece should not change another open piece'
+  );
+
+  await consulting.click();
+  assert.equal(await consulting.getAttribute('aria-pressed'), 'false');
 
   console.log('PASS capability map flip behavior');
 

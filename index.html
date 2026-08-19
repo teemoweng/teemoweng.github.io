@@ -254,6 +254,156 @@ section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
 }
 .section-title span { color: var(--accent); }
 
+/* ── FDE CAPABILITY PUZZLE ── */
+#capabilities { padding-top: 86px; padding-bottom: 92px; }
+.capabilities-intro {
+  max-width: 680px; margin: -26px 0 38px;
+  color: var(--fg2); font-size: 15px; line-height: 1.75;
+}
+.capability-puzzle {
+  position: relative; isolation: isolate;
+  width: min(100%, 820px); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, 248px); gap: 12px;
+}
+.capability-piece {
+  --piece: color-mix(in srgb, var(--bg2) 82%, var(--accent) 18%);
+  --piece-edge: color-mix(in srgb, var(--border) 52%, var(--accent) 48%);
+  position: relative; z-index: 1; min-width: 0;
+  padding: 0; border: 0; color: var(--fg); background: transparent;
+  font: inherit; text-align: left; cursor: pointer; perspective: 1200px;
+  transition: translate 220ms ease, filter 220ms ease, z-index 0s 220ms;
+}
+.capability-piece--consulting {
+  --piece: color-mix(in srgb, var(--bg2) 78%, var(--accent) 22%);
+  border-radius: 28px 18px 76px 20px;
+}
+.capability-piece--sales {
+  --piece: color-mix(in srgb, var(--bg2) 88%, var(--accent) 12%);
+  border-radius: 18px 28px 20px 76px;
+}
+.capability-piece--engineering {
+  --piece: color-mix(in srgb, var(--bg2) 84%, var(--accent) 16%);
+  border-radius: 20px 76px 18px 28px;
+}
+.capability-piece--teaching {
+  --piece: color-mix(in srgb, var(--bg2) 92%, var(--accent) 8%);
+  border-radius: 76px 20px 28px 18px;
+}
+.capability-piece:hover,
+.capability-piece:focus-visible,
+.capability-piece.is-flipped {
+  z-index: 6; filter: drop-shadow(0 18px 24px rgba(0,0,0,0.18));
+  transition-delay: 0s;
+}
+.capability-piece--consulting:hover,
+.capability-piece--consulting:focus-visible,
+.capability-piece--consulting.is-flipped { translate: -6px -6px; }
+.capability-piece--sales:hover,
+.capability-piece--sales:focus-visible,
+.capability-piece--sales.is-flipped { translate: 6px -6px; }
+.capability-piece--engineering:hover,
+.capability-piece--engineering:focus-visible,
+.capability-piece--engineering.is-flipped { translate: -6px 6px; }
+.capability-piece--teaching:hover,
+.capability-piece--teaching:focus-visible,
+.capability-piece--teaching.is-flipped { translate: 6px 6px; }
+.capability-piece:focus-visible { outline: 2px solid var(--accent); outline-offset: 7px; }
+.capability-piece-inner {
+  position: relative; display: block; width: 100%; height: 100%;
+  border-radius: inherit; transform-style: preserve-3d;
+  transition: transform 680ms cubic-bezier(.2,.75,.2,1);
+}
+.capability-piece.is-flipped .capability-piece-inner { transform: rotateY(180deg); }
+.capability-face {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  justify-content: center; overflow: visible;
+  padding: 38px 46px; border-radius: inherit;
+  border: 1px solid var(--piece-edge);
+  background:
+    radial-gradient(circle at 18% 10%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 36%),
+    var(--piece);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), var(--shadow);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.capability-face--back {
+  transform: rotateY(180deg);
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--piece) 86%, var(--accent) 14%), var(--piece));
+}
+.capability-piece--consulting .capability-face,
+.capability-piece--engineering .capability-face { padding-right: 76px; }
+.capability-piece--sales .capability-face,
+.capability-piece--teaching .capability-face { padding-left: 76px; }
+.capability-piece--consulting .capability-face { padding-bottom: 62px; }
+.capability-piece--sales .capability-face { padding-bottom: 62px; }
+.capability-piece--engineering .capability-face { padding-top: 62px; }
+.capability-piece--teaching .capability-face { padding-top: 62px; }
+
+/* Interlocking tabs are part of the flipping faces, not decorative overlays. */
+.capability-piece--consulting .capability-face::after,
+.capability-piece--engineering .capability-face::after,
+.capability-piece--consulting .capability-face::before,
+.capability-piece--sales .capability-face::before {
+  content: ''; position: absolute; z-index: -1;
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 1px solid var(--piece-edge); background: var(--piece);
+}
+.capability-piece--consulting .capability-face::after { right: -24px; top: 54px; border-left: 0; }
+.capability-piece--engineering .capability-face::after { right: -24px; bottom: 48px; border-left: 0; }
+.capability-piece--consulting .capability-face::before { bottom: -24px; left: 56px; border-top: 0; }
+.capability-piece--sales .capability-face::before { bottom: -24px; right: 52px; border-top: 0; }
+
+.capability-kicker,
+.capability-return {
+  font-family: 'JetBrains Mono', monospace; color: var(--accent);
+  font-size: 10px; font-weight: 500; letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.capability-kicker { margin-bottom: 13px; }
+.capability-name {
+  display: block; margin-bottom: 12px;
+  font-family: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+  font-size: clamp(24px, 3vw, 35px); font-weight: 650;
+  letter-spacing: -0.035em; line-height: 1.05;
+}
+.capability-definition {
+  display: block; max-width: 255px; color: var(--fg2);
+  font-size: 14px; line-height: 1.58;
+}
+.capability-back-name {
+  display: block; margin-bottom: 13px; color: var(--accent);
+  font-family: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+  font-size: 17px; font-weight: 650;
+}
+.capability-story {
+  display: block; color: var(--fg); font-size: 13.5px; line-height: 1.62;
+}
+.capability-return { display: block; margin-top: 16px; opacity: 0.72; }
+.capability-core {
+  position: absolute; z-index: 10; top: 50%; left: 50%;
+  width: 142px; height: 142px; translate: -50% -50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border-radius: 50%; pointer-events: none;
+  color: #160e08; background: var(--accent);
+  border: 9px solid var(--bg);
+  box-shadow: 0 14px 38px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.capability-core span {
+  font-family: 'Space Grotesk', sans-serif; font-size: 35px;
+  font-weight: 750; line-height: 0.9; letter-spacing: -0.055em;
+}
+.capability-core small {
+  margin-top: 8px; font-family: 'JetBrains Mono', monospace;
+  font-size: 7px; font-weight: 600; line-height: 1.2;
+  letter-spacing: 0.14em; text-align: center;
+}
+.capability-hint {
+  margin: 24px auto 0; color: var(--fg3); text-align: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
 /* ── NEWS ── */
 .news-list { display: flex; flex-direction: column; gap: 0; }
 .news-item {
@@ -523,6 +673,10 @@ footer span { color: var(--accent); }
 .reveal.visible { opacity: 1; transform: none; }
 
 /* ── RESPONSIVE ── */
+@media (max-width: 1040px) {
+  .nav-links { display: none; }
+}
+
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
   .nav-links { display: none; }
@@ -531,6 +685,20 @@ footer span { color: var(--accent); }
   .hero-actions { justify-content: center; }
   .hero-desc { margin: 0 auto 36px; }
   section { padding: 60px 20px; }
+  #capabilities { padding-top: 68px; padding-bottom: 72px; }
+  .capabilities-intro { margin-top: -24px; margin-bottom: 30px; }
+  .capability-puzzle { grid-template-rows: repeat(2, 224px); gap: 9px; }
+  .capability-face { padding: 30px 34px; }
+  .capability-piece--consulting .capability-face,
+  .capability-piece--engineering .capability-face { padding-right: 62px; }
+  .capability-piece--sales .capability-face,
+  .capability-piece--teaching .capability-face { padding-left: 62px; }
+  .capability-piece--consulting .capability-face,
+  .capability-piece--sales .capability-face { padding-bottom: 54px; }
+  .capability-piece--engineering .capability-face,
+  .capability-piece--teaching .capability-face { padding-top: 54px; }
+  .capability-core { width: 118px; height: 118px; border-width: 7px; }
+  .capability-core span { font-size: 29px; }
   .projects-grid { grid-template-columns: 1fr; }
   .research-card { grid-template-columns: 1fr; }
   .research-signal { min-height: 190px; }
@@ -588,7 +756,51 @@ footer span { color: var(--accent); }
 }
 @media (max-width: 520px) {
   .github-repos-grid { grid-template-columns: 1fr; }
+  .capabilities-intro { font-size: 13px; line-height: 1.65; margin-bottom: 24px; }
+  .capability-puzzle { grid-template-rows: repeat(2, 218px); gap: 8px; }
+  .capability-piece--consulting { border-radius: 20px 12px 52px 14px; }
+  .capability-piece--sales { border-radius: 12px 20px 14px 52px; }
+  .capability-piece--engineering { border-radius: 14px 52px 12px 20px; }
+  .capability-piece--teaching { border-radius: 52px 14px 20px 12px; }
+  .capability-face { padding: 22px 20px; }
+  .capability-piece--consulting .capability-face,
+  .capability-piece--engineering .capability-face { padding-right: 40px; }
+  .capability-piece--sales .capability-face,
+  .capability-piece--teaching .capability-face { padding-left: 40px; }
+  .capability-piece--consulting .capability-face,
+  .capability-piece--sales .capability-face { padding-bottom: 40px; }
+  .capability-piece--engineering .capability-face,
+  .capability-piece--teaching .capability-face { padding-top: 40px; }
+  .capability-kicker { margin-bottom: 9px; font-size: 8px; letter-spacing: 0.1em; }
+  .capability-name { margin-bottom: 9px; font-size: 19px; }
+  .capability-definition { font-size: 11px; line-height: 1.45; }
+  .capability-back-name { margin-bottom: 8px; font-size: 13px; }
+  .capability-story { font-size: 10.25px; line-height: 1.48; }
+  .capability-return { margin-top: 8px; font-size: 7.5px; }
+  .capability-core { width: 90px; height: 90px; border-width: 6px; }
+  .capability-core span { font-size: 23px; }
+  .capability-core small { display: none; }
+  .capability-piece--consulting .capability-face::after,
+  .capability-piece--engineering .capability-face::after,
+  .capability-piece--consulting .capability-face::before,
+  .capability-piece--sales .capability-face::before { width: 36px; height: 36px; }
+  .capability-piece--consulting .capability-face::after { right: -17px; top: 40px; }
+  .capability-piece--engineering .capability-face::after { right: -17px; bottom: 38px; }
+  .capability-piece--consulting .capability-face::before { bottom: -17px; left: 34px; }
+  .capability-piece--sales .capability-face::before { bottom: -17px; right: 32px; }
+  .capability-hint { max-width: 290px; line-height: 1.5; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .capability-piece,
+  .capability-piece-inner,
+  .capability-face { transition: none !important; }
+  .capability-piece.is-flipped .capability-piece-inner { transform: none; }
+  .capability-face--back { transform: none; opacity: 0; visibility: hidden; }
+  .capability-piece.is-flipped .capability-face--front { opacity: 0; visibility: hidden; }
+  .capability-piece.is-flipped .capability-face--back { opacity: 1; visibility: visible; }
+}
+
 .github-repo-card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 16px;
@@ -658,6 +870,7 @@ footer span { color: var(--accent); }
 <nav>
   <div class="nav-logo">tw<span style="color:var(--fg3)">.</span>dev</div>
   <ul class="nav-links">
+    <li><a href="#capabilities" data-i18n="nav_capabilities">Capabilities</a></li>
     <li><a href="#news" data-i18n="nav_news">News</a></li>
     <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
     <li><a href="#research" data-i18n="nav_research">Research</a></li>
@@ -705,6 +918,81 @@ footer span { color: var(--accent); }
     <div class="scroll-line"></div>
     <span data-i18n="scroll_hint">scroll</span>
   </div>
+</section>
+
+<!-- CAPABILITY MAP -->
+<section id="capabilities">
+  <div class="section-label" data-i18n="section_capabilities">FDE capability map</div>
+  <h2 class="section-title reveal" data-i18n="capabilities_heading">From ambiguity to <span>adoption</span></h2>
+  <p class="capabilities-intro reveal" data-i18n="capabilities_intro">Four connected capabilities turn an unclear business need into a solution people can understand, use and trust.</p>
+
+  <div class="capability-puzzle" data-i18n-aria-label="capabilities_aria" aria-label="Interactive FDE capability map">
+    <button type="button" class="capability-piece capability-piece--consulting" data-capability="consulting" aria-pressed="false" onclick="toggleCapability(this)">
+      <span class="capability-piece-inner">
+        <span class="capability-face capability-face--front">
+          <span class="capability-kicker" data-i18n="capability_consulting_kicker">Discover</span>
+          <span class="capability-name" data-i18n="capability_consulting_name">Consulting</span>
+          <span class="capability-definition" data-i18n="capability_consulting_definition">Find the business problem that is truly worth solving.</span>
+        </span>
+        <span class="capability-face capability-face--back">
+          <span class="capability-back-name" data-i18n="capability_consulting_name">Consulting</span>
+          <span class="capability-story" data-i18n="capability_consulting_story">BCG strategy work and frontline research at Alibaba trained me to move from market-level judgment to concrete product decisions.</span>
+          <span class="capability-return" data-i18n="capability_return">Flip back</span>
+        </span>
+      </span>
+    </button>
+
+    <button type="button" class="capability-piece capability-piece--sales" data-capability="sales" aria-pressed="false" onclick="toggleCapability(this)">
+      <span class="capability-piece-inner">
+        <span class="capability-face capability-face--front">
+          <span class="capability-kicker" data-i18n="capability_sales_kicker">Align</span>
+          <span class="capability-name" data-i18n="capability_sales_name">Solution selling</span>
+          <span class="capability-definition" data-i18n="capability_sales_definition">Make the value clear and turn stakeholder agreement into action.</span>
+        </span>
+        <span class="capability-face capability-face--back">
+          <span class="capability-back-name" data-i18n="capability_sales_name">Solution selling</span>
+          <span class="capability-story" data-i18n="capability_sales_story">From merchant acquisition at Hinbor to AI solution reviews and paid career coaching, I have learned to turn value propositions into commitment.</span>
+          <span class="capability-return" data-i18n="capability_return">Flip back</span>
+        </span>
+      </span>
+    </button>
+
+    <button type="button" class="capability-piece capability-piece--engineering" data-capability="engineering" aria-pressed="false" onclick="toggleCapability(this)">
+      <span class="capability-piece-inner">
+        <span class="capability-face capability-face--front">
+          <span class="capability-kicker" data-i18n="capability_engineering_kicker">Build</span>
+          <span class="capability-name" data-i18n="capability_engineering_name">Engineering</span>
+          <span class="capability-definition" data-i18n="capability_engineering_definition">Connect AI with data, tools and real operating workflows.</span>
+        </span>
+        <span class="capability-face capability-face--back">
+          <span class="capability-back-name" data-i18n="capability_engineering_name">Engineering</span>
+          <span class="capability-story" data-i18n="capability_engineering_story">I designed an AI billing Skill and operations workbench at Alibaba, while RepoLens and CiteCook deepened my practice in agents, RAG and evaluation.</span>
+          <span class="capability-return" data-i18n="capability_return">Flip back</span>
+        </span>
+      </span>
+    </button>
+
+    <button type="button" class="capability-piece capability-piece--teaching" data-capability="teaching" aria-pressed="false" onclick="toggleCapability(this)">
+      <span class="capability-piece-inner">
+        <span class="capability-face capability-face--front">
+          <span class="capability-kicker" data-i18n="capability_teaching_kicker">Enable</span>
+          <span class="capability-name" data-i18n="capability_teaching_name">Teaching</span>
+          <span class="capability-definition" data-i18n="capability_teaching_definition">Help people understand the solution and keep using it with confidence.</span>
+        </span>
+        <span class="capability-face capability-face--back">
+          <span class="capability-back-name" data-i18n="capability_teaching_name">Teaching</span>
+          <span class="capability-story" data-i18n="capability_teaching_story">At Easy and Look4Tutor, I taught classes, trials, reviews and one-to-one sessions, turning statistics, R and Excel into learnable steps.</span>
+          <span class="capability-return" data-i18n="capability_return">Flip back</span>
+        </span>
+      </span>
+    </button>
+
+    <div class="capability-core" aria-hidden="true">
+      <span>FDE</span>
+      <small>FIELD<br>DEPLOYED<br>ENGINEER</small>
+    </div>
+  </div>
+  <p class="capability-hint reveal" data-i18n="capabilities_hint">Select a puzzle piece to see how experience connects to capability.</p>
 </section>
 
 <!-- NEWS -->
@@ -1058,12 +1346,34 @@ footer span { color: var(--accent); }
 // ── i18n ──
 const i18n = {
   en: {
-    nav_news: 'News', nav_projects: 'Projects', nav_experience: 'Experience',
+    nav_capabilities: 'Capabilities', nav_news: 'News', nav_projects: 'Projects', nav_experience: 'Experience',
     nav_research: 'Research', nav_education: 'Education', nav_contact: 'Contact',
     hero_tag: 'Strategy · Product · AI',
     hero_desc: 'MSc student at Imperial College London, currently an AI Product Intern at Alibaba (space-leasing product line). Experienced in strategy consulting (BCG), internet product (Beike, POIZON), and startup building. Seeking product & strategy roles in China.',
     btn_resume: '↓ Download Resume', btn_contact: 'Get in Touch', btn_v2: 'Cinematic',
     avatar_badge: '@ Imperial College', scroll_hint: 'scroll',
+    section_capabilities: 'FDE capability map',
+    capabilities_heading: 'From ambiguity to <span>adoption</span>',
+    capabilities_intro: 'Four connected capabilities turn an unclear business need into a solution people can understand, use and trust.',
+    capabilities_aria: 'Interactive FDE capability puzzle',
+    capabilities_hint: 'Select a puzzle piece to see how experience connects to capability.',
+    capability_consulting_kicker: 'Discover',
+    capability_consulting_name: 'Consulting',
+    capability_consulting_definition: 'Find the business problem that is truly worth solving.',
+    capability_consulting_story: 'BCG strategy work and frontline research at Alibaba trained me to move from market-level judgment to concrete product decisions.',
+    capability_sales_kicker: 'Align',
+    capability_sales_name: 'Solution selling',
+    capability_sales_definition: 'Make the value clear and turn stakeholder agreement into action.',
+    capability_sales_story: 'From merchant acquisition at Hinbor to AI solution reviews and paid career coaching, I have learned to turn value propositions into commitment.',
+    capability_engineering_kicker: 'Build',
+    capability_engineering_name: 'Engineering',
+    capability_engineering_definition: 'Connect AI with data, tools and real operating workflows.',
+    capability_engineering_story: 'I designed an AI billing Skill and operations workbench at Alibaba, while RepoLens and CiteCook deepened my practice in agents, RAG and evaluation.',
+    capability_teaching_kicker: 'Enable',
+    capability_teaching_name: 'Teaching',
+    capability_teaching_definition: 'Help people understand the solution and keep using it with confidence.',
+    capability_teaching_story: 'At Easy and Look4Tutor, I taught classes, trials, reviews and one-to-one sessions, turning statistics, R and Excel into learnable steps.',
+    capability_return: 'Flip back',
     section_news: 'Latest', section_projects: 'Open source', section_research: 'Research output', section_exp: 'Career',
     section_edu: 'Academia', section_skills: 'Tools', section_contact: 'Connect',
     news_research: '📄 <strong>SPARK</strong> was accepted at the British Machine Vision Conference (BMVC 2026).',
@@ -1133,12 +1443,34 @@ const i18n = {
     github_error: 'Failed to load repos.'
   },
   zh: {
-    nav_news: '动态', nav_projects: '项目', nav_experience: '经历',
+    nav_capabilities: '能力图谱', nav_news: '动态', nav_projects: '项目', nav_experience: '经历',
     nav_research: '论文成果', nav_education: '教育', nav_contact: '联系',
     hero_tag: '战略 · 产品 · AI',
     hero_desc: '帝国理工学院经济与战略硕士在读，现于阿里巴巴担任 AI 产品实习生（空间租赁产品线）。拥有战略咨询（BCG）、互联网产品（贝壳、得物）及初创公司（Hinbor）经验。正积极寻求中国互联网、咨询或消费品产品/战略岗位。',
     btn_resume: '↓ 下载简历', btn_contact: '联系我', btn_v2: '动效版',
     avatar_badge: '@ 帝国理工', scroll_hint: '向下滚动',
+    section_capabilities: 'FDE 能力图谱',
+    capabilities_heading: '从模糊问题到<span>真正采用</span>',
+    capabilities_intro: '四种相互连接的能力，将模糊的业务需求转化为用户愿意理解、使用并信任的解决方案。',
+    capabilities_aria: '交互式 FDE 能力拼图',
+    capabilities_hint: '点击拼图，看看经历如何连接到能力。',
+    capability_consulting_kicker: '发现问题',
+    capability_consulting_name: '顾问能力',
+    capability_consulting_definition: '挖出真正值得解决的业务问题。',
+    capability_consulting_story: 'BCG 的战略分析训练，加上阿里的一线访谈与场景拆解，让我能从宏观判断走到具体产品方案。',
+    capability_sales_kicker: '建立共识',
+    capability_sales_name: '销售能力',
+    capability_sales_definition: '让方案价值被理解，并把利益相关者的共识转化为行动。',
+    capability_sales_story: '从 Hinbor 商家拓展和冷启动，到 AI 方案评审与付费求职辅导，我持续练习把价值主张转化为真实承诺。',
+    capability_engineering_kicker: '交付方案',
+    capability_engineering_name: '工程能力',
+    capability_engineering_definition: '把 AI 接入数据、工具与真实业务流程。',
+    capability_engineering_story: '我在阿里设计账务管家 Skill 与 AI 运营工作台，也通过 RepoLens、CiteCook 深入实践 Agent、RAG 与评测闭环。',
+    capability_teaching_kicker: '推动采用',
+    capability_teaching_name: '教学能力',
+    capability_teaching_definition: '帮助用户理解方案，掌握方法并持续使用。',
+    capability_teaching_story: '在 Easy 与 Look4Tutor，我长期承担班课、试听、复习与一对一教学，把统计、R 和 Excel 拆成可掌握的步骤。',
+    capability_return: '翻回正面',
     section_news: '最新动态', section_projects: '开源作品', section_research: '论文成果', section_exp: '实习经历',
     section_edu: '教育背景', section_skills: '技能工具', section_contact: '联系方式',
     news_research: '📄 论文 <strong>SPARK</strong> 被英国机器视觉大会（BMVC 2026）接收。',
@@ -1215,10 +1547,27 @@ function setLang(lang) {
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+    const key = el.getAttribute('data-i18n-aria-label');
+    if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
+  });
   // restart typing
   startTyping();
   localStorage.setItem('tw-lang', lang);
   if (_githubReposCache) renderGithubRepos();
+}
+
+// ── CAPABILITY PUZZLE ──
+function toggleCapability(piece) {
+  const shouldOpen = !piece.classList.contains('is-flipped');
+  document.querySelectorAll('.capability-piece').forEach(item => {
+    item.classList.remove('is-flipped');
+    item.setAttribute('aria-pressed', 'false');
+  });
+  if (shouldOpen) {
+    piece.classList.add('is-flipped');
+    piece.setAttribute('aria-pressed', 'true');
+  }
 }
 
 // ── TYPING ──

@@ -29,6 +29,11 @@ try {
     4,
     'capability map should contain four interactive puzzle pieces'
   );
+  assert.equal(
+    await page.locator('#capabilities .capability-core small').innerText(),
+    'FORWARD\nDEPLOYED\nENGINEER',
+    'FDE should expand to Forward Deployed Engineer'
+  );
 
   console.log('PASS capability map structure');
 

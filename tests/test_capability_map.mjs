@@ -5,7 +5,10 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({
+  headless: true,
+  ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}),
+});
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
 const pageUrl = pathToFileURL(new URL('../index.html', import.meta.url).pathname).href;
 
@@ -98,8 +101,15 @@ try {
   assert.ok(Math.abs(desktopPieces[2].y - desktopPieces[3].y) < 2, 'bottom pieces should share a row');
   assert.ok(desktopPieces[2].y > desktopPieces[0].y, 'bottom pieces should sit below the top pair');
 
-  const puzzleBox = await page.locator('.capability-puzzle').boundingBox();
-  const coreBox = await page.locator('.capability-core').boundingBox();
+  // Read both rectangles in one layout snapshot so font loading or scroll
+  // restoration cannot move the page between two independent measurements.
+  const { puzzleBox, coreBox } = await page.evaluate(() => {
+    const rect = (selector) => {
+      const element = document.querySelector(selector);
+      return element?.getClientRects().length ? element.getBoundingClientRect().toJSON() : null;
+    };
+    return { puzzleBox: rect('.capability-puzzle'), coreBox: rect('.capability-core') };
+  });
   assert.ok(puzzleBox && coreBox, 'puzzle and FDE core should be visible');
   assert.ok(
     Math.abs((coreBox.x + coreBox.width / 2) - (puzzleBox.x + puzzleBox.width / 2)) < 3,

@@ -1041,8 +1041,12 @@ footer span { color: var(--accent); }
 .handheld-toggle[hidden],#handheld-content[hidden]{display:none}
 .handheld-toggle:hover{background:#8e997a18}
 .handheld-toggle:focus-visible{outline:2px solid var(--hh-ink);outline-offset:3px}
+.handheld-toggle svg{transition:transform .32s ease}
 .handheld-toggle[aria-expanded="false"] svg{transform:rotate(180deg)}
-.handheld-stage[data-collapsed="true"] .handheld-stage-header{padding-bottom:0;border-bottom:0}
+.handheld-stage-header{transition:padding-bottom .3s ease,border-color .3s ease}
+.handheld-stage[data-collapsed="true"] .handheld-stage-header{padding-bottom:0;border-bottom-color:transparent}
+#playground{overflow-anchor:none}
+@media(prefers-reduced-motion:reduce){.handheld-stage-header,.handheld-toggle svg{transition:none}}
 @media(max-width:680px){.handheld-stage-header > [data-i18n="game_edition"]{display:none}.handheld-toggle{font-size:10px;padding-inline:9px}}
 </style>
 </head>
@@ -2646,18 +2650,57 @@ window.TeemoHandheld.init();
 // Collapse the display without discarding its current page or game progress.
 const handheldToggle = document.getElementById('handheld-toggle');
 const handheldContent = document.getElementById('handheld-content');
+let handheldTransition = null;
 function setHandheldExpanded(expanded) {
+  if (handheldToggle.getAttribute('aria-expanded') === String(expanded)) return;
   if (!expanded) {
     window.TeemoHandheld.pause();
     if (handheldContent.contains(document.activeElement)) handheldToggle.focus({ preventScroll: true });
   }
-  handheldContent.hidden = !expanded;
+
+  // Capture the current visual state before cancelling, so a quick reversal
+  // continues from its current height instead of jumping to either endpoint.
+  const startHeight = handheldContent.hidden ? 0 : handheldContent.getBoundingClientRect().height;
+  const startOpacity = handheldContent.hidden ? 0 : Number(getComputedStyle(handheldContent).opacity);
+  if (handheldTransition) {
+    handheldTransition.cancel();
+    handheldTransition = null;
+  }
+  handheldContent.hidden = false;
+  handheldContent.inert = !expanded;
+  if (expanded) handheldContent.removeAttribute('aria-hidden');
+  else handheldContent.setAttribute('aria-hidden', 'true');
   handheldToggle.setAttribute('aria-expanded', String(expanded));
   handheldToggle.closest('.handheld-stage').dataset.collapsed = String(!expanded);
   const label = handheldToggle.querySelector('span');
   const key = expanded ? 'game_collapse' : 'game_expand';
   label.dataset.i18n = key;
   label.textContent = i18n[currentLang][key];
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !handheldContent.animate) {
+    handheldContent.hidden = !expanded;
+    handheldContent.style.overflow = '';
+    return;
+  }
+
+  const endHeight = expanded ? handheldContent.scrollHeight : 0;
+  handheldContent.style.overflow = 'hidden';
+  const animation = handheldContent.animate([
+    { height: startHeight + 'px', opacity: startOpacity },
+    { height: endHeight + 'px', opacity: expanded ? 1 : 0 },
+  ], {
+    duration: expanded ? 460 : 300,
+    easing: expanded ? 'cubic-bezier(0.22, 1, 0.36, 1)' : 'cubic-bezier(0.4, 0, 0.2, 1)',
+    fill: 'both',
+  });
+  handheldTransition = animation;
+  animation.onfinish = () => {
+    if (handheldTransition !== animation) return;
+    handheldContent.hidden = !expanded;
+    handheldContent.style.overflow = '';
+    handheldTransition = null;
+    animation.cancel(); // Restore natural height for responsive content.
+  };
 }
 handheldToggle.hidden = false;
 handheldToggle.addEventListener('click', () => setHandheldExpanded(handheldToggle.getAttribute('aria-expanded') !== 'true'));

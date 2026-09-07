@@ -1228,7 +1228,10 @@ footer span { color: var(--accent); }
 .pocket-homepage #capabilities { border-top: 1px solid var(--border); }
 .pocket-homepage .capabilities-intro { max-width: 660px; }
 .pocket-homepage .capability-puzzle { gap: 12px; }
-.pocket-homepage .capability-piece { --piece-edge: var(--shell-edge); }
+.pocket-homepage .capability-piece {
+  --piece-edge: color-mix(in srgb,var(--fg) 35%,var(--shell));
+  transition: translate 220ms ease,z-index 0s 220ms;
+}
 .pocket-homepage .capability-piece--consulting { --piece: var(--shell); }
 .pocket-homepage .capability-piece--sales { --piece: color-mix(in srgb,var(--shell) 85%,var(--lcd)); }
 .pocket-homepage .capability-piece--engineering { --piece: color-mix(in srgb,var(--shell) 80%,var(--bg3)); }
@@ -1238,14 +1241,16 @@ footer span { color: var(--accent); }
   box-shadow: inset 0 2px 0 color-mix(in srgb,var(--bg2) 85%,transparent),0 4px 0 var(--shell-edge);
 }
 .pocket-homepage .capability-face--back { background: var(--piece); }
+.pocket-homepage .capability-face::before,
+.pocket-homepage .capability-face::after { display: none; }
 .pocket-homepage .capability-piece:hover,
 .pocket-homepage .capability-piece:focus-visible,
-.pocket-homepage .capability-piece.is-flipped { filter: drop-shadow(0 7px 8px color-mix(in srgb,var(--fg) 12%,transparent)); }
+.pocket-homepage .capability-piece.is-flipped { filter: none; }
 .pocket-homepage .capability-kicker { font: 10px var(--pixel); letter-spacing: 0; color: var(--accent); }
 .pocket-homepage .capability-name { font-family: inherit; font-weight: 650; letter-spacing: -.035em; }
 .pocket-homepage .capability-definition { color: var(--fg2); }
 .pocket-homepage .capability-back-name { font-family: inherit; color: var(--accent); }
-.pocket-homepage .capability-story { color: var(--fg2); }
+.pocket-homepage .capability-story { color: var(--fg); }
 .pocket-homepage .capability-return { font-family: inherit; letter-spacing: 0; opacity: 1; text-transform: none; }
 .pocket-homepage .capability-core {
   background: var(--lcd); color: var(--lcd-ink); border-color: var(--bg);

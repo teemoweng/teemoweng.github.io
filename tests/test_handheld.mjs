@@ -124,10 +124,13 @@ try {
     assert.match(await disclosure.innerText(), lang === 'zh' ? /收起/ : /collapse/i);
     await disclosure.click();
     assert.equal(await disclosure.getAttribute('aria-expanded'), 'false');
+    assert.equal(await handheldContent.evaluate(content => content.inert), true, 'closing immediately disables console interaction');
+    await handheldContent.waitFor({ state: 'hidden', timeout: 2000 });
     assert.equal(await handheldContent.isVisible(), false, 'collapsed console content is actually hidden');
     assert.match(await disclosure.innerText(), lang === 'zh' ? /展开/ : /expand/i);
     await disclosure.click();
     assert.equal(await disclosure.getAttribute('aria-expanded'), 'true');
+    await handheldContent.waitFor({ state: 'visible', timeout: 2000 });
     assert.equal(await handheldContent.isVisible(), true);
   }
   console.log('PASS first-section placement, four desktop hero actions and bilingual disclosure');
@@ -285,12 +288,14 @@ try {
       };
       await disclosure.click();
       assert.equal(await disclosure.getAttribute('aria-expanded'), 'false');
-      assert.equal(await handheldContent.isVisible(), false);
       assert.equal((await snapshot()).quest.paused, true, 'collapsing an active game pauses it');
+      await handheldContent.waitFor({ state: 'hidden', timeout: 2000 });
+      assert.equal(await handheldContent.isVisible(), false);
       await expectProgress();
       await disclosure.focus();
       await page.keyboard.press('Enter');
       assert.equal(await disclosure.getAttribute('aria-expanded'), 'true', 'Enter expands the native disclosure button');
+      await handheldContent.waitFor({ state: 'visible', timeout: 2000 });
       assert.equal(await handheldContent.isVisible(), true);
       assert.equal((await snapshot()).quest.paused, true, 'expanding does not silently resume a game');
       await expectProgress();
@@ -299,6 +304,7 @@ try {
       assert.equal(await disclosure.getAttribute('aria-expanded'), 'false', 'Space collapses the disclosure button');
       await page.locator('#hero a[href="#playground"]').click();
       assert.equal(await disclosure.getAttribute('aria-expanded'), 'true', 'the hero Play action reveals a collapsed console');
+      await handheldContent.waitFor({ state: 'visible', timeout: 2000 });
       assert.equal(await handheldContent.isVisible(), true);
       await expectProgress();
       await page.locator('#handheld-console').scrollIntoViewIfNeeded();
@@ -354,6 +360,14 @@ try {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.reload({ waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => window.TeemoHandheld?.snapshot().initialized);
+  for (const expanded of [false, true]) {
+    const immediate = await disclosure.evaluate(button => {
+      button.click();
+      const content = document.getElementById('handheld-content');
+      return { expanded: button.getAttribute('aria-expanded') === 'true', hidden: content.hidden, inert: content.inert, animations: content.getAnimations().length };
+    });
+    assert.deepEqual(immediate, { expanded, hidden: !expanded, inert: !expanded, animations: 0 }, 'reduced-motion disclosure changes synchronously without animation');
+  }
   await page.locator('#handheld-console').scrollIntoViewIfNeeded();
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   await action('start');

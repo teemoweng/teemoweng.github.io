@@ -138,11 +138,11 @@ canvas#particles {
 }
 .hero-content {
   position: relative; z-index: 1;
-  display: grid; grid-template-columns: 1fr 340px;
-  gap: 80px; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 48px; align-items: center;
   max-width: 1100px; width: 100%; padding: 0 40px;
 }
-.hero-text { }
+.hero-text { min-width: 0; }
 .hero-tag {
   display: inline-block; font-family: 'JetBrains Mono', monospace;
   font-size: 12px; color: var(--accent); letter-spacing: 0.12em;
@@ -171,7 +171,21 @@ canvas#particles {
   font-size: 15px; line-height: 1.75; color: var(--fg2);
   max-width: 520px; margin-bottom: 36px;
 }
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-actions { display: flex; gap: 8px; flex-wrap: nowrap; }
+.hero-actions > a, .hero-actions > button { padding-inline: 15px; font-size: 13px; white-space: nowrap; justify-content: center; }
+.hero-action-short { display: none; }
+@media (max-width: 960px) {
+  .hero-content { grid-template-columns: 1fr; gap: 40px; padding-inline: 20px; text-align: center; }
+  .hero-avatar { order: -1; }
+  .hero-actions { justify-content: center; }
+  .hero-desc { margin-inline: auto; }
+}
+@media (max-width: 480px) {
+  .hero-actions { gap: 6px; }
+  .hero-actions > a, .hero-actions > button { flex: 1; min-width: 0; min-height: 44px; padding: 10px 6px; font-size: 11px; }
+  .hero-action-full { display: none; }
+  .hero-action-short { display: inline; }
+}
 .btn-primary {
   padding: 12px 28px; background: var(--accent); color: #000;
   border: none; border-radius: 8px; font-weight: 600;
@@ -861,6 +875,179 @@ footer span { color: var(--accent); }
   color: var(--fg3); font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
 }
+/* A playable personal system. All styling stays inside this module. */
+@font-face{font-family:'Handheld Pixel';src:url('uploads/handheld/Silkscreen-Regular.ttf') format('truetype');font-display:swap}
+#playground{max-width:1200px;padding:65px 30px 85px;scroll-margin-top:70px}
+.handheld-stage{--hh-ink:#30372e;--hh-muted:#73776a;--hh-rule:#ced0c4;position:relative;background:#eeefe8;border:1px solid #dcdfd2;border-radius:6px;padding:38px 42px 32px;isolation:isolate;color:var(--hh-ink)}
+[data-theme="dark"] .handheld-stage{--hh-ink:#e2e5d8;--hh-muted:#adb5a1;--hh-rule:#4c5545;background:#262c23;border-color:#434b3c}
+.handheld-stage::before{content:'';position:absolute;inset:0;border-radius:inherit;background-image:radial-gradient(#92978532 .6px,transparent .7px);background-size:5px 5px;opacity:.3;z-index:-1;pointer-events:none}
+.handheld-stage-header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:23px;border-bottom:1px solid var(--hh-rule);font:10px 'JetBrains Mono',monospace;letter-spacing:.07em;color:var(--hh-muted)}
+.handheld-stage-header strong{font-weight:500;display:flex;align-items:center;gap:9px;color:var(--hh-ink)}
+.handheld-mark{display:grid;grid-template-columns:repeat(2,4px);gap:2px;transform:rotate(-8deg)}
+.handheld-mark i{width:4px;height:4px;background:var(--hh-ink)}
+.handheld-layout{display:grid;grid-template-columns:minmax(150px,1fr) 388px minmax(140px,.85fr);gap:38px;align-items:center;padding:52px 0 40px}
+.handheld-intro{align-self:center;min-width:0}
+.handheld-intro h2{font:500 40px/1.16 'Helvetica Neue','PingFang SC',sans-serif;letter-spacing:-.055em;margin:0 0 25px;color:var(--hh-ink)}
+.handheld-intro h2 span{display:block}
+[data-lang="zh"] .handheld-intro h2{font-size:35px;letter-spacing:-.03em;line-height:1.38}
+.handheld-intro p{font-size:12px;line-height:1.9;color:var(--hh-muted);margin-bottom:28px;max-width:230px}
+.handheld-player-tag{display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid var(--hh-rule)}
+.handheld-player-symbol{display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;border-radius:7px;background:#dce2cf;color:#4f6240;font:18px 'Handheld Pixel',monospace}
+.handheld-player-tag strong{font-size:12px;font-weight:500;display:block;margin-bottom:5px}
+.handheld-player-tag small{font:9px/1.5 'JetBrains Mono',monospace;color:var(--hh-muted)}
+.handheld-pencil-note{display:block;color:var(--hh-muted);font:italic 17px/1.5 Georgia,'Kaiti SC',serif;margin-top:36px;transform:rotate(-5deg)}
+/* The shell is drawn in CSS: molded corners, seam, bezel, recessed switches. */
+.handheld-console{--lcd-bg:#b6c985;--lcd-ink:#293b21;--lcd-mid:#728953;--lcd-line:#849963;--lcd-light:#c3d394;position:relative;width:388px;min-height:647px;padding:0 24px 27px;border:1px solid #aeb0a4;border-radius:19px 20px 69px 21px;background:linear-gradient(114deg,#f0f0e8 0%,#dedfd5 57%,#d0d2c7 100%);box-shadow:inset 3px 2px 4px #ffffffe0,inset -5px -5px 8px #9d9f9380,5px 8px 0 -1px #b5b8aa,6px 9px 0 #9b9f8f,15px 25px 35px #23321835,2px 2px 7px #23321820;transform:rotate(-3deg);color:#303730;touch-action:pan-y;outline:none;transition:transform .35s ease,box-shadow .35s ease}
+.handheld-console:focus-within{transform:rotate(-1deg);box-shadow:inset 3px 2px 4px #ffffffe0,inset -5px -5px 8px #9d9f9380,5px 8px 0 -1px #b5b8aa,6px 9px 0 #9b9f8f,15px 25px 35px #23321835,0 0 0 3px #79865c44}
+.handheld-console[data-palette="amber"]{--lcd-bg:#ddbb78;--lcd-ink:#463719;--lcd-mid:#a78649;--lcd-line:#b39350;--lcd-light:#e9ca8f}
+.handheld-console::before{content:'';position:absolute;top:0;bottom:25px;left:10px;width:2px;border-left:1px solid #c4c7bb;border-right:1px solid #f5f5eb;pointer-events:none;border-radius:10px}
+.handheld-top-rail{position:relative;display:flex;align-items:center;gap:12px;margin:0 -24px 17px;padding:8px 30px 9px;height:35px;border-bottom:2px solid #babcaf;box-shadow:0 1px 0 #f5f6ed;color:#777d6c;font:8px 'JetBrains Mono',monospace;border-radius:19px 20px 0 0}
+.handheld-top-rail::after{content:'';position:absolute;right:20px;top:0;bottom:0;border-left:1px solid #b9bdaf;border-right:1px solid #f3f4e9;width:2px}
+.handheld-power{width:44px;height:15px;padding:0;border:1px solid #888d7a;border-radius:3px;background:#9da38f;box-shadow:inset 1px 2px 3px #3d443b60;position:relative;cursor:pointer}
+.handheld-power::after{content:'';position:absolute;top:1px;bottom:1px;width:23px;left:1px;border-radius:1px;border:1px solid #828978;background:repeating-linear-gradient(90deg,#acb39f 0 2px,#89917f 2px 3px);box-shadow:1px 0 2px #39433355;transition:left .12s}
+.handheld-power[aria-pressed="true"]::after{left:17px}
+.handheld-top-rail small{margin-left:auto;font:7px 'JetBrains Mono',monospace;letter-spacing:.1em}
+.handheld-bezel{position:relative;min-height:308px;background:linear-gradient(135deg,#6f7675,#5e6665);border:2px solid #8b9088;border-radius:11px 12px 40px 12px;padding:34px 19px 22px 39px;box-shadow:inset 1px 1px 2px #353e3b80,0 1px 0 #f7f7ed}
+.handheld-bezel-top{position:absolute;top:11px;left:12px;right:12px;display:flex;gap:7px;align-items:center;color:#d4d8cf;font:6px 'JetBrains Mono',monospace;letter-spacing:.08em;white-space:nowrap}
+.handheld-bezel-top::before,.handheld-bezel-top::after{content:'';height:4px;flex:1;border-top:1px solid #623c52;border-bottom:1px solid #3a4e61}
+.handheld-power-light{position:absolute;left:12px;top:130px;text-align:center;color:#d3d9cf;font:5px 'JetBrains Mono',monospace}
+.handheld-power-light i{display:block;margin:0 auto 5px;width:6px;height:6px;background:#d95e54;border:1px solid #a23d31;box-shadow:0 0 5px #fc68569c;border-radius:50%}
+.handheld-console[data-powered="false"] .handheld-power-light i{background:#795750;box-shadow:none}
+.handheld-screen{height:252px;position:relative;background:var(--lcd-bg);color:var(--lcd-ink);border:3px solid #414a36;box-shadow:inset 3px 3px 9px #33411c5c,inset -1px -1px 3px #eff4b73b,0 0 0 1px #8d9478;overflow:hidden;image-rendering:pixelated}
+.handheld-screen::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,#293b2110 0 1px,transparent 1px 3px),linear-gradient(125deg,#ffffd010,transparent 45%);box-shadow:inset 0 0 16px #26351920}
+.handheld-display{height:100%;padding:11px 11px 9px;position:relative;overflow:auto;scrollbar-width:thin;scrollbar-color:var(--lcd-mid) var(--lcd-bg);font:12px/1.55 'Courier New','PingFang SC',monospace;letter-spacing:0;overscroll-behavior:contain}
+.handheld-display *{box-sizing:border-box}
+.handheld-display button,.handheld-display a{font:inherit;color:inherit;cursor:pointer}
+.handheld-display button{border:0;border-radius:0;background:transparent;text-align:left}
+.handheld-display :focus-visible{outline:2px dashed var(--lcd-ink);outline-offset:2px}
+.handheld-brand{display:flex;align-items:baseline;gap:6px;padding:14px 0 0 4px;color:#344557}
+.handheld-brand strong{font:bold italic 22px/1 Arial,sans-serif;letter-spacing:-1.3px}
+.handheld-brand span{font:italic 8px Arial,sans-serif;letter-spacing:.04em}
+.handheld-brand small{margin-left:auto;font:bold italic 14px Arial,sans-serif}
+.handheld-controls{height:150px;display:flex;justify-content:space-between;align-items:center;padding:7px 7px 0 1px}
+.handheld-dpad{width:125px;height:125px;border-radius:50%;padding:8px;display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);position:relative;background:linear-gradient(130deg,#c4c7ba88,#e7e8dc33);box-shadow:inset 1px 1px 3px #b5b9aa55,1px 1px 0 #f3f5e680}
+.handheld-dpad button{padding:0;border:0;background:linear-gradient(130deg,#3f4640,#252c27);color:#6c7568;box-shadow:inset 1px 1px 0 #65715a,inset -1px -1px 1px #101a12,2px 3px 3px #202e2570;position:relative;font-size:13px;cursor:pointer;touch-action:none;z-index:1}
+.handheld-dpad button[data-handheld-action="up"]{grid-area:1/2;border-radius:4px 4px 0 0;padding-bottom:7px}
+.handheld-dpad button[data-handheld-action="down"]{grid-area:3/2;border-radius:0 0 4px 4px;padding-top:7px}
+.handheld-dpad button[data-handheld-action="left"]{grid-area:2/1;border-radius:4px 0 0 4px;padding-right:7px}
+.handheld-dpad button[data-handheld-action="right"]{grid-area:2/3;border-radius:0 4px 4px 0;padding-left:7px}
+.handheld-dpad-center{grid-area:2/2;background:#303831;z-index:2;pointer-events:none;display:grid;place-items:center}
+.handheld-dpad-center::after{content:'';width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#252e26,#414e3b);box-shadow:inset 1px 1px 3px #18231ba0,1px 1px 0 #5b6a4f66}
+.handheld-dpad button:active,.handheld-dpad button.is-held{background:#263027;box-shadow:inset 1px 1px 4px #08130dcc;transform:translateY(2px);color:#9eaf8a}
+.handheld-ab{display:flex;gap:14px;padding:8px;border-radius:70px;background:linear-gradient(135deg,#c8cbbdb3,#e4e6d980);box-shadow:inset 1px 1px 4px #bbc0b199,1px 1px 0 #f5f6eb;transform:rotate(-25deg);margin-top:2px}
+.handheld-ab-key{position:relative}
+.handheld-ab-key button{display:block;width:52px;height:52px;border-radius:50%;border:1px solid #6c264c;background:linear-gradient(135deg,#a54871 2%,#8b2859 45%,#741c47 100%);box-shadow:inset 2px 2px 3px #d0809d,2px 4px 0 #5b2343,3px 6px 5px #2d182b50;cursor:pointer;touch-action:none}
+.handheld-ab-key button:active,.handheld-ab-key button.is-held{transform:translateY(3px);box-shadow:inset 1px 2px 4px #612445,0 1px 0 #5b2343,1px 2px 3px #2d182b40}
+.handheld-ab-key span{position:absolute;top:61px;left:22px;font:bold 11px Arial,sans-serif;color:#4c5560}
+.handheld-controls button:focus-visible,.handheld-system-controls button:focus-visible,.handheld-power:focus-visible{outline:2px solid #52718b;outline-offset:5px}
+.handheld-bottom{height:83px;position:relative}
+.handheld-system-controls{display:flex;gap:20px;position:absolute;top:0;left:71px;transform:rotate(-24deg)}
+.handheld-system-key{text-align:center}
+.handheld-system-key button{display:block;width:37px;height:11px;background:linear-gradient(#9fa897,#74826b);border-radius:8px;border:1px solid #737d6a;box-shadow:1px 2px 0 #707c6755,1px 3px 3px #2b3b2940;cursor:pointer;padding:0;touch-action:none}
+.handheld-system-key button:active,.handheld-system-key button.is-held{transform:translateY(2px);box-shadow:inset 1px 1px 2px #3c4c34}
+.handheld-system-key span{display:block;margin-top:6px;font:7px 'JetBrains Mono',monospace;color:#687460;letter-spacing:.03em}
+.handheld-speaker{position:absolute;bottom:0;right:8px;display:flex;gap:7px;transform:rotate(-28deg)}
+.handheld-speaker i{display:block;width:6px;height:56px;border-radius:6px;background:linear-gradient(90deg,#939c86,#52634b 50%,#8f9b82);box-shadow:inset 1px 1px 3px #33432e,1px 1px 1px #fbfceb}
+.handheld-speaker i:first-child,.handheld-speaker i:last-child{height:48px;margin-top:4px}
+.handheld-shell-label{position:absolute;bottom:17px;left:25px;font:6px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#7a846f}
+.handheld-screw{width:7px;height:7px;background:#a4ae95;border:1px solid #8c987d;border-radius:50%;box-shadow:inset 1px 1px 1px #5c6b5022;position:absolute;bottom:16px;right:57px}
+.handheld-screw::after{content:'';position:absolute;left:2px;top:1px;height:3px;border-left:1px solid #69775f;transform:rotate(25deg)}
+/* Small UI pieces share the four-color LCD palette; no raster screenshots. */
+.hh-screen-title{font:18px/1.18 'Handheld Pixel','Courier New','PingFang SC',monospace;letter-spacing:0;margin-bottom:10px;font-weight:400}
+[data-lang="zh"] .hh-screen-title{font-family:'Courier New','PingFang SC',monospace;font-size:17px;font-weight:700;line-height:1.4}
+.hh-screen-meta{display:flex;justify-content:space-between;gap:6px;font-size:9px;line-height:1.4;border-bottom:1px solid var(--lcd-line);padding-bottom:5px;margin-bottom:8px}
+.hh-screen-copy{font-size:11px;line-height:1.65;margin:6px 0 9px;overflow-wrap:anywhere}
+.hh-screen-footer{display:flex;justify-content:space-between;gap:5px;font-size:8px;line-height:1.4;border-top:1px solid var(--lcd-line);margin-top:8px;padding-top:5px}
+.hh-menu{display:flex;flex-direction:column;gap:2px;margin:5px 0}
+.hh-menu-item{width:100%;display:flex;justify-content:space-between;align-items:center;gap:5px;min-height:26px;padding:4px 5px!important;line-height:1.4!important;font-size:11px!important}
+.hh-menu-item::before{content:none}
+.hh-menu-item>span:first-child{width:8px;flex-shrink:0;text-align:left}.hh-menu-item>span:nth-child(2){flex:1;text-align:left}
+.hh-menu-item small{font-size:8px}
+.hh-menu-item.is-selected{background:var(--lcd-ink)!important;color:var(--lcd-bg)!important}
+.hh-menu-item:hover{box-shadow:inset 0 0 0 1px var(--lcd-ink)}
+.hh-link{display:inline-block;padding:4px 5px;border:1px solid var(--lcd-ink)!important;text-decoration:none;margin:3px 4px 3px 0;font-size:10px!important;line-height:1.5!important}
+.hh-link:hover,.hh-link.is-selected{background:var(--lcd-ink)!important;color:var(--lcd-bg)!important}
+.hh-card{padding:7px;border:1px solid var(--lcd-line);margin:7px 0;line-height:1.55}
+.hh-pixel-avatar{image-rendering:pixelated;max-width:54px;float:right;margin:2px 3px 5px 9px}
+.hh-title-screen{display:flex;align-items:center;justify-content:center;flex-direction:column;height:100%;text-align:center}
+.hh-title-logo{font:31px/1.02 'Handheld Pixel',monospace;letter-spacing:-2px;margin:13px 0 9px}
+.hh-title-logo span{display:block}
+.hh-title-mark{width:45px;height:33px;position:relative;display:block;margin-bottom:5px}
+.hh-title-mark::before{content:'';position:absolute;inset:6px 0 0;border:4px solid var(--lcd-ink);box-shadow:4px 0 0 -1px var(--lcd-ink),-4px 0 0 -1px var(--lcd-ink)}
+.hh-title-mark::after{content:'+';position:absolute;top:6px;left:8px;font:bold 24px/1 monospace}
+.hh-title-screen p{font-size:9px;margin:4px 0}
+.hh-title-start{font:11px 'Handheld Pixel',monospace!important;border:1px solid var(--lcd-ink)!important;padding:7px 12px!important;margin-top:13px;cursor:pointer}
+.hh-boot{display:grid;place-content:center;gap:14px;height:100%;text-align:center;font:20px 'Handheld Pixel',monospace}
+.hh-boot-bar{height:8px;border:1px solid var(--lcd-ink);position:relative;width:135px}
+.hh-boot-bar::after{content:'';display:block;height:100%;background:var(--lcd-ink);animation:hh-loading .7s steps(8) forwards}
+@keyframes hh-loading{from{width:0}to{width:100%}}
+.hh-quest canvas,#handheld-quest-canvas{display:block;width:100%;max-width:240px;height:auto;image-rendering:pixelated;background:var(--lcd-bg);border:1px solid var(--lcd-ink)}
+.handheld-guide{align-self:center;min-width:0}
+.handheld-guide-title{font:9px 'JetBrains Mono',monospace;color:var(--hh-muted);letter-spacing:.1em;padding-bottom:18px;border-bottom:1px solid var(--hh-rule);margin-bottom:21px}
+.handheld-guide-item{margin-bottom:24px}
+.handheld-guide-item strong{font-size:12px;display:block;font-weight:500;margin-bottom:7px}
+.handheld-guide-item p{font-size:11px;line-height:1.7;color:var(--hh-muted);margin-bottom:9px}
+.handheld-guide-keys{display:flex;gap:5px;align-items:center}
+.handheld-guide-keys kbd{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;border:1px solid var(--hh-rule);border-radius:4px;padding:0 5px;font:9px 'JetBrains Mono',monospace;color:var(--hh-muted);box-shadow:0 1px 1px #3c4d3612}
+.handheld-guide-keys span{font-size:9px;color:var(--hh-muted)}
+.handheld-sound{display:flex;align-items:center;gap:8px;border:0;border-bottom:1px solid var(--hh-rule);background:transparent;color:var(--hh-ink);padding:11px 0;font-size:11px;cursor:pointer;width:100%;text-align:left}
+.handheld-sound svg{width:15px;height:15px;flex-shrink:0}
+.handheld-sound[aria-pressed="false"] .hh-sound-wave{display:none}
+.handheld-sound[aria-pressed="true"] .hh-sound-mute{display:none}
+.handheld-guide-note{font:italic 15px/1.5 Georgia,'Kaiti SC',serif;color:var(--hh-muted);margin-top:25px;max-width:160px}
+.handheld-stage-footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--hh-rule);padding-top:20px;color:var(--hh-muted);font:9px/1.7 'JetBrains Mono',monospace}
+.handheld-stage-footer a{color:var(--hh-ink);text-decoration:none;border-bottom:1px solid var(--hh-rule)}
+.handheld-sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.handheld-nojs{display:none}
+@media(max-width:1150px){.handheld-stage{padding-inline:28px}.handheld-layout{grid-template-columns:minmax(140px,1fr) 358px minmax(130px,.8fr);gap:25px}.handheld-console{width:358px;padding-inline:20px;min-height:617px}.handheld-top-rail{margin-inline:-20px}.handheld-bezel{padding-left:34px;padding-right:16px;min-height:287px}.handheld-screen{height:235px}.handheld-intro h2{font-size:34px}[data-lang="zh"] .handheld-intro h2{font-size:30px}.handheld-brand strong{font-size:20px}.handheld-display{padding:9px 9px 8px}.hh-menu-item{min-height:24px}.handheld-controls{height:145px}.handheld-ab{gap:11px}.handheld-ab-key button{width:49px;height:49px}.handheld-ab-key span{top:58px}}
+@media(max-width:940px){#playground{padding-inline:24px}.handheld-layout{grid-template-columns:1fr 370px;gap:30px;padding-top:42px;align-items:center}.handheld-console{grid-column:2;grid-row:1/3;width:370px;min-height:625px}.handheld-intro{grid-column:1;grid-row:1}.handheld-guide{grid-column:1;grid-row:2}.handheld-intro p{max-width:250px;margin-bottom:18px}.handheld-player-tag{padding-top:16px}.handheld-pencil-note{display:none}.handheld-guide-title{display:none}.handheld-guide-item{margin-bottom:16px}.handheld-guide-item p{margin-bottom:5px}.handheld-guide-note{display:none}.handheld-stage-header>span{font-size:8px}.handheld-sound{max-width:200px}}
+@media(max-width:680px){#playground{padding:45px 16px 55px}.handheld-stage{padding:22px 18px 22px;border-radius:5px}.handheld-stage-header{padding-bottom:17px;font-size:9px}.handheld-stage-header>span{max-width:105px;text-align:right;font-size:8px}.handheld-layout{display:flex;flex-direction:column;gap:32px;padding:28px 0 26px}.handheld-intro{width:100%;text-align:left}.handheld-intro h2{font-size:38px;margin-bottom:14px;max-width:330px}[data-lang="zh"] .handheld-intro h2{font-size:32px}.handheld-intro h2 span{display:inline}.handheld-intro h2 span+span::before{content:' '}.handheld-intro p{font-size:12px;max-width:400px;margin-bottom:0}.handheld-player-tag{display:none}.handheld-console{width:calc(100% - 16px);max-width:354px;min-height:590px;padding-inline:18px;transform:rotate(-1.7deg);margin:5px 8px 14px}.handheld-console:focus-within{transform:rotate(0)}.handheld-top-rail{margin-inline:-18px;padding-inline:22px;height:31px;margin-bottom:15px}.handheld-bezel{padding:29px 14px 18px 31px;min-height:268px;border-bottom-right-radius:31px}.handheld-bezel-top{font-size:5px;top:10px;gap:5px}.handheld-power-light{left:10px;top:110px}.handheld-screen{height:230px;border-width:2px}.handheld-display{padding:8px}.hh-screen-title{font-size:17px}.hh-screen-meta{font-size:8px;padding-bottom:4px;margin-bottom:6px}.hh-menu-item{font-size:11px!important;min-height:23px;padding:3px 4px!important}.hh-screen-copy{font-size:11px}.handheld-brand{padding-top:13px;gap:5px}.handheld-brand strong{font-size:19px}.handheld-brand span{font-size:7px}.handheld-controls{height:135px;padding-inline:0}.handheld-dpad{width:110px;height:110px;padding:7px}.handheld-ab{gap:11px;padding:7px;margin-right:1px}.handheld-ab-key button{width:44px;height:44px}.handheld-ab-key span{top:54px;left:17px;font-size:10px}.handheld-bottom{height:73px}.handheld-system-controls{left:60px;top:2px;gap:16px}.handheld-system-key button{width:33px;height:10px}.handheld-speaker{right:7px;gap:6px}.handheld-speaker i{height:49px;width:5px}.handheld-speaker i:first-child,.handheld-speaker i:last-child{height:42px}.handheld-shell-label{font-size:5px;bottom:14px}.handheld-screw{display:none}.handheld-guide{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:15px 20px}.handheld-guide-item{margin:0}.handheld-guide-item:nth-of-type(4){display:none}.handheld-guide-item strong{font-size:11px}.handheld-guide-item p{font-size:10px}.handheld-sound{grid-column:1/-1;width:auto;justify-self:start;padding:9px 0;max-width:none;margin-top:1px}.handheld-stage-footer{font-size:8px;gap:18px}.handheld-stage-footer>span{max-width:210px}.hh-title-logo{font-size:28px}.hh-title-screen p{font-size:8px}}
+@media(max-width:380px){.btn-stack{white-space:normal;min-width:0;max-width:100%;text-align:center;padding-inline:16px}#playground{padding-inline:8px}.handheld-stage{padding-inline:12px}.handheld-console{width:calc(100% - 10px);margin-inline:5px;padding-inline:14px;min-height:567px}.handheld-top-rail{margin-inline:-14px}.handheld-screen{height:228px}.handheld-bezel{padding-left:27px;padding-right:11px}.handheld-bezel-top{font-size:4.4px;gap:4px}.handheld-power-light{left:7px;font-size:4px}.handheld-ab{gap:9px;padding:6px}.handheld-ab-key button{width:40px;height:40px}.handheld-ab-key span{top:48px;left:15px}.handheld-dpad{width:99px;height:99px}.handheld-system-controls{left:49px}.handheld-controls{height:128px}.handheld-brand span{font-size:6px}.hh-menu-item{font-size:10px!important}.hh-screen-copy{font-size:10px;line-height:1.65}.hh-screen-title{font-size:16px}.handheld-guide-keys kbd{min-width:20px}.handheld-stage-footer{gap:10px}}
+@media(prefers-reduced-motion:reduce){.handheld-console,.handheld-power::after,.hh-boot-bar::after{transition:none!important;animation:none!important}.handheld-console,.handheld-console:focus-within{transform:none}}
+
+
+/* LCD detail layouts are compact at every console size. */
+.hh-skill-list{display:grid;grid-template-columns:1fr 1fr;gap:11px 10px;padding:9px 7px}
+.hh-skill-entry{min-width:0}
+.hh-skill-entry .hh-screen-meta{font-size:8px;margin:0 0 5px;padding:0 0 4px}
+.hh-skill-entry .hh-screen-copy{font-size:10px;line-height:1.5;margin:0;overflow-wrap:anywhere}
+.hh-player-card{padding:7px;margin:6px 0}
+.hh-player-card .hh-pixel-avatar{width:32px;margin-left:6px}
+.hh-player-card svg{width:32px;height:32px}
+.hh-player-card .hh-screen-copy{font-size:10px;line-height:1.55;margin:0}
+.hh-title-card{display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;min-height:185px;border:0;padding:10px;margin:0}
+.hh-title-card .hh-pixel-avatar{float:none;margin:0 0 8px}
+.hh-links{display:flex;gap:5px;flex-wrap:wrap}
+.hh-contact-links{display:flex;flex-direction:column;gap:5px;align-items:stretch;margin-top:12px}
+.hh-contact-links .hh-link{margin:0}
+.hh-quest .hh-screen-title{font-size:15px;margin-bottom:4px;line-height:1.2}
+.hh-quest .hh-screen-meta{margin-bottom:5px;font-size:8px}
+.hh-quest .hh-screen-footer{font-size:8px;line-height:1.35;margin-top:5px;padding-top:4px}
+.hh-quest canvas,#handheld-quest-canvas{max-height:117px;object-fit:contain;margin:0 auto 4px}
+.hh-quest .hh-link{font-size:8px!important;padding:2px 4px;margin:2px 0}
+.hh-quest-position{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.hh-boot small{font:10px/1.5 'Courier New','PingFang SC',monospace;letter-spacing:0}
+.handheld-console[data-powered="false"] .handheld-screen{background:#889879;box-shadow:inset 3px 3px 9px #33411c60}
+.handheld-console[data-powered="false"] .handheld-display{opacity:.36}
+
+
+/* Keep small-screen copy deliberate, with comfortable menu hit areas. */
+.hh-menu-item{font-size:12px!important;min-height:27px}
+@media(max-width:680px){[data-lang="zh"] .handheld-intro h2 span{display:block}[data-lang="zh"] .handheld-intro h2 span+span::before{content:none}.hh-menu-item{font-size:12px!important;min-height:27px}.handheld-screen .hh-menu{gap:1px}}
+@media(max-width:380px){.handheld-screen{height:250px}.hh-links{flex-wrap:nowrap;gap:4px}.hh-links .hh-link{font-size:9px!important;white-space:nowrap;margin-right:0;padding-inline:4px}}
+
+.handheld-stage-header > [data-i18n="game_edition"]{margin-left:auto}
+.handheld-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0;min-height:40px;padding:8px 12px;border:1px solid var(--hh-rule);border-radius:5px;background:transparent;color:var(--hh-ink);font:11px 'JetBrains Mono','PingFang SC',monospace;cursor:pointer}
+.handheld-toggle[hidden],#handheld-content[hidden]{display:none}
+.handheld-toggle:hover{background:#8e997a18}
+.handheld-toggle:focus-visible{outline:2px solid var(--hh-ink);outline-offset:3px}
+.handheld-toggle svg{transition:transform .32s ease}
+.handheld-toggle[aria-expanded="false"] svg{transform:rotate(180deg)}
+.handheld-stage-header{transition:padding-bottom .3s ease,border-color .3s ease}
+.handheld-stage[data-collapsed="true"] .handheld-stage-header{padding-bottom:0;border-bottom-color:transparent}
+#playground{overflow-anchor:none}
+@media(prefers-reduced-motion:reduce){.handheld-stage-header,.handheld-toggle svg{transition:none}}
+@media(max-width:680px){.handheld-stage-header > [data-i18n="game_edition"]{display:none}.handheld-toggle{font-size:10px;padding-inline:9px}}
 </style>
 </head>
 
@@ -900,10 +1087,9 @@ footer span { color: var(--accent); }
         MSc student at Imperial College London, currently an AI Product Intern at Alibaba (space-leasing product line). Experienced in strategy consulting (BCG), internet product (Beike, POIZON), and startup building. Seeking product & strategy roles in China.
       </p>
       <div class="hero-actions">
-        <a class="btn-primary" href="#" onclick="downloadResume()" data-i18n="btn_resume">
-          ↓ Download Resume
-        </a>
-        <a class="btn-outline" href="#contact" data-i18n="btn_contact">Get in Touch</a>
+        <a class="btn-primary" href="#" onclick="downloadResume()" data-i18n-aria-label="btn_resume"><span class="hero-action-full" data-i18n="btn_resume">↓ Download Resume</span><span class="hero-action-short" data-i18n="btn_resume_short">↓ Resume</span></a>
+        <a class="btn-outline" href="#contact" data-i18n-aria-label="btn_contact"><span class="hero-action-full" data-i18n="btn_contact">Get in Touch</span><span class="hero-action-short" data-i18n="btn_contact_short">Contact</span></a>
+        <a class="btn-outline" href="#playground" data-i18n-aria-label="game_hero_link"><span class="hero-action-full" data-i18n="game_hero_link">▶ Play a little</span><span class="hero-action-short" data-i18n="game_hero_short">▶ Play</span></a>
         <button type="button" class="btn-outline" onclick="openGithubModal()" data-i18n="btn_github">⌥ GitHub</button>
       </div>
     </div>
@@ -917,6 +1103,57 @@ footer span { color: var(--accent); }
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span data-i18n="scroll_hint">scroll</span>
+  </div>
+</section>
+
+<!-- INTERACTIVE HANDHELD — isolated addition to the classic homepage -->
+<section id="playground">
+  <div class="handheld-stage">
+    <div class="handheld-stage-header">
+      <strong><span class="handheld-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span> TEEMO / PLAY</strong>
+      <span data-i18n="game_edition">A little world, ready to play.</span>
+      <button id="handheld-toggle" class="handheld-toggle" type="button" aria-expanded="true" aria-controls="handheld-content" hidden><span data-i18n="game_collapse">Collapse</span><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
+    </div>
+    <div id="handheld-content">
+    <div class="handheld-layout">
+      <div class="handheld-intro">
+        <h2 data-i18n="game_heading"><span>Press start.</span><span>Meet Teemo.</span></h2>
+        <p data-i18n="game_intro">A few projects, a little curiosity, and a pocket-sized way to get to know me. Go on. Press a button.</p>
+        <div class="handheld-player-tag"><span class="handheld-player-symbol" aria-hidden="true">T</span><div><strong>Teemo Weng</strong><small data-i18n="game_player_role">Product · AI · Strategy</small></div></div>
+        <span class="handheld-pencil-note" data-i18n="game_margin_note">Made for the curious. ↗</span>
+      </div>
+      <div id="handheld-console" class="handheld-console" tabindex="0" role="group" data-powered="true" data-palette="green" data-i18n-aria-label="game_console_label" aria-label="Teemo interactive handheld. Use direction keys and A or B while focused.">
+        <div class="handheld-top-rail"><span>OFF · ON</span><button id="handheld-power" class="handheld-power" type="button" aria-pressed="true" aria-label="Power" data-i18n-aria-label="game_power_label"></button><small>TW—01</small></div>
+        <div class="handheld-bezel">
+          <div class="handheld-bezel-top" aria-hidden="true">DOT MATRIX · PERSONAL SYSTEM</div>
+          <div class="handheld-power-light" aria-hidden="true"><i></i>POWER</div>
+          <div id="handheld-screen" class="handheld-screen"><div id="handheld-display" class="handheld-display">
+            <div class="hh-title-screen"><span class="hh-title-mark" aria-hidden="true"></span><div class="hh-title-logo">TEEMO<span>PLAY</span></div><p data-i18n="game_title_sub">A pocket-sized introduction.</p><button type="button" class="hh-title-start" data-handheld-action="start" data-i18n="game_press_start">PRESS START</button><p>© TEEMO WENG 2026</p></div>
+          </div></div>
+        </div>
+        <div class="handheld-brand" aria-hidden="true"><strong>TEEMO</strong><span>POCKET PERSONAL SYSTEM</span><small>01</small></div>
+        <div class="handheld-controls">
+          <div class="handheld-dpad" aria-label="Direction controls">
+            <button type="button" data-handheld-action="up" data-i18n-aria-label="game_up" aria-label="Up">▲</button><button type="button" data-handheld-action="left" data-i18n-aria-label="game_left" aria-label="Left">◀</button><span class="handheld-dpad-center" aria-hidden="true"></span><button type="button" data-handheld-action="right" data-i18n-aria-label="game_right" aria-label="Right">▶</button><button type="button" data-handheld-action="down" data-i18n-aria-label="game_down" aria-label="Down">▼</button>
+          </div>
+          <div class="handheld-ab"><div class="handheld-ab-key"><button type="button" data-handheld-action="b" data-i18n-aria-label="game_b" aria-label="B — back"></button><span aria-hidden="true">B</span></div><div class="handheld-ab-key"><button type="button" data-handheld-action="a" data-i18n-aria-label="game_a" aria-label="A — select"></button><span aria-hidden="true">A</span></div></div>
+        </div>
+        <div class="handheld-bottom"><div class="handheld-system-controls"><div class="handheld-system-key"><button type="button" data-handheld-action="select" data-i18n-aria-label="game_select" aria-label="Select — switch screen color"></button><span aria-hidden="true">SELECT</span></div><div class="handheld-system-key"><button type="button" data-handheld-action="start" data-i18n-aria-label="game_start" aria-label="Start — main menu"></button><span aria-hidden="true">START</span></div></div><div class="handheld-speaker" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="handheld-shell-label" aria-hidden="true">DESIGNED FOR A LITTLE CURIOSITY</div><i class="handheld-screw" aria-hidden="true"></i>
+      </div>
+      <aside class="handheld-guide">
+        <div class="handheld-guide-title" data-i18n="game_guide">A QUICK START</div>
+        <div class="handheld-guide-item"><strong data-i18n="game_direction_title">Find your way</strong><p data-i18n="game_direction_desc">Use the D-pad or arrow keys.</p><div class="handheld-guide-keys" aria-hidden="true"><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd></div></div>
+        <div class="handheld-guide-item"><strong data-i18n="game_action_title">Follow your curiosity</strong><p data-i18n="game_action_desc">A to select. B to go back.</p><div class="handheld-guide-keys" aria-hidden="true"><kbd>A</kbd><span>/</span><kbd>Enter</kbd><kbd>B</kbd><span>/</span><kbd>Esc</kbd></div></div>
+        <div class="handheld-guide-item"><strong data-i18n="game_home_title">Make yourself at home</strong><p data-i18n="game_home_desc">START returns home. SELECT changes the screen color.</p></div>
+        <button type="button" id="handheld-sound" class="handheld-sound" aria-pressed="false" aria-label="Enable sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 5 5 9H2v6h3l5 4V5Z"/><path class="hh-sound-wave" d="M14 8q4 4 0 8m3-11q7 7 0 14"/><path class="hh-sound-mute" d="m15 9 6 6m0-6-6 6"/></svg><span data-i18n="game_sound_off">Sound off · turn on</span></button>
+        <p class="handheld-guide-note" data-i18n="game_quest_note">Psst… there’s a little side quest inside.</p>
+      </aside>
+    </div>
+    <div class="handheld-stage-footer"><span data-i18n="game_footer">Real projects. A playful way in.</span><a href="#projects" data-i18n="game_skip">Browse the projects below ↗</a></div>
+    </div>
+    <div id="handheld-announcement" class="handheld-sr-only" aria-live="polite" aria-atomic="true"></div>
+    <noscript><p class="handheld-nojs">掌机需要 JavaScript。你仍可在下方浏览完整项目。 / Enable JavaScript to play, or browse all projects below.</p><style>.handheld-nojs{display:block;padding-top:15px;font-size:12px}.project-card,.news-item,.tl-item,.edu-card,.skill-group,.reveal{opacity:1;transform:none}.handheld-console button,.handheld-sound{pointer-events:none}.handheld-nojs a{color:inherit}</style></noscript>
   </div>
 </section>
 
@@ -1346,6 +1583,37 @@ footer span { color: var(--accent); }
 // ── i18n ──
 const i18n = {
   en: {
+    game_hero_link: "▶ Play a little",
+    btn_resume_short: "↓ Resume", btn_contact_short: "Contact", game_hero_short: "▶ Play",
+    game_collapse: "Collapse", game_expand: "Expand",
+    game_edition: "A little world, ready to play.",
+    game_heading: "<span>Press start.</span><span>Meet Teemo.</span>",
+    game_intro: "A few projects, a little curiosity, and a pocket-sized way to get to know me. Go on. Press a button.",
+    game_player_role: "Product · AI · Strategy",
+    game_margin_note: "Made for the curious. ↗",
+    game_console_label: "Teemo interactive handheld. Use direction keys and A or B while focused.",
+    game_power_label: "Power",
+    game_title_sub: "A pocket-sized introduction.",
+    game_press_start: "PRESS START",
+    game_up: "Up",
+    game_down: "Down",
+    game_left: "Left",
+    game_right: "Right",
+    game_a: "A — select",
+    game_b: "B — back",
+    game_select: "Select — switch screen color",
+    game_start: "Start — main menu",
+    game_guide: "A QUICK START",
+    game_direction_title: "Find your way",
+    game_direction_desc: "Use the D-pad or arrow keys.",
+    game_action_title: "Follow your curiosity",
+    game_action_desc: "A to select. B to go back.",
+    game_home_title: "Make yourself at home",
+    game_home_desc: "START returns home. SELECT changes the screen color.",
+    game_sound_off: "Sound off · turn on",
+    game_quest_note: "Psst… there’s a little side quest inside.",
+    game_footer: "Real projects. A playful way in.",
+    game_skip: "Browse the projects below ↗",
     nav_capabilities: 'Capabilities', nav_news: 'News', nav_projects: 'Projects', nav_experience: 'Experience',
     nav_research: 'Research', nav_education: 'Education', nav_contact: 'Contact',
     hero_tag: 'Strategy · Product · AI',
@@ -1443,6 +1711,37 @@ const i18n = {
     github_error: 'Failed to load repos.'
   },
   zh: {
+    game_hero_link: "▶ 玩一下掌机",
+    btn_resume_short: "↓ 简历", btn_contact_short: "联系我", game_hero_short: "▶ 掌机",
+    game_collapse: "收起掌机", game_expand: "展开掌机",
+    game_edition: "我的小世界，随时开机。",
+    game_heading: "<span>按下开始，</span><span>认识一下我。</span>",
+    game_intro: "几个项目，一点好奇心，装进一台小掌机。用方向键逛逛我的作品，也可以去收集一点灵感。",
+    game_player_role: "产品 · AI · 策略",
+    game_margin_note: "给好奇的人，一个小入口。↗",
+    game_console_label: "Teemo 互动掌机。聚焦后使用方向键和 A、B 操作。",
+    game_power_label: "电源开关",
+    game_title_sub: "装进口袋的自我介绍。",
+    game_press_start: "按下 START",
+    game_up: "向上",
+    game_down: "向下",
+    game_left: "向左",
+    game_right: "向右",
+    game_a: "A — 确认",
+    game_b: "B — 返回",
+    game_select: "Select — 切换屏幕颜色",
+    game_start: "Start — 返回主菜单",
+    game_guide: "上手指南",
+    game_direction_title: "选一个方向",
+    game_direction_desc: "点十字键，或使用键盘方向键。",
+    game_action_title: "跟着好奇心走",
+    game_action_desc: "按 A 确认，按 B 返回。",
+    game_home_title: "随时回到起点",
+    game_home_desc: "START 回主菜单，SELECT 换个屏幕颜色。",
+    game_sound_off: "音效已关 · 点击开启",
+    game_quest_note: "里面还藏了一个小彩蛋。",
+    game_footer: "真实的作品，换一种好玩的打开方式。",
+    game_skip: "直接浏览下方项目 ↗",
     nav_capabilities: '能力图谱', nav_news: '动态', nav_projects: '项目', nav_experience: '经历',
     nav_research: '论文成果', nav_education: '教育', nav_contact: '联系',
     hero_tag: '战略 · 产品 · AI',
@@ -1555,6 +1854,7 @@ function setLang(lang) {
   startTyping();
   localStorage.setItem('tw-lang', lang);
   if (_githubReposCache) renderGithubRepos();
+  window.TeemoHandheld?.refreshLanguage();
 }
 
 // ── CAPABILITY PUZZLE ──
@@ -1714,6 +2014,7 @@ window.parent.postMessage({type:'__edit_mode_available'}, '*');
 let _githubReposCache = null;
 
 function openGithubModal() {
+  window.TeemoHandheld?.pause();
   const modal = document.getElementById('github-modal');
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1839,11 +2140,571 @@ const savedTheme = localStorage.getItem('tw-theme') || 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '☀' : '☾';
 
-const savedLang = localStorage.getItem('tw-lang') || 'en';
+const requestedLang = new URLSearchParams(location.search).get('lang');
+const savedLang = ['en', 'zh'].includes(requestedLang) ? requestedLang : localStorage.getItem('tw-lang') || 'en';
 setLang(savedLang);
 initParticles();
 initReveal();
 </script>
 
+<script>
+/* Teemo Pocket controller. Inline after the homepage's existing functions.
+ * Call TeemoHandheld.init() at the end of the root script. No dependencies.
+ * Screen palette: #handheld-console[data-hh-palette="green|amber"].
+ */
+(function () {
+  'use strict';
+
+  const copy = {
+    en: {
+      title: 'TEEMO PLAY', title_word_1: 'TEEMO', title_word_2: 'PLAY', copyright: '© TEEMO WENG 2026', player_short: 'Teemo Weng', title_sub: 'A tiny portfolio to explore.', title_role: 'AI PRODUCT × STRATEGY',
+      press_start: 'PRESS START / A', boot: 'Loading player profile…', powered_off: 'POWER OFF',
+      power_on: 'Turn console on', power_off: 'Turn console off', sound_on: 'Enable sound effects', sound_off: 'Mute sound effects',
+      sound_enabled: 'Sound on', sound_muted: 'Sound off', sound_unavailable: 'Sound is unavailable in this browser.',
+      green: 'Green screen', amber: 'Amber screen', menu: 'MAIN MENU',
+      player: 'Player profile', projects: 'Project levels', skills: 'Skill inventory', contact: 'Contact', quest: 'Bonus quest',
+      menu_hint: '↑ ↓ Choose · A Open · B Back', page_hint: 'B Back · START Home', project_hint: '↑ ↓ Choose · A Details · B Back', detail_hint: '↑↓ Flip · A Next · B Back', back_control: 'B Back',
+      player_name: 'Teemo Weng / 翁呈轩', player_school: 'Imperial College London',
+      player_degree: 'MSc · Economics & Strategy for Business', player_work: 'AI Product Intern · Alibaba',
+      player_about: 'I connect strategy, user needs and AI product building.',
+      project_1: 'CareerBuddy', project_2: 'AI Shopping Guide', project_3: 'RepoLens', project_4: 'CiteCook',
+      challenge: 'CHALLENGE', choice: 'DESIGN CHOICE', demo: 'Open demo ↗', code: 'View code ↗',
+      career_challenge: 'Bring a fragmented job search into one workbench.',
+      career_choice: 'A local-first product joins tracking, role research, matching and interview practice.',
+      shopping_challenge: 'Turn shoppable content into a considered product choice.',
+      shopping_choice: 'A prototype links evidence checks and comparisons to product selection and a simulated cart.',
+      repo_challenge: 'Make GitHub repository research easier to verify.',
+      repo_choice: 'Read-only tools connect findings to evidence and expose fallback paths.',
+      cook_challenge: 'Answer recipe questions with sources that can be checked.',
+      cook_choice: 'Hybrid retrieval supports cited answers, filtered recommendations and safety refusals.',
+      skills_data: 'DATA', skills_data_items: 'SQL · Python · R · Excel',
+      skills_design: 'DESIGN', skills_design_items: 'Figma · Axure · Stitch',
+      skills_viz: 'VISUALIZATION', skills_viz_items: 'Tableau · Power BI',
+      skills_build: 'AI CODING', skills_build_items: 'Claude Code · Codex',
+      contact_copy: 'Open to product, AI and strategy opportunities in China.',
+      email: 'Email Teemo ↗', github: 'GitHub ↗', linkedin: 'LinkedIn ↗',
+      quest_title: 'IDEA EXPLORER', quest_intro: 'Collect 3 idea sparks, then find the exit.',
+      quest_controls: 'Move with the D-pad or arrow keys. Each press is one step.',
+      quest_play: 'A Start exploring', quest_restart: 'A Restart', quest_resume: 'A Resume',
+      quest_paused: 'PAUSED', quest_count: 'Sparks', quest_position: 'Position', quest_map: 'Idea maze: collect three sparks and reach the exit.',
+      quest_wall: 'A wall. Try another direction.', quest_collect: 'Idea spark collected.',
+      quest_need_more: 'Find all three sparks before leaving.', quest_move: 'Moved.',
+      quest_win: 'QUEST COMPLETE', quest_win_copy: 'Three sparks collected. Keep exploring.', quest_home: 'A Back to menu',
+      quest_legend: '● You · ◆ Spark · ▣ Exit', back: 'Back',
+    },
+    zh: {
+      title: 'TEEMO PLAY', title_word_1: 'TEEMO', title_word_2: 'PLAY', copyright: '© TEEMO WENG 2026', player_short: '翁呈轩 / Teemo', title_sub: '一台可以玩的迷你作品集。', title_role: 'AI 产品 × 商业策略',
+      press_start: '按 START / A 开始', boot: '正在载入玩家资料…', powered_off: '电源已关闭',
+      power_on: '打开掌机电源', power_off: '关闭掌机电源', sound_on: '开启音效', sound_off: '关闭音效',
+      sound_enabled: '音效已开启', sound_muted: '音效已关闭', sound_unavailable: '当前浏览器不支持音效。',
+      green: '绿色屏幕', amber: '琥珀屏幕', menu: '主菜单',
+      player: '玩家档案', projects: '项目关卡', skills: '技能背包', contact: '联系玩家', quest: '彩蛋关卡',
+      menu_hint: '↑ ↓ 选择 · A 进入 · B 返回', page_hint: 'B 返回 · START 主菜单', project_hint: '↑ ↓ 选择 · A 详情 · B 返回', detail_hint: '↑↓ 翻页 · A 下一页 · B 返回', back_control: 'B 返回',
+      player_name: '翁呈轩 · Teemo', player_school: '帝国理工学院',
+      player_degree: '经济与商业战略硕士', player_work: '阿里巴巴 · AI 产品实习生',
+      player_about: '连接商业策略、用户需求与 AI 产品实践。',
+      project_1: 'CareerBuddy', project_2: 'AI 购物助手', project_3: 'RepoLens', project_4: 'CiteCook',
+      challenge: '挑战', choice: '设计取舍', demo: '打开演示 ↗', code: '查看代码 ↗',
+      career_challenge: '把分散的求职任务放进一个工作台。',
+      career_choice: '以本地优先的产品，串联投递跟踪、岗位研究、简历匹配与面试练习。',
+      shopping_challenge: '从可购物内容走到有依据的商品选择。',
+      shopping_choice: '用原型串联证据检查、条件对比、商品选择与模拟购物车。',
+      repo_challenge: '让 GitHub 仓库研究结论更容易核实。',
+      repo_choice: '使用只读工具，将结论绑定证据，并保留可追踪的降级路径。',
+      cook_challenge: '让菜谱问答有可追溯的来源。',
+      cook_choice: '用混合检索支持引用回答、条件推荐与安全拒答。',
+      skills_data: '数据分析', skills_data_items: 'SQL · Python · R · Excel',
+      skills_design: '产品设计', skills_design_items: 'Figma · Axure · Stitch',
+      skills_viz: '数据可视化', skills_viz_items: 'Tableau · Power BI',
+      skills_build: 'AI 编程', skills_build_items: 'Claude Code · Codex',
+      contact_copy: '欢迎交流中国互联网、AI 产品与策略方向的机会。',
+      email: '邮件联系 ↗', github: 'GitHub ↗', linkedin: 'LinkedIn ↗',
+      quest_title: '灵感探索者', quest_intro: '收集 3 个灵感点，再走到出口。',
+      quest_controls: '用十字键或键盘方向键移动，每按一次走一格。',
+      quest_play: 'A 开始探索', quest_restart: 'A 重新开始', quest_resume: 'A 继续',
+      quest_paused: '已暂停', quest_count: '灵感', quest_position: '位置', quest_map: '灵感迷宫：收集三个灵感点，然后到达出口。',
+      quest_wall: '前方是墙，换个方向试试。', quest_collect: '收集到一个灵感点。',
+      quest_need_more: '先收集全部三个灵感点，再离开。', quest_move: '已移动。',
+      quest_win: '探索完成', quest_win_copy: '三个灵感点已收集，继续保持好奇。', quest_home: 'A 返回主菜单',
+      quest_legend: '● 玩家 · ◆ 灵感 · ▣ 出口', back: '返回',
+    },
+  };
+
+  const projects = [
+    { name: 'project_1', challenge: 'career_challenge', choice: 'career_choice', demo: 'https://careerdesk-production.up.railway.app/', code: 'https://github.com/teemoweng/CareerBuddy' },
+    { name: 'project_2', challenge: 'shopping_challenge', choice: 'shopping_choice', demo: 'https://ai-shopping-agent.vercel.app/case-study', code: 'https://github.com/teemoweng/ai-shopping-agent' },
+    { name: 'project_3', challenge: 'repo_challenge', choice: 'repo_choice', demo: 'https://repolens-hi6hjkfvkpqltmetdvxs4v.streamlit.app/', code: 'https://github.com/teemoweng/repolens' },
+    { name: 'project_4', challenge: 'cook_challenge', choice: 'cook_choice', demo: 'https://citecook-rag-6j2jfyw4c67synm8lpxvub.streamlit.app/', code: 'https://github.com/teemoweng/citecook-rag' },
+  ];
+  const homeItems = ['player', 'projects', 'skills', 'contact', 'quest'];
+  const maze = [
+    '############',
+    '#S...#.....#',
+    '#.##.#.##..#',
+    '#....#.....#',
+    '###.###.##.#',
+    '#...#......#',
+    '#.........E#',
+    '############',
+  ];
+  const sparks = [{ x: 4, y: 1 }, { x: 9, y: 1 }, { x: 1, y: 5 }];
+  const exit = { x: 10, y: 6 };
+  const state = {
+    initialized: false, powered: true, mode: 'title', homeIndex: 0, projectIndex: 0, detailPage: 0,
+    palette: 'green', soundEnabled: false, quest: null, error: null,
+  };
+  let root, screen, display, announcement, powerButton, soundButton;
+  let bootTimer = null;
+  let audioContext = null;
+  let observer = null;
+  let languageObserver = null;
+  let visible = true;
+  const heldButtons = new Map();
+
+  function language() {
+    try { if (typeof currentLang !== 'undefined' && currentLang === 'zh') return 'zh'; } catch (_) {}
+    return document.documentElement.getAttribute('data-lang') === 'zh' ? 'zh' : 'en';
+  }
+  function t(key) { return copy[language()][key] || copy.en[key] || ''; }
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
+  }
+  function guard(fn) {
+    return function () {
+      try { return fn.apply(null, arguments); }
+      catch (error) { state.error = error instanceof Error ? error.message : String(error); return false; }
+    };
+  }
+  function announce(message) { if (announcement) announcement.textContent = message; }
+  function safeRead(key) { try { return localStorage.getItem(key); } catch (_) { return null; } }
+  function safeWrite(key, value) { try { localStorage.setItem(key, value); } catch (_) {} }
+  function reducedMotion() { return Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  function modalOpen() { return Boolean(document.querySelector('#github-modal.open')); }
+  function focusConsole() { if (root) root.focus({ preventScroll: true }); }
+  function clearBoot() { if (bootTimer !== null) { clearTimeout(bootTimer); bootTimer = null; } }
+
+  function feedback(kind) {
+    if (!state.soundEnabled || !audioContext || audioContext.state !== 'running') return;
+    try {
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      const now = audioContext.currentTime;
+      oscillator.type = 'square';
+      oscillator.frequency.setValueAtTime(kind === 'success' ? 660 : kind === 'back' ? 220 : 330, now);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.018, now + 0.008);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.065);
+      oscillator.connect(gain); gain.connect(audioContext.destination);
+      oscillator.start(now); oscillator.stop(now + 0.075);
+      oscillator.onended = function () { oscillator.disconnect(); gain.disconnect(); };
+    } catch (_) { /* Sound must never interrupt controls. */ }
+  }
+
+  function syncHardware() {
+    root.dataset.palette = state.palette;
+    root.dataset.powered = String(state.powered);
+    root.dataset.hhPalette = state.palette;
+    root.dataset.hhMode = state.mode;
+    root.dataset.hhPowered = String(state.powered);
+    screen.dataset.palette = state.palette;
+    screen.dataset.powered = String(state.powered);
+    screen.setAttribute('aria-busy', String(state.mode === 'boot'));
+    powerButton.setAttribute('aria-pressed', String(state.powered));
+    powerButton.setAttribute('aria-label', t(state.powered ? 'power_off' : 'power_on'));
+    powerButton.title = t(state.powered ? 'power_off' : 'power_on');
+    soundButton.setAttribute('aria-pressed', String(state.soundEnabled));
+    soundButton.setAttribute('aria-label', t(state.soundEnabled ? 'sound_off' : 'sound_on'));
+    soundButton.title = t(state.soundEnabled ? 'sound_off' : 'sound_on');
+    const soundLabel = soundButton.querySelector('span[data-i18n], span');
+    if (soundLabel) { soundLabel.removeAttribute('data-i18n'); soundLabel.textContent = t(state.soundEnabled ? 'sound_enabled' : 'sound_muted'); }
+  }
+
+  const avatar = '<span class="hh-pixel-avatar" aria-hidden="true"><svg width="48" height="48" viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="currentColor" d="M5 1h6v1h2v6h-1v3h-2v1h3v1h1v3H2v-3h1v-1h3v-1H4V8H3V2h2z"/><path fill="var(--lcd-bg,#a9ba70)" d="M4 4h8v4h-1v2H5V8H4z"/><path fill="currentColor" d="M4 5h3v2H4zm5 0h3v2H9zM7 5h2v1H7zM6 9h4v1H6z"/></svg></span>';
+  function title(key, meta) {
+    return '<h3 class="hh-screen-title">' + escapeHTML(t(key)) + '</h3>' + (meta ? '<p class="hh-screen-meta">' + escapeHTML(meta) + '</p>' : '');
+  }
+  function footer(key) { return '<p class="hh-screen-footer">' + escapeHTML(t(key)) + '</p>'; }
+  function button(command, key) { return '<button type="button" class="hh-link" data-hh-command="' + command + '">' + escapeHTML(t(key)) + '</button>'; }
+  function menu(kind, labels, selected) {
+    return '<div class="hh-menu" role="group" aria-label="' + escapeHTML(t(kind === 'home' ? 'menu' : 'projects')) + '">' + labels.map(function (label, index) {
+      return '<button type="button" class="hh-menu-item' + (selected === index ? ' is-selected' : '') + '" data-hh-menu="' + kind + '" data-hh-index="' + index + '"' + (selected === index ? ' aria-current="true"' : '') + '><span aria-hidden="true">' + (selected === index ? '▸' : '·') + '</span><span>' + escapeHTML(t(label)) + '</span></button>';
+    }).join('') + '</div>';
+  }
+  function externalLink(url, key) {
+    return '<a class="hh-link" href="' + escapeHTML(url) + '"' + (url.startsWith('mailto:') ? '' : ' target="_blank" rel="noopener noreferrer"') + '>' + escapeHTML(t(key)) + '</a>';
+  }
+
+  function render() {
+    if (!state.initialized) return;
+    const wasFocused = display.contains(document.activeElement);
+    syncHardware();
+    let html = '';
+    switch (state.mode) {
+      case 'off':
+        html = '<div class="hh-card hh-title-card">' + title('powered_off') + '</div>';
+        break;
+      case 'title':
+        html = '<div class="hh-title-screen"><span class="hh-title-mark" aria-hidden="true"></span><div class="hh-title-logo">' + escapeHTML(t('title_word_1')) + '<span>' + escapeHTML(t('title_word_2')) + '</span></div><p>' + escapeHTML(t('title_sub')) + '</p><button type="button" class="hh-title-start" data-hh-command="a">' + escapeHTML(t('press_start')) + '</button><p>' + escapeHTML(t('copyright')) + '</p></div>';
+        break;
+      case 'boot':
+        html = '<div class="hh-boot">' + title('title') + '<div class="hh-boot-bar" aria-hidden="true"></div><small>' + escapeHTML(t('boot')) + '</small></div>';
+        break;
+      case 'home':
+        html = title('player_short') + menu('home', homeItems, state.homeIndex) + footer('menu_hint');
+        break;
+      case 'player':
+        html = title('player') + '<div class="hh-card hh-player-card">' + avatar + '<p class="hh-screen-copy"><strong>' + escapeHTML(t('player_name')) + '</strong><br>' + escapeHTML(t('player_school')) + '<br>' + escapeHTML(t('player_degree')) + '<br>' + escapeHTML(t('player_work')) + '</p></div><p class="hh-screen-copy">' + escapeHTML(t('player_about')) + '</p>' + footer('page_hint');
+        break;
+      case 'projects':
+        html = title('projects') + menu('projects', projects.map(function (project) { return project.name; }), state.projectIndex) + footer('project_hint');
+        break;
+      case 'project-detail': {
+        const project = projects[state.projectIndex];
+        const pageKey = state.detailPage === 0 ? 'challenge' : 'choice';
+        html = title(project.name) + '<div class="hh-card"><p class="hh-screen-meta">' + escapeHTML(t(pageKey)) + ' · ' + (state.detailPage + 1) + '/2</p><p class="hh-screen-copy">' + escapeHTML(t(project[pageKey])) + '</p></div><div class="hh-links">' + externalLink(project.demo, 'demo') + externalLink(project.code, 'code') + '</div>' + footer('detail_hint');
+        break;
+      }
+      case 'skills':
+        html = title('skills') + '<div class="hh-card hh-skill-list">' + ['data', 'design', 'viz', 'build'].map(function (category) {
+          return '<div class="hh-skill-entry"><p class="hh-screen-meta">' + escapeHTML(t('skills_' + category)) + '</p><p class="hh-screen-copy">' + escapeHTML(t('skills_' + category + '_items')) + '</p></div>';
+        }).join('') + '</div>' + footer('page_hint');
+        break;
+      case 'contact':
+        html = title('contact') + '<p class="hh-screen-copy">' + escapeHTML(t('contact_copy')) + '</p><div class="hh-links hh-contact-links">' + externalLink('mailto:teemow0106@163.com', 'email') + externalLink('https://github.com/teemoweng', 'github') + externalLink('https://linkedin.com/in/teemoweng', 'linkedin') + '</div>' + footer('page_hint');
+        break;
+      case 'quest-intro':
+        html = title('quest_title') + '<p class="hh-screen-copy">' + escapeHTML(t('quest_intro')) + '</p><p class="hh-screen-copy">' + escapeHTML(t('quest_controls')) + '</p>' + button('a', 'quest_play') + footer('page_hint');
+        break;
+      case 'quest': {
+        const quest = state.quest;
+        html = '<div class="hh-quest">' + title('quest_title', t('quest_count') + ' ' + quest.collected.length + '/3' + (quest.paused ? ' · ' + t('quest_paused') : '')) + '<canvas id="handheld-quest-canvas" width="240" height="144" tabindex="0" role="img" aria-label="' + escapeHTML(t('quest_map')) + '"></canvas><p class="hh-screen-meta">' + escapeHTML(t('quest_legend')) + '</p><div class="hh-screen-footer">' + button('a', quest.paused ? 'quest_resume' : 'quest_restart') + ' · ' + button('b', 'back_control') + '</div></div>';
+        break;
+      }
+      case 'quest-win':
+        html = '<div class="hh-card hh-title-card">' + avatar + title('quest_win') + '<p class="hh-screen-copy">' + escapeHTML(t('quest_win_copy')) + '</p>' + button('a', 'quest_home') + '</div>';
+        break;
+    }
+    display.innerHTML = html;
+    if (state.mode === 'quest') drawMaze();
+    if (wasFocused) focusConsole();
+  }
+
+  function drawMaze() {
+    const canvas = document.getElementById('handheld-quest-canvas');
+    if (!canvas || !state.quest) return;
+    const context = canvas.getContext('2d');
+    if (!context) return;
+    const colors = state.palette === 'amber'
+      ? { background: '#e1bf70', wall: '#795b26', ink: '#35270f', pale: '#cfab57' }
+      : { background: '#a9ba70', wall: '#657846', ink: '#263d23', pale: '#96a65d' };
+    const cw = 20, ch = 18;
+    context.imageSmoothingEnabled = false;
+    context.fillStyle = colors.background; context.fillRect(0, 0, 240, 144);
+    maze.forEach(function (row, y) {
+      Array.from(row).forEach(function (cell, x) {
+        if (cell === '#') {
+          context.fillStyle = colors.wall; context.fillRect(x * cw, y * ch, cw, ch);
+          context.fillStyle = colors.pale; context.fillRect(x * cw + 2, y * ch + 2, cw - 4, 2);
+        }
+      });
+    });
+    context.fillStyle = colors.ink;
+    context.strokeStyle = colors.ink; context.lineWidth = 2;
+    context.strokeRect(exit.x * cw + 3, exit.y * ch + 3, 14, 12);
+    context.fillRect(exit.x * cw + 8, exit.y * ch + 5, 4, 8);
+    sparks.forEach(function (spark) {
+      if (state.quest.collected.includes(spark.x + ',' + spark.y)) return;
+      const x = spark.x * cw + 10, y = spark.y * ch + 9;
+      context.beginPath(); context.moveTo(x, y - 6); context.lineTo(x + 6, y); context.lineTo(x, y + 6); context.lineTo(x - 6, y); context.closePath(); context.fill();
+    });
+    const px = state.quest.x * cw, py = state.quest.y * ch;
+    context.fillRect(px + 6, py + 3, 8, 7); context.fillRect(px + 4, py + 10, 12, 5);
+    context.fillStyle = colors.background;
+    context.fillRect(px + 7, py + 5, 2, 2); context.fillRect(px + 11, py + 5, 2, 2);
+  }
+
+  function boot() {
+    clearBoot();
+    state.powered = true; state.mode = 'boot';
+    render(); announce(t('boot'));
+    const finish = guard(function () { bootTimer = null; state.mode = 'home'; render(); announce(t('menu')); });
+    if (reducedMotion()) finish(); else bootTimer = setTimeout(finish, 800);
+  }
+  function setMode(mode) { clearBoot(); state.mode = mode; render(); announce(t(mode === 'home' ? 'menu' : mode === 'quest-intro' ? 'quest_title' : mode === 'project-detail' ? projects[state.projectIndex].name : mode)); }
+  function flipDetail() {
+    state.detailPage = state.detailPage === 0 ? 1 : 0;
+    render(); announce(t(state.detailPage === 0 ? 'challenge' : 'choice') + ' ' + (state.detailPage + 1) + '/2');
+  }
+  function startQuest() {
+    state.quest = { x: 1, y: 1, collected: [], paused: false };
+    state.mode = 'quest'; render(); announce(t('quest_intro'));
+  }
+  function refreshSelection() {
+    display.querySelectorAll('[data-hh-menu]').forEach(function (item) {
+      const selected = Number(item.dataset.hhIndex) === (item.dataset.hhMenu === 'home' ? state.homeIndex : state.projectIndex);
+      item.classList.toggle('is-selected', selected);
+      if (selected) item.setAttribute('aria-current', 'true'); else item.removeAttribute('aria-current');
+      const marker = item.querySelector('[aria-hidden]'); if (marker) marker.textContent = selected ? '▸' : '·';
+    });
+  }
+  function move(direction) {
+    const quest = state.quest;
+    if (!quest || quest.paused) { announce(t('quest_resume')); return true; }
+    const offsets = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+    const nx = quest.x + offsets[direction][0], ny = quest.y + offsets[direction][1];
+    if (!maze[ny] || maze[ny][nx] === '#' || maze[ny][nx] === undefined) { announce(t('quest_wall')); return true; }
+    quest.x = nx; quest.y = ny;
+    const key = nx + ',' + ny;
+    const found = sparks.some(function (spark) { return spark.x === nx && spark.y === ny; }) && !quest.collected.includes(key);
+    if (found) quest.collected.push(key);
+    if (nx === exit.x && ny === exit.y && quest.collected.length === sparks.length) {
+      state.mode = 'quest-win'; render(); announce(t('quest_win')); feedback('success'); return true;
+    }
+    render();
+    announce((found ? t('quest_collect') : nx === exit.x && ny === exit.y ? t('quest_need_more') : t('quest_move')) + ' ' + t('quest_count') + ' ' + quest.collected.length + '/3. ' + t('quest_position') + ' ' + nx + ', ' + ny + '.');
+    return true;
+  }
+
+  function action(name) {
+    if (!state.initialized) return false;
+    if (modalOpen() || document.hidden || !visible) { pause(); return false; }
+    if (name === 'select') {
+      state.palette = state.palette === 'green' ? 'amber' : 'green';
+      safeWrite('tw-handheld-palette', state.palette); render(); announce(t(state.palette)); return true;
+    }
+    if (name === 'start') {
+      if (!state.powered || state.mode === 'title') boot();
+      else { if (state.quest) state.quest.paused = true; setMode('home'); }
+      return true;
+    }
+    if (!state.powered || state.mode === 'boot') return false;
+    if (name === 'b') {
+      if (state.quest) state.quest.paused = true;
+      if (state.mode === 'project-detail') setMode('projects');
+      else if (state.mode === 'home') setMode('title');
+      else if (state.mode !== 'title') setMode('home');
+      else return false;
+      return true;
+    }
+    if (['up', 'down', 'left', 'right'].includes(name)) {
+      if (state.mode === 'quest') return move(name);
+      if (state.mode === 'project-detail') { flipDetail(); return true; }
+      if (state.mode !== 'home' && state.mode !== 'projects') return false;
+      const delta = name === 'up' || name === 'left' ? -1 : 1;
+      const menuHadFocus = Boolean(document.activeElement && document.activeElement.matches('[data-hh-menu]'));
+      if (state.mode === 'home') state.homeIndex = (state.homeIndex + delta + homeItems.length) % homeItems.length;
+      else state.projectIndex = (state.projectIndex + delta + projects.length) % projects.length;
+      refreshSelection();
+      if (menuHadFocus) {
+        const selected = display.querySelector('.hh-menu-item.is-selected');
+        if (selected) selected.focus({ preventScroll: true });
+      }
+      announce(t(state.mode === 'home' ? homeItems[state.homeIndex] : projects[state.projectIndex].name));
+      return true;
+    }
+    if (name !== 'a') return false;
+    if (state.mode === 'title') boot();
+    else if (state.mode === 'home') setMode(homeItems[state.homeIndex] === 'quest' ? 'quest-intro' : homeItems[state.homeIndex]);
+    else if (state.mode === 'projects') { state.detailPage = 0; setMode('project-detail'); }
+    else if (state.mode === 'project-detail') flipDetail();
+    else if (state.mode === 'quest-intro') startQuest();
+    else if (state.mode === 'quest') {
+      if (state.quest.paused) { state.quest.paused = false; render(); announce(t('quest_controls')); }
+      else startQuest();
+    } else if (state.mode === 'quest-win') setMode('home');
+    else return false;
+    return true;
+  }
+
+  const dispatch = guard(function (name) {
+    const consumed = action(name);
+    if (consumed) feedback(name === 'b' ? 'back' : 'move');
+    return consumed;
+  });
+  function releaseButtons() {
+    heldButtons.forEach(function (button, pointerId) {
+      button.classList.remove('is-held');
+      try { if (button.hasPointerCapture(pointerId)) button.releasePointerCapture(pointerId); } catch (_) {}
+    });
+    heldButtons.clear();
+  }
+  function pause() {
+    releaseButtons();
+    if (state.mode === 'quest' && state.quest && !state.quest.paused) {
+      state.quest.paused = true; render(); announce(t('quest_paused') + ' · ' + t('quest_resume'));
+    }
+  }
+  function releasePointer(event) {
+    const button = heldButtons.get(event.pointerId);
+    if (button) { button.classList.remove('is-held'); heldButtons.delete(event.pointerId); }
+  }
+
+  function init() {
+    if (state.initialized) return true;
+    root = document.getElementById('handheld-console');
+    screen = document.getElementById('handheld-screen');
+    display = document.getElementById('handheld-display');
+    announcement = document.getElementById('handheld-announcement');
+    powerButton = document.getElementById('handheld-power');
+    soundButton = document.getElementById('handheld-sound');
+    if (!root || !screen || !display || !announcement || !powerButton || !soundButton) return false;
+    root.setAttribute('tabindex', '0');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('aria-atomic', 'true');
+    const storedPalette = safeRead('tw-handheld-palette');
+    if (storedPalette === 'green' || storedPalette === 'amber') state.palette = storedPalette;
+    state.initialized = true;
+
+    root.querySelectorAll('[data-handheld-action]').forEach(function (button) {
+      button.addEventListener('pointerdown', guard(function (event) {
+        if (event.isPrimary === false || (event.pointerType === 'mouse' && event.button !== 0)) return;
+        event.preventDefault();
+        button.focus({ preventScroll: true });
+        heldButtons.set(event.pointerId, button); button.classList.add('is-held');
+        try { button.setPointerCapture(event.pointerId); } catch (_) {}
+        dispatch(button.dataset.handheldAction);
+      }));
+      ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (type) { button.addEventListener(type, releasePointer); });
+      // Pointer actions happen on press. Native keyboard/AT click still works once.
+      button.addEventListener('click', guard(function (event) { if (event.detail === 0) dispatch(button.dataset.handheldAction); }));
+    });
+    root.addEventListener('keydown', guard(function (event) {
+      if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || !root.contains(document.activeElement)) return;
+      if (event.target.isContentEditable || event.target.closest('input,textarea,select,[contenteditable]')) return;
+      if (modalOpen()) { pause(); return; }
+      const keys = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right', a: 'a', z: 'a', b: 'b', x: 'b', Escape: 'b' };
+      let name = keys[event.key] || keys[event.key.toLowerCase()];
+      if (event.key === 'Enter' && (event.target === root || event.target.tagName === 'CANVAS')) name = 'a';
+      if (name && dispatch(name)) event.preventDefault();
+    }));
+    display.addEventListener('click', guard(function (event) {
+      const item = event.target.closest('[data-hh-menu]');
+      if (item && display.contains(item)) {
+        if (item.dataset.hhMenu === 'home') state.homeIndex = Number(item.dataset.hhIndex);
+        else state.projectIndex = Number(item.dataset.hhIndex);
+        dispatch('a'); return;
+      }
+      const command = event.target.closest('[data-hh-command]');
+      if (command && display.contains(command)) dispatch(command.dataset.hhCommand);
+    }));
+    display.addEventListener('focusin', guard(function (event) {
+      const item = event.target.closest('[data-hh-menu]');
+      if (!item) return;
+      if (item.dataset.hhMenu === 'home') state.homeIndex = Number(item.dataset.hhIndex);
+      else state.projectIndex = Number(item.dataset.hhIndex);
+      refreshSelection();
+    }));
+    root.addEventListener('focusout', function () {
+      setTimeout(guard(function () { if (!root.contains(document.activeElement)) pause(); }), 0);
+    });
+    window.addEventListener('blur', guard(pause));
+    document.addEventListener('visibilitychange', guard(function () { if (document.hidden) pause(); }));
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(guard(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (!visible) pause();
+      }), { threshold: 0 });
+      observer.observe(root);
+    }
+    languageObserver = new MutationObserver(guard(function () { render(); }));
+    languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
+    powerButton.addEventListener('click', guard(function () {
+      releaseButtons(); clearBoot();
+      if (state.powered) { state.powered = false; state.mode = 'off'; if (state.quest) state.quest.paused = true; render(); announce(t('powered_off')); }
+      else boot();
+      feedback('back');
+    }));
+    soundButton.addEventListener('click', guard(function () {
+      if (state.soundEnabled) { state.soundEnabled = false; syncHardware(); announce(t('sound_muted')); return; }
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) { announce(t('sound_unavailable')); return; }
+      audioContext = audioContext || new AudioContextClass();
+      state.soundEnabled = true; syncHardware(); announce(t('sound_enabled'));
+      const resumed = audioContext.resume();
+      if (resumed && typeof resumed.then === 'function') resumed.then(guard(function () { feedback('success'); })).catch(function () { state.soundEnabled = false; syncHardware(); announce(t('sound_unavailable')); });
+      else feedback('success');
+    }));
+    render();
+    return true;
+  }
+
+  window.TeemoHandheld = {
+    init: guard(init),
+    refreshLanguage: guard(render),
+    pause: guard(pause),
+    snapshot: function () {
+      return {
+        initialized: state.initialized, powered: state.powered, mode: state.mode,
+        homeIndex: state.homeIndex, projectIndex: state.projectIndex, detailPage: state.detailPage,
+        palette: state.palette, soundEnabled: state.soundEnabled, language: language(), error: state.error,
+        quest: state.quest ? { x: state.quest.x, y: state.quest.y, collected: state.quest.collected.slice(), total: sparks.length,
+          paused: state.quest.paused, map: maze.slice(), items: sparks.map(function (spark) { return { x: spark.x, y: spark.y }; }), exit: { x: exit.x, y: exit.y } } : null,
+      };
+    },
+  };
+}());
+
+window.TeemoHandheld.init();
+
+// Collapse the display without discarding its current page or game progress.
+const handheldToggle = document.getElementById('handheld-toggle');
+const handheldContent = document.getElementById('handheld-content');
+let handheldTransition = null;
+function setHandheldExpanded(expanded) {
+  if (handheldToggle.getAttribute('aria-expanded') === String(expanded)) return;
+  if (!expanded) {
+    window.TeemoHandheld.pause();
+    if (handheldContent.contains(document.activeElement)) handheldToggle.focus({ preventScroll: true });
+  }
+
+  // Capture the current visual state before cancelling, so a quick reversal
+  // continues from its current height instead of jumping to either endpoint.
+  const startHeight = handheldContent.hidden ? 0 : handheldContent.getBoundingClientRect().height;
+  const startOpacity = handheldContent.hidden ? 0 : Number(getComputedStyle(handheldContent).opacity);
+  if (handheldTransition) {
+    handheldTransition.cancel();
+    handheldTransition = null;
+  }
+  handheldContent.hidden = false;
+  handheldContent.inert = !expanded;
+  if (expanded) handheldContent.removeAttribute('aria-hidden');
+  else handheldContent.setAttribute('aria-hidden', 'true');
+  handheldToggle.setAttribute('aria-expanded', String(expanded));
+  handheldToggle.closest('.handheld-stage').dataset.collapsed = String(!expanded);
+  const label = handheldToggle.querySelector('span');
+  const key = expanded ? 'game_collapse' : 'game_expand';
+  label.dataset.i18n = key;
+  label.textContent = i18n[currentLang][key];
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !handheldContent.animate) {
+    handheldContent.hidden = !expanded;
+    handheldContent.style.overflow = '';
+    return;
+  }
+
+  const endHeight = expanded ? handheldContent.scrollHeight : 0;
+  handheldContent.style.overflow = 'hidden';
+  const animation = handheldContent.animate([
+    { height: startHeight + 'px', opacity: startOpacity },
+    { height: endHeight + 'px', opacity: expanded ? 1 : 0 },
+  ], {
+    duration: expanded ? 460 : 300,
+    easing: expanded ? 'cubic-bezier(0.22, 1, 0.36, 1)' : 'cubic-bezier(0.4, 0, 0.2, 1)',
+    fill: 'both',
+  });
+  handheldTransition = animation;
+  animation.onfinish = () => {
+    if (handheldTransition !== animation) return;
+    handheldContent.hidden = !expanded;
+    handheldContent.style.overflow = '';
+    handheldTransition = null;
+    animation.cancel(); // Restore natural height for responsive content.
+  };
+}
+handheldToggle.hidden = false;
+handheldToggle.addEventListener('click', () => setHandheldExpanded(handheldToggle.getAttribute('aria-expanded') !== 'true'));
+document.querySelector('.hero-actions a[href="#playground"]').addEventListener('click', () => setHandheldExpanded(true));
+</script>
 </body>
 </html>

@@ -2,20 +2,22 @@
 
 Live site: https://teemoweng.github.io/
 
-Single-page personal homepage designed in [Claude Design](https://claude.ai/design) and served as static HTML via GitHub Pages.
+Single-page personal homepage with a retro handheld visual style, served as static HTML via GitHub Pages.
 
 ## Structure
 
 - `index.html` — the full homepage (styles and scripts inlined)
 - `uploads/` — avatar, project images, and downloadable resume PDF
 - `.nojekyll` — tells GitHub Pages to skip Jekyll and serve files as-is
+- `v1/` and `v2/` — historical pages retained without an entry in the current homepage; no ongoing content synchronization
 
 ## Features
 
 - Light / dark theme toggle
 - English / 中文 language switch
-- Particle background, typing animation, scroll reveal
-- News, Projects, Experience timeline, Education, Skills, Contact
+- Interactive handheld with smooth expand/collapse, keyboard/touch controls and a playable maze
+- Independently flipping capability cards
+- News, Projects, Research, Experience timeline, Education, Skills, Contact
 - Downloadable PDF resume
 
 ## Local preview

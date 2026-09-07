@@ -104,16 +104,6 @@ nav {
 }
 .btn-icon:hover { border-color: var(--accent); color: var(--accent); }
 
-.nav-v2 {
-  display: inline-flex; align-items: center;
-  padding: 5px 12px; border: 1px solid var(--border);
-  border-radius: 99px; background: var(--card);
-  font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em;
-  color: var(--fg2); text-decoration: none; white-space: nowrap;
-  transition: all 0.2s;
-}
-.nav-v2:hover { border-color: var(--accent); color: var(--accent); }
-
 .lang-toggle {
   display: flex; gap: 4px; background: var(--bg3);
   border-radius: 8px; padding: 3px;
@@ -895,7 +885,7 @@ footer span { color: var(--accent); }
 .handheld-player-symbol{display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;border-radius:7px;background:#dce2cf;color:#4f6240;font:18px 'Handheld Pixel',monospace}
 .handheld-player-tag strong{font-size:12px;font-weight:500;display:block;margin-bottom:5px}
 .handheld-player-tag small{font:9px/1.5 'JetBrains Mono',monospace;color:var(--hh-muted)}
-.handheld-pencil-note{display:block;color:var(--hh-muted);font:italic 17px/1.5 Georgia,'Kaiti SC',serif;margin-top:36px;transform:rotate(-5deg)}
+
 /* The shell is drawn in CSS: molded corners, seam, bezel, recessed switches. */
 .handheld-console{--lcd-bg:#b6c985;--lcd-ink:#293b21;--lcd-mid:#728953;--lcd-line:#849963;--lcd-light:#c3d394;position:relative;width:388px;min-height:647px;padding:0 24px 27px;border:1px solid #aeb0a4;border-radius:19px 20px 69px 21px;background:linear-gradient(114deg,#f0f0e8 0%,#dedfd5 57%,#d0d2c7 100%);box-shadow:inset 3px 2px 4px #ffffffe0,inset -5px -5px 8px #9d9f9380,5px 8px 0 -1px #b5b8aa,6px 9px 0 #9b9f8f,15px 25px 35px #23321835,2px 2px 7px #23321820;transform:rotate(-3deg);color:#303730;touch-action:pan-y;outline:none;transition:transform .35s ease,box-shadow .35s ease}
 .handheld-console:focus-within{transform:rotate(-1deg);box-shadow:inset 3px 2px 4px #ffffffe0,inset -5px -5px 8px #9d9f9380,5px 8px 0 -1px #b5b8aa,6px 9px 0 #9b9f8f,15px 25px 35px #23321835,0 0 0 3px #79865c44}
@@ -994,15 +984,15 @@ footer span { color: var(--accent); }
 .handheld-sound svg{width:15px;height:15px;flex-shrink:0}
 .handheld-sound[aria-pressed="false"] .hh-sound-wave{display:none}
 .handheld-sound[aria-pressed="true"] .hh-sound-mute{display:none}
-.handheld-guide-note{font:italic 15px/1.5 Georgia,'Kaiti SC',serif;color:var(--hh-muted);margin-top:25px;max-width:160px}
-.handheld-stage-footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--hh-rule);padding-top:20px;color:var(--hh-muted);font:9px/1.7 'JetBrains Mono',monospace}
-.handheld-stage-footer a{color:var(--hh-ink);text-decoration:none;border-bottom:1px solid var(--hh-rule)}
+
+
+
 .handheld-sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .handheld-nojs{display:none}
 @media(max-width:1150px){.handheld-stage{padding-inline:28px}.handheld-layout{grid-template-columns:minmax(140px,1fr) 358px minmax(130px,.8fr);gap:25px}.handheld-console{width:358px;padding-inline:20px;min-height:617px}.handheld-top-rail{margin-inline:-20px}.handheld-bezel{padding-left:34px;padding-right:16px;min-height:287px}.handheld-screen{height:235px}.handheld-intro h2{font-size:34px}[data-lang="zh"] .handheld-intro h2{font-size:30px}.handheld-brand strong{font-size:20px}.handheld-display{padding:9px 9px 8px}.hh-menu-item{min-height:24px}.handheld-controls{height:145px}.handheld-ab{gap:11px}.handheld-ab-key button{width:49px;height:49px}.handheld-ab-key span{top:58px}}
-@media(max-width:940px){#playground{padding-inline:24px}.handheld-layout{grid-template-columns:1fr 370px;gap:30px;padding-top:42px;align-items:center}.handheld-console{grid-column:2;grid-row:1/3;width:370px;min-height:625px}.handheld-intro{grid-column:1;grid-row:1}.handheld-guide{grid-column:1;grid-row:2}.handheld-intro p{max-width:250px;margin-bottom:18px}.handheld-player-tag{padding-top:16px}.handheld-pencil-note{display:none}.handheld-guide-title{display:none}.handheld-guide-item{margin-bottom:16px}.handheld-guide-item p{margin-bottom:5px}.handheld-guide-note{display:none}.handheld-stage-header>span{font-size:8px}.handheld-sound{max-width:200px}}
-@media(max-width:680px){#playground{padding:45px 16px 55px}.handheld-stage{padding:22px 18px 22px;border-radius:5px}.handheld-stage-header{padding-bottom:17px;font-size:9px}.handheld-stage-header>span{max-width:105px;text-align:right;font-size:8px}.handheld-layout{display:flex;flex-direction:column;gap:32px;padding:28px 0 26px}.handheld-intro{width:100%;text-align:left}.handheld-intro h2{font-size:38px;margin-bottom:14px;max-width:330px}[data-lang="zh"] .handheld-intro h2{font-size:32px}.handheld-intro h2 span{display:inline}.handheld-intro h2 span+span::before{content:' '}.handheld-intro p{font-size:12px;max-width:400px;margin-bottom:0}.handheld-player-tag{display:none}.handheld-console{width:calc(100% - 16px);max-width:354px;min-height:590px;padding-inline:18px;transform:rotate(-1.7deg);margin:5px 8px 14px}.handheld-console:focus-within{transform:rotate(0)}.handheld-top-rail{margin-inline:-18px;padding-inline:22px;height:31px;margin-bottom:15px}.handheld-bezel{padding:29px 14px 18px 31px;min-height:268px;border-bottom-right-radius:31px}.handheld-bezel-top{font-size:5px;top:10px;gap:5px}.handheld-power-light{left:10px;top:110px}.handheld-screen{height:230px;border-width:2px}.handheld-display{padding:8px}.hh-screen-title{font-size:17px}.hh-screen-meta{font-size:8px;padding-bottom:4px;margin-bottom:6px}.hh-menu-item{font-size:11px!important;min-height:23px;padding:3px 4px!important}.hh-screen-copy{font-size:11px}.handheld-brand{padding-top:13px;gap:5px}.handheld-brand strong{font-size:19px}.handheld-brand span{font-size:7px}.handheld-controls{height:135px;padding-inline:0}.handheld-dpad{width:110px;height:110px;padding:7px}.handheld-ab{gap:11px;padding:7px;margin-right:1px}.handheld-ab-key button{width:44px;height:44px}.handheld-ab-key span{top:54px;left:17px;font-size:10px}.handheld-bottom{height:73px}.handheld-system-controls{left:60px;top:2px;gap:16px}.handheld-system-key button{width:33px;height:10px}.handheld-speaker{right:7px;gap:6px}.handheld-speaker i{height:49px;width:5px}.handheld-speaker i:first-child,.handheld-speaker i:last-child{height:42px}.handheld-shell-label{font-size:5px;bottom:14px}.handheld-screw{display:none}.handheld-guide{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:15px 20px}.handheld-guide-item{margin:0}.handheld-guide-item:nth-of-type(4){display:none}.handheld-guide-item strong{font-size:11px}.handheld-guide-item p{font-size:10px}.handheld-sound{grid-column:1/-1;width:auto;justify-self:start;padding:9px 0;max-width:none;margin-top:1px}.handheld-stage-footer{font-size:8px;gap:18px}.handheld-stage-footer>span{max-width:210px}.hh-title-logo{font-size:28px}.hh-title-screen p{font-size:8px}}
-@media(max-width:380px){.btn-stack{white-space:normal;min-width:0;max-width:100%;text-align:center;padding-inline:16px}#playground{padding-inline:8px}.handheld-stage{padding-inline:12px}.handheld-console{width:calc(100% - 10px);margin-inline:5px;padding-inline:14px;min-height:567px}.handheld-top-rail{margin-inline:-14px}.handheld-screen{height:228px}.handheld-bezel{padding-left:27px;padding-right:11px}.handheld-bezel-top{font-size:4.4px;gap:4px}.handheld-power-light{left:7px;font-size:4px}.handheld-ab{gap:9px;padding:6px}.handheld-ab-key button{width:40px;height:40px}.handheld-ab-key span{top:48px;left:15px}.handheld-dpad{width:99px;height:99px}.handheld-system-controls{left:49px}.handheld-controls{height:128px}.handheld-brand span{font-size:6px}.hh-menu-item{font-size:10px!important}.hh-screen-copy{font-size:10px;line-height:1.65}.hh-screen-title{font-size:16px}.handheld-guide-keys kbd{min-width:20px}.handheld-stage-footer{gap:10px}}
+@media(max-width:940px){#playground{padding-inline:24px}.handheld-layout{grid-template-columns:1fr 370px;gap:30px;padding-top:42px;align-items:center}.handheld-console{grid-column:2;grid-row:1/3;width:370px;min-height:625px}.handheld-intro{grid-column:1;grid-row:1}.handheld-guide{grid-column:1;grid-row:2}.handheld-intro p{max-width:250px;margin-bottom:18px}.handheld-player-tag{padding-top:16px}.handheld-guide-title{display:none}.handheld-guide-item{margin-bottom:16px}.handheld-guide-item p{margin-bottom:5px}.handheld-sound{max-width:200px}}
+@media(max-width:680px){#playground{padding:45px 16px 55px}.handheld-stage{padding:22px 18px 22px;border-radius:5px}.handheld-stage-header{padding-bottom:17px;font-size:9px}.handheld-layout{display:flex;flex-direction:column;gap:32px;padding:28px 0 26px}.handheld-intro{width:100%;text-align:left}.handheld-intro h2{font-size:38px;margin-bottom:14px;max-width:330px}[data-lang="zh"] .handheld-intro h2{font-size:32px}.handheld-intro h2 span{display:inline}.handheld-intro h2 span+span::before{content:' '}.handheld-intro p{font-size:12px;max-width:400px;margin-bottom:0}.handheld-player-tag{display:none}.handheld-console{width:calc(100% - 16px);max-width:354px;min-height:590px;padding-inline:18px;transform:rotate(-1.7deg);margin:5px 8px 14px}.handheld-console:focus-within{transform:rotate(0)}.handheld-top-rail{margin-inline:-18px;padding-inline:22px;height:31px;margin-bottom:15px}.handheld-bezel{padding:29px 14px 18px 31px;min-height:268px;border-bottom-right-radius:31px}.handheld-bezel-top{font-size:5px;top:10px;gap:5px}.handheld-power-light{left:10px;top:110px}.handheld-screen{height:230px;border-width:2px}.handheld-display{padding:8px}.hh-screen-title{font-size:17px}.hh-screen-meta{font-size:8px;padding-bottom:4px;margin-bottom:6px}.hh-menu-item{font-size:11px!important;min-height:23px;padding:3px 4px!important}.hh-screen-copy{font-size:11px}.handheld-brand{padding-top:13px;gap:5px}.handheld-brand strong{font-size:19px}.handheld-brand span{font-size:7px}.handheld-controls{height:135px;padding-inline:0}.handheld-dpad{width:110px;height:110px;padding:7px}.handheld-ab{gap:11px;padding:7px;margin-right:1px}.handheld-ab-key button{width:44px;height:44px}.handheld-ab-key span{top:54px;left:17px;font-size:10px}.handheld-bottom{height:73px}.handheld-system-controls{left:60px;top:2px;gap:16px}.handheld-system-key button{width:33px;height:10px}.handheld-speaker{right:7px;gap:6px}.handheld-speaker i{height:49px;width:5px}.handheld-speaker i:first-child,.handheld-speaker i:last-child{height:42px}.handheld-shell-label{font-size:5px;bottom:14px}.handheld-screw{display:none}.handheld-guide{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:15px 20px}.handheld-guide-item{margin:0}.handheld-guide-item:nth-of-type(4){display:none}.handheld-guide-item strong{font-size:11px}.handheld-guide-item p{font-size:10px}.handheld-sound{grid-column:1/-1;width:auto;justify-self:start;padding:9px 0;max-width:none;margin-top:1px}.hh-title-logo{font-size:28px}.hh-title-screen p{font-size:8px}}
+@media(max-width:380px){.btn-stack{white-space:normal;min-width:0;max-width:100%;text-align:center;padding-inline:16px}#playground{padding-inline:8px}.handheld-stage{padding-inline:12px}.handheld-console{width:calc(100% - 10px);margin-inline:5px;padding-inline:14px;min-height:567px}.handheld-top-rail{margin-inline:-14px}.handheld-screen{height:228px}.handheld-bezel{padding-left:27px;padding-right:11px}.handheld-bezel-top{font-size:4.4px;gap:4px}.handheld-power-light{left:7px;font-size:4px}.handheld-ab{gap:9px;padding:6px}.handheld-ab-key button{width:40px;height:40px}.handheld-ab-key span{top:48px;left:15px}.handheld-dpad{width:99px;height:99px}.handheld-system-controls{left:49px}.handheld-controls{height:128px}.handheld-brand span{font-size:6px}.hh-menu-item{font-size:10px!important}.hh-screen-copy{font-size:10px;line-height:1.65}.hh-screen-title{font-size:16px}.handheld-guide-keys kbd{min-width:20px}}
 @media(prefers-reduced-motion:reduce){.handheld-console,.handheld-power::after,.hh-boot-bar::after{transition:none!important;animation:none!important}.handheld-console,.handheld-console:focus-within{transform:none}}
 
 
@@ -1036,7 +1026,7 @@ footer span { color: var(--accent); }
 @media(max-width:680px){[data-lang="zh"] .handheld-intro h2 span{display:block}[data-lang="zh"] .handheld-intro h2 span+span::before{content:none}.hh-menu-item{font-size:12px!important;min-height:27px}.handheld-screen .hh-menu{gap:1px}}
 @media(max-width:380px){.handheld-screen{height:250px}.hh-links{flex-wrap:nowrap;gap:4px}.hh-links .hh-link{font-size:9px!important;white-space:nowrap;margin-right:0;padding-inline:4px}}
 
-.handheld-stage-header > [data-i18n="game_edition"]{margin-left:auto}
+
 .handheld-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0;min-height:40px;padding:8px 12px;border:1px solid var(--hh-rule);border-radius:5px;background:transparent;color:var(--hh-ink);font:11px 'JetBrains Mono','PingFang SC',monospace;cursor:pointer}
 .handheld-toggle[hidden],#handheld-content[hidden]{display:none}
 .handheld-toggle:hover{background:#8e997a18}
@@ -1047,7 +1037,7 @@ footer span { color: var(--accent); }
 .handheld-stage[data-collapsed="true"] .handheld-stage-header{padding-bottom:0;border-bottom-color:transparent}
 #playground{overflow-anchor:none}
 @media(prefers-reduced-motion:reduce){.handheld-stage-header,.handheld-toggle svg{transition:none}}
-@media(max-width:680px){.handheld-stage-header > [data-i18n="game_edition"]{display:none}.handheld-toggle{font-size:10px;padding-inline:9px}}
+@media(max-width:680px){.handheld-toggle{font-size:10px;padding-inline:9px}}
 
 /* Pocket System: one material language across the personal homepage. */
 .pocket-homepage {
@@ -1085,8 +1075,7 @@ footer span { color: var(--accent); }
 .pocket-homepage .nav-links{gap:22px}
 .pocket-homepage .nav-links a{font-size:11px;letter-spacing:0;text-transform:none;font-weight:600}
 .pocket-homepage .nav-controls{gap:10px}
-.pocket-homepage .nav-v2,.pocket-homepage .btn-icon{border-radius:5px;background:var(--bg2);border-color:var(--border);box-shadow:0 2px 0 var(--shell-edge);font-size:11px}
-.pocket-homepage .nav-v2{padding:7px 10px}
+.pocket-homepage .btn-icon{border-radius:5px;background:var(--bg2);border-color:var(--border);box-shadow:0 2px 0 var(--shell-edge);font-size:11px}
 .pocket-homepage .lang-toggle{border:1px solid var(--border);border-radius:6px;background:var(--bg3);padding:3px;box-shadow:inset 0 1px 3px #26322318}
 .pocket-homepage .lang-btn{border-radius:3px;font-size:10px;padding:4px 8px;color:var(--fg2)}
 .pocket-homepage .lang-btn.active{background:var(--accent);color:var(--bg2);box-shadow:0 1px 2px #0003}
@@ -1112,7 +1101,7 @@ footer span { color: var(--accent); }
 .pocket-homepage .hero-case-rail{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--border);font:9px var(--pixel);letter-spacing:.02em;color:var(--fg3)}
 .pocket-homepage .hero-case-rail>span:first-child{display:flex;align-items:center;gap:9px}
 .pocket-homepage .hero-case-rail i{width:6px;height:6px;border-radius:50%;background:#913856;box-shadow:inset 1px 1px 1px #ffb8d8;flex-shrink:0}
-.pocket-homepage .hero-case-rail>span:last-child{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0}
+
 .pocket-homepage .hero-text{min-width:0}
 .pocket-homepage .hero-tag{padding:0;border:0;border-radius:0;font:11px var(--pixel);letter-spacing:0;text-transform:none;margin:0 0 20px;color:var(--accent)}
 .pocket-homepage .hero-name{font-family:var(--pixel);font-size:clamp(60px,7.2vw,100px);font-weight:400;line-height:.98;letter-spacing:-5px;margin:0 0 25px;color:var(--fg)}
@@ -1172,14 +1161,13 @@ footer span { color: var(--accent); }
   .pocket-homepage nav{height:66px;padding-inline:18px;gap:12px}
   .pocket-homepage .nav-logo{font-size:12px;gap:8px}
   .pocket-homepage .nav-controls{gap:7px}
-  .pocket-homepage .nav-v2{font-size:10px;padding:6px 8px}
   .pocket-homepage .btn-icon{width:30px;height:30px}
   .pocket-homepage .lang-btn{padding:4px 6px}
   .pocket-homepage section{padding:55px 24px;scroll-margin-top:86px}
   .pocket-homepage #hero{padding:96px 20px 23px}
   .pocket-homepage .hero-content{grid-template-columns:1fr;gap:28px;padding:24px 26px 40px;border-radius:18px 18px 42px 18px;text-align:left}
   .pocket-homepage .hero-case-rail{grid-column:1;padding-bottom:18px;font-size:8px;gap:10px}
-  .pocket-homepage .hero-case-rail>span:last-child{font-size:7px}
+
   .pocket-homepage .hero-name{font-size:76px;letter-spacing:-4px;line-height:.98;margin-bottom:22px}
   .pocket-homepage .hero-tag{margin-bottom:16px}
   .pocket-homepage .hero-desc{font-size:14px;line-height:1.8}
@@ -1202,7 +1190,7 @@ footer span { color: var(--accent); }
   .pocket-homepage .hero-desc{font-size:13px}
   .pocket-homepage .hero-typing{font-size:10px;margin-bottom:19px}
   .pocket-homepage .hero-case-rail{font-size:7px}
-  .pocket-homepage .hero-case-rail>span:last-child{max-width:70px;line-height:1.6;text-align:right}
+
   .pocket-homepage .hero-avatar{max-width:250px;margin-block:10px}
   .pocket-homepage .avatar-wrap img{height:215px}
   .pocket-homepage #playground{padding-inline:13px}
@@ -1215,7 +1203,6 @@ footer span { color: var(--accent); }
   .pocket-homepage .pocket-brand-icon{grid-template-columns:repeat(2,4px)}
   .pocket-homepage .pocket-brand-icon i{width:4px;height:4px}
   .pocket-homepage .nav-controls{gap:6px}
-  .pocket-homepage .nav-v2{padding:5px 6px;font-size:9px}
   .pocket-homepage .hero-name{font-size:54px;letter-spacing:-3px}
   .pocket-homepage .hero-content{padding-inline:17px}
   .pocket-homepage .hero-actions>a,.pocket-homepage .hero-actions>button{padding-inline:4px;font-size:9px}
@@ -1454,7 +1441,6 @@ footer span { color: var(--accent); }
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
   <div class="nav-controls">
-    <a class="nav-v2" href="/v2/" data-i18n="btn_v2">Cinematic</a>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('zh')">中</button>
@@ -1467,7 +1453,7 @@ footer span { color: var(--accent); }
 <section id="hero">
   <canvas id="particles"></canvas>
   <div class="hero-content">
-    <div class="hero-case-rail"><span><i aria-hidden="true"></i> TEEMO PERSONAL SYSTEM</span><span data-i18n="pocket_edition">A little world to explore.</span></div>
+    <div class="hero-case-rail"><span><i aria-hidden="true"></i> TEEMO PERSONAL SYSTEM</span></div>
     <div class="hero-text">
       <div class="hero-tag" data-i18n="hero_tag">Strategy · Product · AI</div>
       <h1 class="hero-name">Teemo<br><span>Weng.</span></h1>
@@ -1504,7 +1490,6 @@ footer span { color: var(--accent); }
   <div class="handheld-stage">
     <div class="handheld-stage-header">
       <strong><span class="handheld-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span> TEEMO / PLAY</strong>
-      <span data-i18n="game_edition">A little world, ready to play.</span>
       <button id="handheld-toggle" class="handheld-toggle" type="button" aria-expanded="true" aria-controls="handheld-content" hidden><span data-i18n="game_collapse">Collapse</span><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
     </div>
     <div id="handheld-content">
@@ -1513,7 +1498,6 @@ footer span { color: var(--accent); }
         <h2 data-i18n="game_heading"><span>Press start.</span><span>Meet Teemo.</span></h2>
         <p data-i18n="game_intro">A few projects, a little curiosity, and a pocket-sized way to get to know me. Go on. Press a button.</p>
         <div class="handheld-player-tag"><span class="handheld-player-symbol" aria-hidden="true">T</span><div><strong>Teemo Weng</strong><small data-i18n="game_player_role">Product · AI · Strategy</small></div></div>
-        <span class="handheld-pencil-note" data-i18n="game_margin_note">Made for the curious. ↗</span>
       </div>
       <div id="handheld-console" class="handheld-console" tabindex="0" role="group" data-powered="true" data-palette="green" data-i18n-aria-label="game_console_label" aria-label="Teemo interactive handheld. Use direction keys and A or B while focused.">
         <div class="handheld-top-rail"><span>OFF · ON</span><button id="handheld-power" class="handheld-power" type="button" aria-pressed="true" aria-label="Power" data-i18n-aria-label="game_power_label"></button><small>TW—01</small></div>
@@ -1540,10 +1524,8 @@ footer span { color: var(--accent); }
         <div class="handheld-guide-item"><strong data-i18n="game_action_title">Follow your curiosity</strong><p data-i18n="game_action_desc">A to select. B to go back.</p><div class="handheld-guide-keys" aria-hidden="true"><kbd>A</kbd><span>/</span><kbd>Enter</kbd><kbd>B</kbd><span>/</span><kbd>Esc</kbd></div></div>
         <div class="handheld-guide-item"><strong data-i18n="game_home_title">Make yourself at home</strong><p data-i18n="game_home_desc">START returns home. SELECT changes the screen color.</p></div>
         <button type="button" id="handheld-sound" class="handheld-sound" aria-pressed="false" aria-label="Enable sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 5 5 9H2v6h3l5 4V5Z"/><path class="hh-sound-wave" d="M14 8q4 4 0 8m3-11q7 7 0 14"/><path class="hh-sound-mute" d="m15 9 6 6m0-6-6 6"/></svg><span data-i18n="game_sound_off">Sound off · turn on</span></button>
-        <p class="handheld-guide-note" data-i18n="game_quest_note">Psst… there’s a little side quest inside.</p>
       </aside>
     </div>
-    <div class="handheld-stage-footer"><span data-i18n="game_footer">Real projects. A playful way in.</span><a href="#projects" data-i18n="game_skip">Browse the projects below ↗</a></div>
     </div>
     <div id="handheld-announcement" class="handheld-sr-only" aria-live="polite" aria-atomic="true"></div>
     <noscript><p class="handheld-nojs">掌机需要 JavaScript。你仍可在下方浏览完整项目。 / Enable JavaScript to play, or browse all projects below.</p><style>.handheld-nojs{display:block;padding-top:15px;font-size:12px}.project-card,.news-item,.tl-item,.edu-card,.skill-group,.reveal{opacity:1;transform:none}.handheld-console button,.handheld-sound{pointer-events:none}.handheld-nojs a{color:inherit}</style></noscript>
@@ -1925,7 +1907,7 @@ footer span { color: var(--accent); }
 </section>
 
 <footer>
-  <strong>TEEMO / PLAY</strong><span data-i18n="pocket_footer">Made for a little curiosity. © Teemo Weng 2026</span>
+  <strong>TEEMO / PLAY</strong><span data-i18n="pocket_footer">© Teemo Weng 2026</span>
 </footer>
 
 <!-- GITHUB MODAL -->
@@ -1978,18 +1960,16 @@ const i18n = {
   en: {
     pocket_theme_label: "Switch light or dark theme",
     pocket_name_placeholder: "Your name", pocket_email_placeholder: "your@email.com", pocket_message_placeholder: "Hello Teemo, I’d like to connect...",
-    pocket_edition: "A little world to explore.", pocket_profile: "Player profile",
+    pocket_profile: "Player profile",
     pocket_news_heading: "What’s new", pocket_experience_heading: "Experience",
     pocket_education_heading: "Education", pocket_skills_heading: "Skills & tools", pocket_contact_heading: "Let’s talk",
-    pocket_footer: "Made for a little curiosity. © Teemo Weng 2026",
+    pocket_footer: "© Teemo Weng 2026",
     game_hero_link: "▶ Play a little",
     btn_resume_short: "↓ Resume", btn_contact_short: "Contact", game_hero_short: "▶ Play",
     game_collapse: "Collapse", game_expand: "Expand",
-    game_edition: "A little world, ready to play.",
     game_heading: "<span>Press start.</span><span>Meet Teemo.</span>",
     game_intro: "A few projects, a little curiosity, and a pocket-sized way to get to know me. Go on. Press a button.",
     game_player_role: "Product · AI · Strategy",
-    game_margin_note: "Made for the curious. ↗",
     game_console_label: "Teemo interactive handheld. Use direction keys and A or B while focused.",
     game_power_label: "Power",
     game_title_sub: "A pocket-sized introduction.",
@@ -2010,14 +1990,11 @@ const i18n = {
     game_home_title: "Make yourself at home",
     game_home_desc: "START returns home. SELECT changes the screen color.",
     game_sound_off: "Sound off · turn on",
-    game_quest_note: "Psst… there’s a little side quest inside.",
-    game_footer: "Real projects. A playful way in.",
-    game_skip: "Browse the projects below ↗",
     nav_capabilities: 'Capabilities', nav_news: 'News', nav_projects: 'Projects', nav_experience: 'Experience',
     nav_research: 'Research', nav_education: 'Education', nav_contact: 'Contact',
     hero_tag: 'Strategy · Product · AI',
     hero_desc: 'MSc student at Imperial College London, currently an AI Product Intern at Alibaba (space-leasing product line). Experienced in strategy consulting (BCG), internet product (Beike, POIZON), and startup building. Seeking product & strategy roles in China.',
-    btn_resume: '↓ Download Resume', btn_contact: 'Get in Touch', btn_v2: 'Cinematic',
+    btn_resume: '↓ Download Resume', btn_contact: 'Get in Touch',
     avatar_badge: '@ Imperial College', scroll_hint: 'scroll',
     section_capabilities: 'FDE capability map',
     capabilities_heading: 'From ambiguity to <span>adoption</span>',
@@ -2112,18 +2089,16 @@ const i18n = {
   zh: {
     pocket_theme_label: "切换浅色或深色外观",
     pocket_name_placeholder: "怎么称呼你", pocket_email_placeholder: "你的邮箱地址", pocket_message_placeholder: "你好 Teemo，我想聊聊……",
-    pocket_edition: "留一点好奇心。", pocket_profile: "玩家档案",
+    pocket_profile: "玩家档案",
     pocket_news_heading: "最近在做什么", pocket_experience_heading: "一路走来的经历",
     pocket_education_heading: "教育经历", pocket_skills_heading: "我的工具箱", pocket_contact_heading: "聊点有意思的",
-    pocket_footer: "留一点好奇心。© 翁呈轩 Teemo Weng 2026",
+    pocket_footer: "© 翁呈轩 Teemo Weng 2026",
     game_hero_link: "▶ 玩一下掌机",
     btn_resume_short: "↓ 简历", btn_contact_short: "联系我", game_hero_short: "▶ 掌机",
     game_collapse: "收起掌机", game_expand: "展开掌机",
-    game_edition: "我的小世界，随时开机。",
     game_heading: "<span>按下开始，</span><span>认识一下我。</span>",
     game_intro: "几个项目，一点好奇心，装进一台小掌机。用方向键逛逛我的作品，也可以去收集一点灵感。",
     game_player_role: "产品 · AI · 策略",
-    game_margin_note: "给好奇的人，一个小入口。↗",
     game_console_label: "Teemo 互动掌机。聚焦后使用方向键和 A、B 操作。",
     game_power_label: "电源开关",
     game_title_sub: "装进口袋的自我介绍。",
@@ -2144,14 +2119,11 @@ const i18n = {
     game_home_title: "随时回到起点",
     game_home_desc: "START 回主菜单，SELECT 换个屏幕颜色。",
     game_sound_off: "音效已关 · 点击开启",
-    game_quest_note: "里面还藏了一个小彩蛋。",
-    game_footer: "真实的作品，换一种好玩的打开方式。",
-    game_skip: "直接浏览下方项目 ↗",
     nav_capabilities: '能力图谱', nav_news: '动态', nav_projects: '项目', nav_experience: '经历',
     nav_research: '论文成果', nav_education: '教育', nav_contact: '联系',
     hero_tag: '战略 · 产品 · AI',
     hero_desc: '帝国理工学院经济与战略硕士在读，现于阿里巴巴担任 AI 产品实习生（空间租赁产品线）。拥有战略咨询（BCG）、互联网产品（贝壳、得物）及初创公司（Hinbor）经验。正积极寻求中国互联网、咨询或消费品产品/战略岗位。',
-    btn_resume: '↓ 下载简历', btn_contact: '联系我', btn_v2: '动效版',
+    btn_resume: '↓ 下载简历', btn_contact: '联系我',
     avatar_badge: '@ 帝国理工', scroll_hint: '向下滚动',
     section_capabilities: 'FDE 能力图谱',
     capabilities_heading: '从模糊问题到<span>真正采用</span>',

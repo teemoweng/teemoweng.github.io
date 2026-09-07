@@ -15,21 +15,21 @@ Push to the `main` branch — GitHub Pages serves it automatically at `teemoweng
 
 ## Architecture
 
-**Two versions coexist (2026-07-08 restructure, Teemo's call: the classic layout reads better as a job-hunting homepage):**
+**Pocket System is the approved main homepage direction (2026-09-07, Teemo's decision).** Earlier versions remain as historical pages.
 
 | Path | What | Status |
 |------|------|--------|
-| `index.html` (root) | **Classic portfolio** (single-page sections: hero/news/projects/experience/education/skills/contact, dark warm theme, particles + typing effect) | **Main entry — maintain this one** |
-| `v2/index.html` | **Cinematic scroll narrative** (8-scene GSAP redesign) | Linked from root hero button "✨ Cinematic version"; keep content in sync when experience changes |
+| `index.html` (root) | **Pocket System portfolio** (single-page sections, retro handheld materials, playable handheld, capability map, full-color portrait, light/dark themes) | **Main entry — maintain this one** |
+| `v2/index.html` | **Historical cinematic scroll narrative** (8-scene GSAP redesign) | Retain files and assets; no homepage entrance and no content-sync requirement |
 | `v1/index.html` | Frozen pre-redesign archive (self-contained with own `uploads/`) | **Do not modify or delete** |
 
-Cross-links: root hero has a `btn_v2` button → `/v2/`; v2's finale credits link back to `/` ("classic version"). `v2/index.html` references root assets by absolute path (`/uploads/...`) — keep it that way.
+Homepage navigation must not offer a “Cinematic version / 动效版” entrance to `/v2/`. The historical v2 finale credits still link back to `/` with their original "classic version" wording. `v2/index.html` references root assets by absolute path (`/uploads/...`) — preserve these files and references. The earlier handheld review preview at `https://teemo-pocket-review.vercel.app/` remains available.
 
 Each version lives in a single HTML file with all CSS and JavaScript inlined. **Do not split into separate files.** There is no build step, no package manager, no bundler.
 
-Content update checklist (new job/news/resume): update root `index.html` (news + timeline + projects + hero_desc + i18n en/zh) **and** `v2/index.html` (record ledger + news + product chapter + i18n en/zh); resume PDFs live at `uploads/resume-cw-{zh,en}-YYYYMM.pdf`, and both `downloadResume()` functions serve zh/en by `currentLang`.
+Content update checklist (new job/news/resume): update root `index.html` (news + timeline + projects + hero_desc + i18n en/zh). There is no ongoing requirement to update `v2/index.html`. Resume PDFs live at `uploads/resume-cw-{zh,en}-YYYYMM.pdf`; the root `downloadResume()` serves zh/en by `currentLang`. Preserve historical PDFs referenced by archived versions.
 
-The v2 site is an **8-scene cinematic scroll narrative** (2026-06 redesign, spec in `docs/superpowers/specs/2026-06-10-cinematic-redesign-design.md`):
+The following v2 implementation notes describe the retained historical page, not the active homepage or a requirement to keep v2 updated. The v2 site is an **8-scene cinematic scroll narrative** (2026-06 redesign, spec in `docs/superpowers/specs/2026-06-10-cinematic-redesign-design.md`):
 
 1. `#s1` Opening (giant name on peach sky) → 2. `#s2` Statement (word-by-word lighting, pinned) → 3-5. `.chapter` ×3 Strategy/Product/Founder (pinned horizontal card strips) → 6. `#why` Why-me (dark warm typography scene, checklist lighting) → 7. `#record` ledger (experience/education/toolkit/news rows) → 8. `#s8` Finale (Let's talk + avatar sticker + giant name footer).
 
@@ -40,7 +40,7 @@ The v2 site is an **8-scene cinematic scroll narrative** (2026-06 redesign, spec
 
 Static assets (images, resume PDF) go in `uploads/`. The finale avatar sticker is `uploads/avatar-sticker.png` (background-removed cutout; regenerate via `npx hyperframes remove-background`).
 
-**The root classic site** shares the same i18n pattern (`data-i18n` + `i18n.en`/`i18n.zh` object) but has its own additional conventions: `--accent` oklch tokens, dark/light theme toggle (`data-theme`), `.reveal` scroll animations, particles canvas, and a typing-roles effect.
+**The root Pocket System site** uses the same i18n pattern (`data-i18n` + `i18n.en`/`i18n.zh` object), with `.pocket-homepage` material/color tokens, a dark/light theme toggle (`data-theme`, stored under `tw-pocket-theme`), and a typing-roles effect that becomes static with reduced motion. The background particles are disabled. The portrait retains its original colors inside the handheld frame; the capability map retains its central FDE label and independent flips without decorative edge circles.
 
 ## i18n
 
@@ -54,13 +54,15 @@ Parity check (run in the browser console): keys of `i18n.en` and `i18n.zh` must 
 
 ## Key Conventions
 
-- **v2 palette** is peach/cream design tokens in `:root`: `--cream`, `--sky-1/2`, `--peach`, `--peach-deep` (accent), `--ink` scale, `--dusk` scale. Single theme in v2 — no dark/light toggle there by design (root classic site does have the toggle).
-- **Fonts**: Hanken Grotesk (display + body) and JetBrains Mono (kicker labels) from Google Fonts; Chinese falls back to system fonts.
-- The GitHub modal fetches repos live from the GitHub API; no mock data needed. It pauses Lenis while open.
-- All contact actions are `mailto:` / direct links — there is no backend or form.
+- **Root palette** uses gray-green/cream shell materials, green LCD surfaces and purple-red controls, with corresponding dark-theme tokens. The historical **v2 palette** retains its peach/cream tokens and single-theme behavior.
+- **Root fonts**: self-hosted Silkscreen for the name, brand and selected short labels; readable system Chinese/English fonts for body text. Historical v2 uses Hanken Grotesk and JetBrains Mono from Google Fonts.
+- The GitHub modal fetches repos live from the GitHub API; no mock data needed. The root modal pauses the handheld while open; historical v2 pauses Lenis.
+- Contact actions use `mailto:` / direct links. The root contact form opens a mail draft; there is no submission backend.
 
 ---
 
+*Schema 版本：v1.3 — 2026-09-07*
+*v1.3 变更：用户批准 Pocket System 作为正式主页并合入 main，合并与线上验证待执行；移除主页动效版入口要求，v2 保留为历史页面且不再要求内容同步；保留 v1/v2 历史资源及原掌机预览。更新根页面的主题、字体、原色照片、能力卡与联系表单约定，历史 v2 实现说明继续保留。*
 *Schema 版本：v1.2 — 2026-07-08*
 *v1.2 变更：站点重构为「经典版为主入口」双版本结构（Teemo 拍板：经典版更像求职个人主页）。root = 经典版（从 v1 复刻并更新：阿里实习进 hero/news/timeline/projects、双语简历 PDF 下载、✨动效版跳转按钮）；/v2/ = 电影式滚动叙事版（资产改用绝对路径 /uploads/，credits 回链经典版）；/v1/ = 冻结档案不动。新增「内容更新 checklist」：经历变动要同时改 root 和 v2 两处 + i18n 双语。*
 *Schema 版本：v1.1 — 2026-06-10*

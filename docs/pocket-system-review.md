@@ -1,10 +1,10 @@
-# Pocket System — 整站掌机风格审阅版
+# Pocket System — 整站掌机风格（已批准合并）
 
-从已认可的掌机模块版 `567d842` 新建独立分支 `codex/pocket-system-homepage-20260907`。此前掌机版的分支、PR 和预览继续保留，本版作为另一条视觉方向供比较。
+从已认可的掌机模块版 `567d842` 新建独立分支 `codex/pocket-system-homepage-20260907`。2026-09-07，用户已批准采用本版作为正式主页并合入 `main`。合并状态以 [PR #3](https://github.com/teemoweng/teemoweng.github.io/pull/3) 为准，正式地址为 https://teemoweng.github.io/ 。此前掌机版的分支、PR 和预览继续保留。
 
-新预览：https://teemo-pocket-system-review.vercel.app/?lang=zh
+Pocket System 预览：https://teemo-pocket-system-review.vercel.app/?lang=zh
 
-已认可版本：https://teemo-pocket-review.vercel.app/?lang=zh
+保留的原掌机预览：https://teemo-pocket-review.vercel.app/?lang=zh
 
 ## 设计方向
 
@@ -22,13 +22,13 @@
 
 掌机的位置、展开/收起、保留游戏进度、方向键与 A/B 控制、音效开关、屏幕配色和迷宫均继承已认可版本。能力卡仍各自独立翻转；四个项目的介绍、演示和源码链接、论文、履历、简历下载与联系方式保持原有内容。补齐部分原先未翻译的栏目标题、联系输入提示及标签关联。
 
-根目录仍为单个 `index.html`，CSS/JS 内联，无构建或新运行时依赖；字体沿用现有本地资源及许可证。`v1/` 和 `v2/` 不修改。
+根目录仍为单个 `index.html`，CSS/JS 内联，无构建或新运行时依赖；字体沿用现有本地资源及许可证。用户同时要求移除主页的“动效版”入口。`v1/`、`v2/` 及其历史资源继续保留；`v2/` 作为历史页面，不再提供主页入口，也不再要求随正式主页同步更新内容。
 
 ## 验收范围
 
 沿用 `tests/test_handheld.mjs`、`tests/test_capability_map.mjs` 和 Python 内容测试。视觉检查覆盖浅色/深色、中英双语、桌面/平板/手机；重点检查 320/390/900/1440px 的页面溢出、四按钮同排、标题与焦点可见性，以及屏幕内容裁切。
 
-独立 Vercel 审阅项目为 `teemo-pocket-system-review`。不改原审阅项目或 GitHub Pages，不合并到 main。
+独立 Vercel 预览项目为 `teemo-pocket-system-review`，原掌机预览保持不动。本轮已获授权将 Pocket System 合入 `main` 并更新 GitHub Pages 正式主页；合并与部署结果在 PR 及 GitHub Pages 发布记录中核验。
 
 
 ## 验证结果（2026-09-07）
@@ -45,3 +45,8 @@
 
 
 能力卡清晰度修订：删除原拼图凸口装饰，移除 hover、键盘聚焦和翻面状态下覆盖整卡的柔化阴影，保留硬边底座阴影与翻面动效。能力图谱 7 组交互回归通过；320/390/600/900/1440px 中英双语、深浅色下，背面文字与页面均无溢出。桌面翻面前后及手机英文截图已更新。
+
+
+## 发布前收尾
+
+移除主页“动效版”入口及对应样式、双语键。按用户六张截图的精确范围，删除首屏与页脚的好奇心短句、掌机顶栏标语、左侧手写短句、右侧彩蛋提示，以及掌机底栏左右两处文字；英文对应内容同步移除，页脚版权信息保留。

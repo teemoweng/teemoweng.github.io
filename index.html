@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-lang="en">
+<html lang="en" data-theme="light" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="https://teemoweng.github.io/og-cover.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23231c15'/><text x='16' y='25' font-family='Georgia,serif' font-size='23' font-style='italic' font-weight='700' fill='%23c8793a' text-anchor='middle'>t</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20x%3D%223%22%20y%3D%221%22%20width%3D%2226%22%20height%3D%2230%22%20rx%3D%225%22%20fill%3D%22%23eeeee4%22%2F%3E%3Crect%20x%3D%227%22%20y%3D%226%22%20width%3D%2218%22%20height%3D%2213%22%20rx%3D%221%22%20fill%3D%22%23293d2b%22%2F%3E%3Crect%20x%3D%229%22%20y%3D%228%22%20width%3D%2214%22%20height%3D%229%22%20fill%3D%22%23b8c78c%22%2F%3E%3Cpath%20d%3D%22M10%2021h3v3h3v3h-3v3h-3v-3H7v-3h3z%22%20fill%3D%22%23293d2b%22%2F%3E%3Ccircle%20cx%3D%2223%22%20cy%3D%2223%22%20r%3D%222%22%20fill%3D%22%2380345c%22%2F%3E%3Ccircle%20cx%3D%2219%22%20cy%3D%2227%22%20r%3D%222%22%20fill%3D%22%2380345c%22%2F%3E%3C%2Fsvg%3E">
 
 <style>
 :root {
@@ -1048,14 +1048,397 @@ footer span { color: var(--accent); }
 #playground{overflow-anchor:none}
 @media(prefers-reduced-motion:reduce){.handheld-stage-header,.handheld-toggle svg{transition:none}}
 @media(max-width:680px){.handheld-stage-header > [data-i18n="game_edition"]{display:none}.handheld-toggle{font-size:10px;padding-inline:9px}}
+
+/* Pocket System: one material language across the personal homepage. */
+.pocket-homepage {
+  --bg:#e6e7df; --bg2:#f2f1e8; --bg3:#d7dacb;
+  --fg:#27352c; --fg2:#536051; --fg3:#697363;
+  --accent:#80345c; --accent2:#692448; --border:#bcc3b2;
+  --card:#f2f1e8; --card-hover:#f7f7ef; --shell:#eeeee4; --shell-edge:#b5bbaa;
+  --lcd:#b8c78c; --lcd-ink:#293d2b; --pixel:'Handheld Pixel',monospace;
+  --shadow:0 4px 0 #b5bbaa,0 13px 28px #293d2b0e; --radius:14px;
+  font-family:'Helvetica Neue',Helvetica,'PingFang SC','Microsoft YaHei',sans-serif;
+  background-color:var(--bg);
+  background-image:radial-gradient(#64715718 .6px,transparent .8px);
+  background-size:6px 6px;
+  color:var(--fg);
+}
+[data-theme="dark"] .pocket-homepage {
+  --bg:#202820; --bg2:#30392f; --bg3:#3c4838;
+  --fg:#e9ecdf; --fg2:#bac4b2; --fg3:#a1ad98;
+  --accent:#d591b0; --accent2:#edacc9; --border:#59664e;
+  --card:#30392f; --card-hover:#364130; --shell:#364034; --shell-edge:#172015;
+  --lcd:#b8c78c; --lcd-ink:#293d2b;
+  --shadow:0 4px 0 #172015,0 13px 28px #0002;
+}
+.pocket-homepage ::selection{background:var(--lcd);color:var(--lcd-ink)}
+.pocket-homepage :focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.pocket-homepage nav {
+  height:76px;padding:0 max(28px,calc((100vw - 1180px)/2));gap:24px;
+  background:color-mix(in srgb,var(--shell) 96%,transparent);
+  border-bottom:1px solid var(--shell-edge);box-shadow:0 3px 0 color-mix(in srgb,var(--shell-edge) 35%,transparent);
+  backdrop-filter:blur(12px);
+}
+.pocket-homepage .nav-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;color:var(--fg);text-decoration:none;font:15px var(--pixel);letter-spacing:-.6px}
+.pocket-homepage .pocket-brand-icon{display:grid;grid-template-columns:repeat(2,5px);gap:2px;transform:rotate(-8deg)}
+.pocket-homepage .pocket-brand-icon i{width:5px;height:5px;background:var(--accent)}
+.pocket-homepage .nav-links{gap:22px}
+.pocket-homepage .nav-links a{font-size:11px;letter-spacing:0;text-transform:none;font-weight:600}
+.pocket-homepage .nav-controls{gap:10px}
+.pocket-homepage .nav-v2,.pocket-homepage .btn-icon{border-radius:5px;background:var(--bg2);border-color:var(--border);box-shadow:0 2px 0 var(--shell-edge);font-size:11px}
+.pocket-homepage .nav-v2{padding:7px 10px}
+.pocket-homepage .lang-toggle{border:1px solid var(--border);border-radius:6px;background:var(--bg3);padding:3px;box-shadow:inset 0 1px 3px #26322318}
+.pocket-homepage .lang-btn{border-radius:3px;font-size:10px;padding:4px 8px;color:var(--fg2)}
+.pocket-homepage .lang-btn.active{background:var(--accent);color:var(--bg2);box-shadow:0 1px 2px #0003}
+.pocket-homepage section{max-width:1180px;padding:72px 38px;scroll-margin-top:96px}
+.pocket-homepage .section-label{font:10px var(--pixel);text-transform:none;letter-spacing:0;color:var(--fg3);margin-bottom:14px}
+.pocket-homepage .section-title{font-size:clamp(29px,3.1vw,40px);line-height:1.2;letter-spacing:-.035em;margin-bottom:40px;color:var(--fg)}
+.pocket-homepage .section-title span{color:inherit}
+.pocket-homepage .reveal{opacity:1;transform:none;transition:none}
+.pocket-homepage #hero{max-width:1240px;min-height:0;padding:122px 30px 32px;overflow:visible}
+.pocket-homepage #particles,.pocket-homepage .hero-scroll{display:none}
+.pocket-homepage .hero-content {
+  max-width:none;min-height:654px;padding:34px 48px 54px;gap:30px 54px;
+  grid-template-columns:minmax(0,1fr) 302px;grid-template-rows:auto 1fr;
+  text-align:left;align-items:center;background:var(--shell);border:1px solid var(--shell-edge);
+  border-radius:24px 24px 64px 24px;
+  box-shadow:inset 0 2px 0 #fff9,inset 2px 0 0 #fff6,4px 7px 0 var(--shell-edge),0 20px 30px #2e3a2510;
+}
+.pocket-homepage .hero-content::after {
+  content:'';position:absolute;bottom:23px;right:43px;width:95px;height:12px;
+  background:repeating-linear-gradient(90deg,var(--shell-edge) 0 4px,transparent 4px 10px);transform:skew(-24deg);
+  filter:drop-shadow(1px 1px 0 #fff6);
+}
+.pocket-homepage .hero-case-rail{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--border);font:9px var(--pixel);letter-spacing:.02em;color:var(--fg3)}
+.pocket-homepage .hero-case-rail>span:first-child{display:flex;align-items:center;gap:9px}
+.pocket-homepage .hero-case-rail i{width:6px;height:6px;border-radius:50%;background:#913856;box-shadow:inset 1px 1px 1px #ffb8d8;flex-shrink:0}
+.pocket-homepage .hero-case-rail>span:last-child{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0}
+.pocket-homepage .hero-text{min-width:0}
+.pocket-homepage .hero-tag{padding:0;border:0;border-radius:0;font:11px var(--pixel);letter-spacing:0;text-transform:none;margin:0 0 20px;color:var(--accent)}
+.pocket-homepage .hero-name{font-family:var(--pixel);font-size:clamp(60px,7.2vw,100px);font-weight:400;line-height:.98;letter-spacing:-5px;margin:0 0 25px;color:var(--fg)}
+.pocket-homepage .hero-name span{color:inherit}
+.pocket-homepage .hero-typing{display:table;width:230px;padding:8px 12px;margin:0 0 24px;min-height:34px;max-width:100%;background:var(--lcd);color:var(--lcd-ink);border:1px solid #8c9d72;border-radius:3px;box-shadow:inset 1px 2px 2px #31422b1a;font:12px/1.5 'JetBrains Mono','PingFang SC',monospace}
+.pocket-homepage .cursor{height:12px;background:var(--lcd-ink);animation:none;opacity:.5}
+.pocket-homepage .hero-desc{font-size:14px;line-height:1.85;max-width:560px;margin:0 0 28px;color:var(--fg2)}
+.pocket-homepage .hero-actions{justify-content:flex-start;gap:9px;flex-wrap:nowrap}
+.pocket-homepage .hero-actions>a,.pocket-homepage .hero-actions>button{min-height:44px;padding:10px 14px;font-size:12px;line-height:1.5;border-radius:6px;border:1px solid var(--border);box-shadow:0 3px 0 var(--shell-edge),inset 0 1px 0 #fff7;color:var(--fg);background:var(--bg2);transition:background .18s,box-shadow .18s,translate .18s}
+.pocket-homepage .hero-actions .btn-primary{background:var(--accent);color:var(--bg2);border-color:color-mix(in srgb,var(--accent) 80%,#000);box-shadow:0 3px 0 color-mix(in srgb,var(--accent) 70%,#000),inset 0 1px 0 #ffffff30}
+.pocket-homepage .hero-actions a[href="#playground"]{background:var(--lcd);color:var(--lcd-ink);border-color:#97a77c;box-shadow:0 3px 0 #84916d,inset 0 1px 0 #edf1cf}
+.pocket-homepage .hero-actions>a:hover,.pocket-homepage .hero-actions>button:hover{translate:0 -1px;transform:none}
+.pocket-homepage .hero-actions>a:active,.pocket-homepage .hero-actions>button:active{translate:0 2px;box-shadow:0 1px 0 var(--shell-edge);transform:none}
+.pocket-homepage .hero-avatar{order:initial;width:100%;min-width:0;align-self:center}
+.pocket-homepage .profile-bezel{width:100%;padding:18px 19px 22px;background:#626a60;border:2px solid #4f594e;border-radius:14px 14px 37px 14px;box-shadow:inset 0 2px 0 #ffffff4a,0 2px 0 #fff9,0 0 0 6px color-mix(in srgb,var(--shell-edge) 50%,transparent);transform:rotate(2deg)}
+.pocket-homepage .profile-caption{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 1px 13px;color:#eef0df;font:8px var(--pixel)}
+.pocket-homepage .profile-caption i{width:34px;height:3px;background:#80345c;box-shadow:0 3px 0 #adc198}
+.pocket-homepage .avatar-wrap{width:100%;height:auto;padding:5px;background:var(--lcd);border:2px solid #344632;box-shadow:inset 2px 2px 4px #17251570;border-radius:0;overflow:hidden}
+.pocket-homepage .avatar-wrap::before{inset:5px;z-index:1;pointer-events:none;border:0;border-radius:0;animation:none;opacity:.14;background:repeating-linear-gradient(0deg,#33422b 0 1px,transparent 1px 3px)}
+.pocket-homepage .avatar-wrap::after{display:none}
+.pocket-homepage .avatar-wrap img{display:block;width:100%;height:255px;border-radius:0;border:0;object-fit:cover;filter:grayscale(1);mix-blend-mode:multiply;opacity:.82}
+.pocket-homepage .avatar-badge{position:relative;bottom:auto;right:auto;z-index:2;background:transparent;color:var(--lcd-ink);border-radius:0;padding:11px 5px 6px;white-space:normal;font:10px 'JetBrains Mono','PingFang SC',monospace;text-align:center}
+.pocket-homepage .profile-grille{display:flex;align-items:center;gap:4px;margin-top:16px;color:#dee4cd}
+.pocket-homepage .profile-grille i{width:4px;height:4px;background:currentColor;opacity:.7}
+.pocket-homepage .profile-grille span{margin-left:auto;font:8px var(--pixel);letter-spacing:.03em}
+.pocket-homepage #playground{max-width:1240px;padding:28px 30px 50px;scroll-margin-top:96px}
+.pocket-homepage .handheld-stage{--hh-ink:var(--fg);--hh-muted:var(--fg2);--hh-rule:var(--border);background:var(--bg2);border:1px solid var(--shell-edge);border-radius:18px 18px 32px 18px;box-shadow:0 4px 0 var(--shell-edge),inset 0 2px 0 #ffffff60}
+.pocket-homepage .handheld-stage::before{opacity:.18}
+.pocket-homepage .handheld-stage-header{font-family:var(--pixel);font-size:10px}
+.pocket-homepage .handheld-stage-header strong{font-size:13px;letter-spacing:0}
+.pocket-homepage .handheld-intro h2{letter-spacing:-.04em}
+.pocket-homepage .handheld-toggle{background:var(--shell);border-color:var(--border);box-shadow:0 2px 0 var(--shell-edge),inset 0 1px 0 #fff6}
+.pocket-homepage footer{max-width:1104px;margin:20px auto 0;padding:30px 0 45px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:2px solid var(--border);color:var(--fg3);font-size:11px;text-transform:none;letter-spacing:0}
+.pocket-homepage footer strong{font:14px var(--pixel);color:var(--fg)}
+.pocket-homepage footer>span{color:var(--fg3)}
+@media(max-width:1190px){
+  .pocket-homepage nav{padding-inline:25px;gap:20px}
+  .pocket-homepage .nav-links{gap:14px}
+  .pocket-homepage .nav-logo{font-size:13px}
+  .pocket-homepage .hero-content{grid-template-columns:minmax(0,1fr) 280px;gap:25px 35px;padding-inline:34px}
+  .pocket-homepage .hero-actions>a,.pocket-homepage .hero-actions>button{padding-inline:10px;font-size:11px}
+  .pocket-homepage footer{margin-inline:38px}
+}
+@media(max-width:1040px){.pocket-homepage .nav-links{display:none}.pocket-homepage nav{gap:20px}}
+@media(max-width:960px){
+  .pocket-homepage .hero-content{grid-template-columns:minmax(0,1fr) 235px;gap:25px 30px;min-height:600px;padding:28px 30px 45px}
+  .pocket-homepage .hero-name{font-size:66px;letter-spacing:-4px}
+  .pocket-homepage .hero-desc{font-size:13px;margin-bottom:23px;line-height:1.8}
+  .pocket-homepage .hero-actions{gap:6px}
+  .pocket-homepage .hero-actions>a,.pocket-homepage .hero-actions>button{padding-inline:8px;font-size:10px}
+  .pocket-homepage .avatar-wrap img{height:216px}
+  .pocket-homepage .profile-bezel{padding:16px 14px 19px}
+  .pocket-homepage .profile-caption{font-size:7px}
+  .pocket-homepage .hero-tag{font-size:10px}
+}
+@media(max-width:760px){
+  .pocket-homepage nav{height:66px;padding-inline:18px;gap:12px}
+  .pocket-homepage .nav-logo{font-size:12px;gap:8px}
+  .pocket-homepage .nav-controls{gap:7px}
+  .pocket-homepage .nav-v2{font-size:10px;padding:6px 8px}
+  .pocket-homepage .btn-icon{width:30px;height:30px}
+  .pocket-homepage .lang-btn{padding:4px 6px}
+  .pocket-homepage section{padding:55px 24px;scroll-margin-top:86px}
+  .pocket-homepage #hero{padding:96px 20px 23px}
+  .pocket-homepage .hero-content{grid-template-columns:1fr;gap:28px;padding:24px 26px 40px;border-radius:18px 18px 42px 18px;text-align:left}
+  .pocket-homepage .hero-case-rail{grid-column:1;padding-bottom:18px;font-size:8px;gap:10px}
+  .pocket-homepage .hero-case-rail>span:last-child{font-size:7px}
+  .pocket-homepage .hero-name{font-size:76px;letter-spacing:-4px;line-height:.98;margin-bottom:22px}
+  .pocket-homepage .hero-tag{margin-bottom:16px}
+  .pocket-homepage .hero-desc{font-size:14px;line-height:1.8}
+  .pocket-homepage .hero-actions{gap:7px}
+  .pocket-homepage .hero-actions>a,.pocket-homepage .hero-actions>button{font-size:11px;padding-inline:9px;flex:1}
+  .pocket-homepage .hero-avatar{max-width:290px;justify-self:center;margin:12px 0 8px;order:initial}
+  .pocket-homepage .avatar-wrap img{height:225px}
+  .pocket-homepage .profile-caption{font-size:8px}
+  .pocket-homepage .hero-content::after{width:70px;height:8px;bottom:16px;right:30px}
+  .pocket-homepage #playground{padding:20px 20px 40px;scroll-margin-top:86px}
+  .pocket-homepage .section-title{font-size:30px;margin-bottom:32px}
+  .pocket-homepage footer{margin:10px 24px 0;padding:26px 0 35px;align-items:flex-start;flex-direction:column;gap:10px}
+}
+@media(max-width:480px){
+  .pocket-homepage #hero{padding-inline:13px}
+  .pocket-homepage .hero-content{padding-inline:20px;gap:22px}
+  .pocket-homepage .hero-name{font-size:64px;letter-spacing:-4px}
+  .pocket-homepage .hero-actions>a,.pocket-homepage .hero-actions>button{padding:10px 5px;font-size:10px;min-height:44px}
+  .pocket-homepage .hero-actions{gap:5px}
+  .pocket-homepage .hero-desc{font-size:13px}
+  .pocket-homepage .hero-typing{font-size:10px;margin-bottom:19px}
+  .pocket-homepage .hero-case-rail{font-size:7px}
+  .pocket-homepage .hero-case-rail>span:last-child{max-width:70px;line-height:1.6;text-align:right}
+  .pocket-homepage .hero-avatar{max-width:250px;margin-block:10px}
+  .pocket-homepage .avatar-wrap img{height:215px}
+  .pocket-homepage #playground{padding-inline:13px}
+  .pocket-homepage .handheld-stage{padding-inline:14px}
+  .pocket-homepage .handheld-stage-header strong{font-size:10px;gap:7px}
+}
+@media(max-width:360px){
+  .pocket-homepage nav{padding-inline:12px;gap:8px}
+  .pocket-homepage .nav-logo{font-size:10px;gap:6px}
+  .pocket-homepage .pocket-brand-icon{grid-template-columns:repeat(2,4px)}
+  .pocket-homepage .pocket-brand-icon i{width:4px;height:4px}
+  .pocket-homepage .nav-controls{gap:6px}
+  .pocket-homepage .nav-v2{padding:5px 6px;font-size:9px}
+  .pocket-homepage .hero-name{font-size:54px;letter-spacing:-3px}
+  .pocket-homepage .hero-content{padding-inline:17px}
+  .pocket-homepage .hero-actions>a,.pocket-homepage .hero-actions>button{padding-inline:4px;font-size:9px}
+  .pocket-homepage #playground{padding-inline:8px}
+  .pocket-homepage .handheld-stage{padding-inline:12px}
+}
+@media(prefers-reduced-motion:reduce){.pocket-homepage .hero-actions>a,.pocket-homepage .hero-actions>button{transition:none}}
+
+/* Pocket system: content surfaces. Append after existing homepage rules. */
+.pocket-homepage #capabilities { border-top: 1px solid var(--border); }
+.pocket-homepage .capabilities-intro { max-width: 660px; }
+.pocket-homepage .capability-puzzle { gap: 12px; }
+.pocket-homepage .capability-piece { --piece-edge: var(--shell-edge); }
+.pocket-homepage .capability-piece--consulting { --piece: var(--shell); }
+.pocket-homepage .capability-piece--sales { --piece: color-mix(in srgb,var(--shell) 85%,var(--lcd)); }
+.pocket-homepage .capability-piece--engineering { --piece: color-mix(in srgb,var(--shell) 80%,var(--bg3)); }
+.pocket-homepage .capability-piece--teaching { --piece: var(--bg2); }
+.pocket-homepage .capability-face {
+  background: var(--piece); border: 1px solid var(--piece-edge);
+  box-shadow: inset 0 2px 0 color-mix(in srgb,var(--bg2) 85%,transparent),0 4px 0 var(--shell-edge);
+}
+.pocket-homepage .capability-face--back { background: var(--piece); }
+.pocket-homepage .capability-piece:hover,
+.pocket-homepage .capability-piece:focus-visible,
+.pocket-homepage .capability-piece.is-flipped { filter: drop-shadow(0 7px 8px color-mix(in srgb,var(--fg) 12%,transparent)); }
+.pocket-homepage .capability-kicker { font: 10px var(--pixel); letter-spacing: 0; color: var(--accent); }
+.pocket-homepage .capability-name { font-family: inherit; font-weight: 650; letter-spacing: -.035em; }
+.pocket-homepage .capability-definition { color: var(--fg2); }
+.pocket-homepage .capability-back-name { font-family: inherit; color: var(--accent); }
+.pocket-homepage .capability-story { color: var(--fg2); }
+.pocket-homepage .capability-return { font-family: inherit; letter-spacing: 0; opacity: 1; text-transform: none; }
+.pocket-homepage .capability-core {
+  background: var(--lcd); color: var(--lcd-ink); border-color: var(--bg);
+  box-shadow: 0 4px 0 var(--shell-edge),inset 0 0 0 1px color-mix(in srgb,var(--lcd-ink) 35%,transparent),inset 0 3px 6px color-mix(in srgb,var(--lcd-ink) 15%,transparent);
+}
+.pocket-homepage .capability-core span { font-family: var(--pixel); font-size: 29px; font-weight: 400; letter-spacing: -2px; }
+.pocket-homepage .capability-core small { font-size: 7px; letter-spacing: .05em; }
+.pocket-homepage .capability-hint { font-family: inherit; font-size: 12px; letter-spacing: 0; }
+
+/* News is an open dated log, with a small status light at each entry. */
+.pocket-homepage .news-list { border-top: 2px solid var(--border); }
+.pocket-homepage .news-item { grid-template-columns: 110px minmax(0,1fr); gap: 28px; padding: 22px 0; }
+.pocket-homepage .news-date { display: flex; align-items: center; gap: 11px; color: var(--fg3); font-size: 11px; }
+.pocket-homepage .news-date::before { content: ''; width: 5px; height: 5px; flex: 0 0 5px; background: var(--shell-edge); }
+.pocket-homepage .news-item:first-child .news-date::before { background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb,var(--accent) 9%,transparent); }
+.pocket-homepage .news-text { line-height: 1.8; font-size: 14px; }
+
+/* Removable cartridges, retaining every original full-color cover. */
+.pocket-homepage .projects-grid { gap: 30px; }
+.pocket-homepage .project-card {
+  position: relative; padding: 22px 15px 13px; border: 1px solid var(--shell-edge);
+  border-radius: 12px 12px 24px 12px; background: var(--shell); cursor: default;
+  box-shadow: inset 0 2px 0 color-mix(in srgb,var(--bg2) 85%,transparent),0 5px 0 var(--shell-edge);
+}
+.pocket-homepage .project-card::before {
+  content: ''; position: absolute; width: 44%; height: 6px; left: 28%; top: 8px;
+  border-top: 1px solid var(--shell-edge); border-bottom: 1px solid var(--shell-edge);
+  background: color-mix(in srgb,var(--bg3) 60%,var(--shell)); pointer-events: none;
+}
+.pocket-homepage .project-card:hover {
+  background: var(--shell); border-color: var(--accent); transform: translateY(-3px);
+  box-shadow: inset 0 2px 0 color-mix(in srgb,var(--bg2) 85%,transparent),0 8px 0 var(--shell-edge);
+}
+.pocket-homepage .project-media { border: 2px solid var(--shell-edge); border-radius: 5px; background: var(--bg3); }
+.pocket-homepage .project-media img { display: block; filter: none; mix-blend-mode: normal; opacity: 1; }
+.pocket-homepage .project-badge { top: 9px; left: 9px; background: var(--lcd); color: var(--lcd-ink); border: 1px solid color-mix(in srgb,var(--lcd-ink) 28%,transparent); border-radius: 3px; font: 9px var(--pixel); padding: 5px 7px; letter-spacing: 0; }
+.pocket-homepage .project-body { padding: 22px 8px 10px; }
+.pocket-homepage .project-title { font-size: 19px; line-height: 1.35; letter-spacing: -.025em; margin-bottom: 9px; }
+.pocket-homepage .project-sub { font-size: 10px; line-height: 1.7; color: var(--fg3); margin-bottom: 15px; }
+.pocket-homepage .project-desc { font-size: 13px; line-height: 1.85; margin-bottom: 22px; }
+.pocket-homepage .project-links { gap: 8px; flex-wrap: wrap; }
+.pocket-homepage .project-link { min-height: 36px; display: inline-flex; align-items: center; padding: 7px 11px; font-family: inherit; font-size: 11px; background: var(--bg2); border-radius: 4px; color: var(--accent); box-shadow: 0 2px 0 var(--shell-edge); }
+.pocket-homepage .project-link:hover { background: var(--lcd); color: var(--lcd-ink); border-color: var(--shell-edge); }
+.pocket-homepage .project-link:active { translate: 0 2px; box-shadow: none; }
+
+/* Research combines a monochrome experiment display and a paper abstract. */
+.pocket-homepage .research-card { grid-template-columns: minmax(230px,.7fr) minmax(0,1.4fr); padding: 12px; border-radius: 12px 12px 27px 12px; border-color: var(--shell-edge); background: var(--shell); box-shadow: 0 4px 0 var(--shell-edge); }
+.pocket-homepage .research-card:hover { background: var(--shell); border-color: var(--shell-edge); box-shadow: 0 4px 0 var(--shell-edge); }
+.pocket-homepage .research-signal {
+  min-height: 330px; padding: 25px; border: 2px solid var(--shell-edge); border-radius: 5px;
+  color: var(--lcd-ink); background-color: var(--lcd);
+  background-image: linear-gradient(color-mix(in srgb,var(--lcd-ink) 6%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--lcd-ink) 6%,transparent) 1px,transparent 1px);
+  background-size: 14px 14px; box-shadow: inset 2px 3px 8px color-mix(in srgb,var(--lcd-ink) 16%,transparent);
+}
+.pocket-homepage .research-signal::before,
+.pocket-homepage .research-signal::after { border-color: color-mix(in srgb,var(--lcd-ink) 60%,transparent); box-shadow: none; border-width: 2px; }
+.pocket-homepage .research-mark { color: var(--lcd-ink); font: 27px/1.2 var(--pixel); letter-spacing: -.06em; }
+.pocket-homepage .research-mark span { color: var(--lcd-ink); opacity: .8; font: 9px/1.6 'JetBrains Mono',monospace; letter-spacing: .02em; }
+.pocket-homepage .research-content { padding: 25px 29px; }
+.pocket-homepage .research-status { border-radius: 3px; font-family: inherit; letter-spacing: .02em; font-size: 10px; padding: 5px 8px; margin-bottom: 16px; }
+.pocket-homepage .research-title { font-size: clamp(22px,2.5vw,30px); line-height: 1.3; }
+.pocket-homepage .research-venue { color: var(--fg3); font-size: 10px; line-height: 1.7; }
+.pocket-homepage .research-desc { font-size: 13px; line-height: 1.8; }
+.pocket-homepage .research-link { color: var(--accent); background: var(--bg2); border-radius: 4px; font-family: inherit; box-shadow: 0 2px 0 var(--shell-edge); }
+.pocket-homepage .research-link:hover { color: var(--lcd-ink); background: var(--lcd); border-color: var(--shell-edge); }
+
+/* Career entries share a quiet continuous rail, not individual cards. */
+.pocket-homepage .timeline { padding-left: 34px; margin-left: 5px; }
+.pocket-homepage .timeline::before { top: 8px; bottom: 24px; width: 2px; background: var(--border); }
+.pocket-homepage .tl-item { padding: 0 0 29px 5px; margin-bottom: 25px; border-bottom: 1px solid var(--border); }
+.pocket-homepage .tl-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: 0; }
+.pocket-homepage .tl-item::before { left: -39px; top: 5px; width: 10px; height: 10px; border-radius: 2px; border-color: var(--shell-edge); background: var(--bg2); box-shadow: 0 2px 0 var(--shell-edge); }
+.pocket-homepage .tl-item:first-child::before { background: var(--accent); border-color: var(--accent); }
+.pocket-homepage .tl-period { font-size: 10px; color: var(--fg3); margin-bottom: 9px; letter-spacing: 0; }
+.pocket-homepage .tl-role { font-size: 18px; line-height: 1.5; margin-bottom: 4px; letter-spacing: -.015em; }
+.pocket-homepage .tl-company { font-size: 13px; color: var(--accent); margin-bottom: 10px; }
+.pocket-homepage .tl-desc { max-width: 780px; font-size: 13px; color: var(--fg2); line-height: 1.85; }
+.pocket-homepage .edu-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px; }
+.pocket-homepage .edu-card { padding: 20px 0 6px; border: 0; border-top: 3px solid var(--shell-edge); border-radius: 0; background: transparent; }
+.pocket-homepage .edu-card:hover { background: transparent; border-color: var(--accent); }
+.pocket-homepage .edu-period { color: var(--fg3); font-size: 10px; margin-bottom: 14px; }
+.pocket-homepage .edu-school { font-size: 17px; line-height: 1.5; margin-bottom: 7px; }
+.pocket-homepage .edu-degree { font-size: 13px; line-height: 1.8; }
+
+/* A compact key tray; only actual tool names appear on the keycaps. */
+.pocket-homepage .skills-grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 26px; }
+.pocket-homepage .skill-group { background: transparent; border: 0; border-radius: 0; padding: 0; }
+.pocket-homepage .skill-cat { font-family: inherit; font-size: 11px; font-weight: 650; letter-spacing: 0; text-transform: none; color: var(--fg3); margin-bottom: 16px; }
+.pocket-homepage .skill-tags { gap: 9px 7px; }
+.pocket-homepage .skill-tag { display: inline-flex; align-items: center; min-height: 35px; padding: 7px 11px; border-radius: 5px; background: var(--shell); color: var(--fg); font: 11px/1.4 'JetBrains Mono',monospace; border-color: var(--shell-edge); box-shadow: inset 0 2px 0 color-mix(in srgb,var(--bg2) 85%,transparent),0 3px 0 var(--shell-edge); }
+.pocket-homepage .btn-stack { max-width: 100%; white-space: normal; text-align: center; color: var(--accent); font-family: inherit; font-size: 12px; line-height: 1.6; border-radius: 5px; border-color: var(--border); background: var(--bg2); }
+.pocket-homepage .btn-stack:hover { color: var(--lcd-ink); border-color: var(--shell-edge); background: var(--lcd); }
+
+/* The contact form sits in a recessed input panel. */
+.pocket-homepage .contact-wrap { gap: 54px; }
+.pocket-homepage .contact-info p { font-size: 14px; line-height: 1.9; }
+.pocket-homepage .contact-links { gap: 0; border-top: 1px solid var(--border); }
+.pocket-homepage .contact-link { padding: 17px 0; border: 0; border-bottom: 1px solid var(--border); border-radius: 0; background: transparent; font-size: 13px; overflow-wrap: anywhere; }
+.pocket-homepage .contact-link-icon { flex: 0 0 23px; font-weight: 650; }
+.pocket-homepage .contact-form { min-width: 0; padding: 25px; border: 1px solid var(--shell-edge); border-radius: 9px 9px 24px 9px; background: var(--shell); box-shadow: 0 4px 0 var(--shell-edge),inset 0 2px 0 color-mix(in srgb,var(--bg2) 85%,transparent); }
+.pocket-homepage .form-group { min-width: 0; gap: 7px; }
+.pocket-homepage .form-label { font-family: inherit; font-size: 11px; font-weight: 650; letter-spacing: .02em; text-transform: none; color: var(--fg2); }
+.pocket-homepage .form-input,
+.pocket-homepage .form-textarea { width: 100%; min-width: 0; border-color: var(--shell-edge); border-radius: 4px; background: var(--bg2); color: var(--fg); box-shadow: inset 1px 2px 3px color-mix(in srgb,var(--fg) 7%,transparent); font-size: 13px; }
+.pocket-homepage .form-input::placeholder,
+.pocket-homepage .form-textarea::placeholder { color: var(--fg3); opacity: .9; }
+.pocket-homepage .form-input:focus,
+.pocket-homepage .form-textarea:focus { border-color: var(--accent); outline: 2px solid color-mix(in srgb,var(--accent) 22%,transparent); outline-offset: 2px; }
+.pocket-homepage .form-submit { min-height: 44px; border: 1px solid var(--accent); border-radius: 5px; background: var(--accent); color: var(--bg2); font-size: 13px; box-shadow: 0 3px 0 var(--accent2),inset 0 1px 0 color-mix(in srgb,var(--bg2) 20%,transparent); }
+.pocket-homepage .form-submit:hover { background: var(--accent); filter: brightness(1.1); transform: none; }
+.pocket-homepage .form-submit:active { translate: 0 2px; box-shadow: 0 1px 0 var(--accent2); }
+
+/* Repository drawer uses the same plastic and readable label hierarchy. */
+.pocket-homepage #github-modal { backdrop-filter: blur(5px); background: color-mix(in srgb,var(--fg) 40%,transparent); }
+.pocket-homepage .github-panel { border: 1px solid var(--shell-edge); border-radius: 12px 12px 28px 12px; background: var(--shell); box-shadow: 0 6px 0 var(--shell-edge),0 20px 60px color-mix(in srgb,var(--fg) 25%,transparent); }
+.pocket-homepage .github-panel-header { background: var(--shell); border-radius: 12px 12px 0 0; z-index: 2; }
+.pocket-homepage .github-repos-grid { gap: 12px; }
+.pocket-homepage .github-repo-card { min-width: 0; background: var(--bg2); border-radius: 5px; box-shadow: 0 2px 0 var(--shell-edge); }
+.pocket-homepage .github-repo-card:hover { background: var(--bg2); }
+.pocket-homepage .github-repo-name { font-size: 13px; overflow-wrap: anywhere; }
+.pocket-homepage .github-repo-desc { font-family: inherit; line-height: 1.75; }
+.pocket-homepage .github-repo-meta,
+.pocket-homepage .github-repo-links { flex-wrap: wrap; }
+.pocket-homepage .github-lang-badge { color: var(--lcd-ink); background: var(--lcd); border-color: var(--shell-edge); }
+.pocket-homepage .github-link-code,
+.pocket-homepage .github-link-live { min-height: 32px; display: inline-flex; align-items: center; font-family: inherit; border-radius: 4px; }
+.pocket-homepage .github-link-live { background: var(--accent); color: var(--bg2); }
+.pocket-homepage .github-link-live:hover { background: var(--accent); filter: brightness(1.1); }
+.pocket-homepage .github-footer-link { font-family: inherit; font-size: 12px; }
+
+@media (max-width: 900px) {
+  .pocket-homepage .skills-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 28px; }
+  .pocket-homepage .research-card { grid-template-columns: 1fr; }
+  .pocket-homepage .research-signal { min-height: 210px; }
+  .pocket-homepage .research-content { padding: 28px 20px 20px; }
+  .pocket-homepage .contact-wrap { grid-template-columns: 1fr; gap: 35px; }
+  .pocket-homepage .edu-grid { gap: 20px; }
+}
+@media (max-width: 600px) {
+  .pocket-homepage .capability-puzzle { grid-template-rows: repeat(2,238px); gap: 8px; }
+  .pocket-homepage .capability-kicker { font-size: 8px; }
+  .pocket-homepage .capability-core span { font-size: 21px; }
+  .pocket-homepage .capability-name { font-size: 20px; line-height: 1.15; }
+  .pocket-homepage .capability-story { font-size: 10.5px; line-height: 1.6; }
+  .pocket-homepage .news-item { grid-template-columns: 1fr; gap: 8px; padding: 19px 0; }
+  .pocket-homepage .news-text { font-size: 13px; }
+  .pocket-homepage .projects-grid { grid-template-columns: 1fr; gap: 25px; }
+  .pocket-homepage .project-title { font-size: 18px; }
+  .pocket-homepage .project-body { padding-inline: 5px; }
+  .pocket-homepage .research-content { padding-inline: 9px; }
+  .pocket-homepage .research-title { font-size: 22px; }
+  .pocket-homepage .research-mark { font-size: 26px; }
+  .pocket-homepage .tl-role { font-size: 16px; }
+  .pocket-homepage .tl-desc { font-size: 12px; }
+  .pocket-homepage .edu-grid { grid-template-columns: 1fr; gap: 25px; }
+  .pocket-homepage .edu-card { padding-top: 17px; }
+  .pocket-homepage .edu-period { margin-bottom: 7px; }
+  .pocket-homepage .contact-form { padding: 20px; }
+  .pocket-homepage .github-repos-grid { grid-template-columns: 1fr; padding: 18px; }
+  .pocket-homepage .github-panel-header { padding-inline: 18px; }
+}
+@media (max-width: 389px) {
+  .pocket-homepage .capability-puzzle { grid-template-rows: repeat(2,285px); }
+  .pocket-homepage .capability-face { padding-inline: 13px; }
+  .pocket-homepage .capability-piece--consulting .capability-face,
+  .pocket-homepage .capability-piece--engineering .capability-face { padding-right: 24px; }
+  .pocket-homepage .capability-piece--sales .capability-face,
+  .pocket-homepage .capability-piece--teaching .capability-face { padding-left: 24px; }
+  .pocket-homepage .capability-name { font-size: 17px; overflow-wrap: anywhere; }
+  .pocket-homepage .capability-story { font-size: 10.5px; }
+  .pocket-homepage .capability-definition { font-size: 11px; }
+  .pocket-homepage .capability-back-name { font-size: 12px; }
+  .pocket-homepage .capability-hint { font-size: 11px; }
+  .pocket-homepage .skills-grid { gap: 24px 17px; }
+  .pocket-homepage .skill-tag { padding: 7px 8px; font-size: 10px; }
+  .pocket-homepage .contact-form { padding: 16px; }
+  .pocket-homepage .contact-link { font-size: 12px; gap: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pocket-homepage .project-card,
+  .pocket-homepage .project-link,
+  .pocket-homepage .form-submit { transition: none; }
+  .pocket-homepage .project-card:hover { transform: none; }
+}
+
 </style>
 </head>
 
-<body>
+<body class="pocket-homepage">
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">tw<span style="color:var(--fg3)">.</span>dev</div>
+  <a class="nav-logo" href="#hero"><span class="pocket-brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>TEEMO / PLAY</a>
   <ul class="nav-links">
     <li><a href="#capabilities" data-i18n="nav_capabilities">Capabilities</a></li>
     <li><a href="#news" data-i18n="nav_news">News</a></li>
@@ -1071,7 +1454,7 @@ footer span { color: var(--accent); }
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('zh')">中</button>
     </div>
-    <button class="btn-icon" onclick="toggleTheme()" title="Toggle theme" id="theme-btn">☀</button>
+    <button class="btn-icon" onclick="toggleTheme()" title="Toggle theme" id="theme-btn" data-i18n-aria-label="pocket_theme_label">☀</button>
   </div>
 </nav>
 
@@ -1079,6 +1462,7 @@ footer span { color: var(--accent); }
 <section id="hero">
   <canvas id="particles"></canvas>
   <div class="hero-content">
+    <div class="hero-case-rail"><span><i aria-hidden="true"></i> TEEMO PERSONAL SYSTEM</span><span data-i18n="pocket_edition">A little world to explore.</span></div>
     <div class="hero-text">
       <div class="hero-tag" data-i18n="hero_tag">Strategy · Product · AI</div>
       <h1 class="hero-name">Teemo<br><span>Weng.</span></h1>
@@ -1094,9 +1478,13 @@ footer span { color: var(--accent); }
       </div>
     </div>
     <div class="hero-avatar">
+      <div class="profile-bezel">
+      <div class="profile-caption"><span data-i18n="pocket_profile">Player profile</span><i aria-hidden="true"></i></div>
       <div class="avatar-wrap">
         <img src="uploads/avatar-1776542946551.jpg" alt="Teemo Weng">
         <div class="avatar-badge" data-i18n="avatar_badge">@ Imperial College</div>
+      </div>
+      <div class="profile-grille" aria-hidden="true"><i></i><i></i><i></i><i></i><span>TEEMO WENG</span></div>
       </div>
     </div>
   </div>
@@ -1235,7 +1623,7 @@ footer span { color: var(--accent); }
 <!-- NEWS -->
 <section id="news">
   <div class="section-label" data-i18n="section_news">Latest</div>
-  <h2 class="section-title reveal">What's <span>New</span></h2>
+  <h2 class="section-title reveal" data-i18n="pocket_news_heading">What's <span>New</span></h2>
   <div class="news-list">
     <div class="news-item">
       <div class="news-date">2026.08</div>
@@ -1366,7 +1754,7 @@ footer span { color: var(--accent); }
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-label" data-i18n="section_exp">Career</div>
-  <h2 class="section-title reveal">Experience <span>Timeline</span></h2>
+  <h2 class="section-title reveal" data-i18n="pocket_experience_heading">Experience <span>Timeline</span></h2>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-period">2026.06 – Present</div>
@@ -1422,7 +1810,7 @@ footer span { color: var(--accent); }
 <!-- EDUCATION -->
 <section id="education">
   <div class="section-label" data-i18n="section_edu">Academia</div>
-  <h2 class="section-title reveal">Education</h2>
+  <h2 class="section-title reveal" data-i18n="pocket_education_heading">Education</h2>
   <div class="edu-grid">
     <div class="edu-card">
       <div class="edu-period">2025 – 2026</div>
@@ -1445,7 +1833,7 @@ footer span { color: var(--accent); }
 <!-- SKILLS -->
 <section id="skills">
   <div class="section-label" data-i18n="section_skills">Tools</div>
-  <h2 class="section-title reveal">Skills & <span>Stack</span></h2>
+  <h2 class="section-title reveal" data-i18n="pocket_skills_heading">Skills & <span>Stack</span></h2>
   <div class="skills-grid">
     <div class="skill-group">
       <div class="skill-cat" data-i18n="skill_cat1">Data Analysis</div>
@@ -1494,7 +1882,7 @@ footer span { color: var(--accent); }
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-label" data-i18n="section_contact">Connect</div>
-  <h2 class="section-title reveal">Get in <span>Touch</span></h2>
+  <h2 class="section-title reveal" data-i18n="pocket_contact_heading">Get in <span>Touch</span></h2>
   <div class="contact-wrap">
     <div class="contact-info reveal">
       <p data-i18n="contact_desc">I'm actively seeking product, AI, and strategy roles in China. If you have an opportunity or just want to chat, feel free to reach out!</p>
@@ -1515,16 +1903,16 @@ footer span { color: var(--accent); }
     </div>
     <div class="contact-form reveal">
       <div class="form-group">
-        <label class="form-label" data-i18n="form_name">Name</label>
-        <input class="form-input" type="text" placeholder="Your name" id="f-name">
+        <label class="form-label" data-i18n="form_name" for="f-name">Name</label>
+        <input class="form-input" type="text" placeholder="Your name" id="f-name" data-i18n-placeholder="pocket_name_placeholder">
       </div>
       <div class="form-group">
-        <label class="form-label" data-i18n="form_email">Email</label>
-        <input class="form-input" type="email" placeholder="your@email.com" id="f-email">
+        <label class="form-label" data-i18n="form_email" for="f-email">Email</label>
+        <input class="form-input" type="email" placeholder="your@email.com" id="f-email" data-i18n-placeholder="pocket_email_placeholder">
       </div>
       <div class="form-group">
-        <label class="form-label" data-i18n="form_msg">Message</label>
-        <textarea class="form-textarea" placeholder="Hello Teemo, I'd like to connect..." id="f-msg"></textarea>
+        <label class="form-label" data-i18n="form_msg" for="f-msg">Message</label>
+        <textarea class="form-textarea" placeholder="Hello Teemo, I'd like to connect..." id="f-msg" data-i18n-placeholder="pocket_message_placeholder"></textarea>
       </div>
       <button class="form-submit" onclick="sendMsg()" data-i18n="form_send">Send Message →</button>
     </div>
@@ -1532,7 +1920,7 @@ footer span { color: var(--accent); }
 </section>
 
 <footer>
-  <span>Teemo Weng</span> · Designed with intention · <span>2026</span>
+  <strong>TEEMO / PLAY</strong><span data-i18n="pocket_footer">Made for a little curiosity. © Teemo Weng 2026</span>
 </footer>
 
 <!-- GITHUB MODAL -->
@@ -1583,6 +1971,12 @@ footer span { color: var(--accent); }
 // ── i18n ──
 const i18n = {
   en: {
+    pocket_theme_label: "Switch light or dark theme",
+    pocket_name_placeholder: "Your name", pocket_email_placeholder: "your@email.com", pocket_message_placeholder: "Hello Teemo, I’d like to connect...",
+    pocket_edition: "A little world to explore.", pocket_profile: "Player profile",
+    pocket_news_heading: "What’s new", pocket_experience_heading: "Experience",
+    pocket_education_heading: "Education", pocket_skills_heading: "Skills & tools", pocket_contact_heading: "Let’s talk",
+    pocket_footer: "Made for a little curiosity. © Teemo Weng 2026",
     game_hero_link: "▶ Play a little",
     btn_resume_short: "↓ Resume", btn_contact_short: "Contact", game_hero_short: "▶ Play",
     game_collapse: "Collapse", game_expand: "Expand",
@@ -1711,6 +2105,12 @@ const i18n = {
     github_error: 'Failed to load repos.'
   },
   zh: {
+    pocket_theme_label: "切换浅色或深色外观",
+    pocket_name_placeholder: "怎么称呼你", pocket_email_placeholder: "你的邮箱地址", pocket_message_placeholder: "你好 Teemo，我想聊聊……",
+    pocket_edition: "留一点好奇心。", pocket_profile: "玩家档案",
+    pocket_news_heading: "最近在做什么", pocket_experience_heading: "一路走来的经历",
+    pocket_education_heading: "教育经历", pocket_skills_heading: "我的工具箱", pocket_contact_heading: "聊点有意思的",
+    pocket_footer: "留一点好奇心。© 翁呈轩 Teemo Weng 2026",
     game_hero_link: "▶ 玩一下掌机",
     btn_resume_short: "↓ 简历", btn_contact_short: "联系我", game_hero_short: "▶ 掌机",
     game_collapse: "收起掌机", game_expand: "展开掌机",
@@ -1850,6 +2250,10 @@ function setLang(lang) {
     const key = el.getAttribute('data-i18n-aria-label');
     if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
   });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const value = t[el.dataset.i18nPlaceholder];
+    if (value !== undefined) el.setAttribute('placeholder', value);
+  });
   // restart typing
   startTyping();
   localStorage.setItem('tw-lang', lang);
@@ -1869,6 +2273,10 @@ function startTyping() {
   clearTimeout(typingTimer);
   const el = document.getElementById('typing-text');
   const roles = i18n[currentLang].typing_roles;
+  if (document.body.classList.contains('pocket-homepage') && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = roles[0];
+    return;
+  }
   let ri = 0, ci = 0, deleting = false;
   el.textContent = '';
 
@@ -1894,13 +2302,14 @@ function toggleTheme() {
   const isDark = html.getAttribute('data-theme') === 'dark';
   html.setAttribute('data-theme', isDark ? 'light' : 'dark');
   document.getElementById('theme-btn').textContent = isDark ? '☾' : '☀';
-  localStorage.setItem('tw-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('tw-pocket-theme', isDark ? 'light' : 'dark');
 }
 
 
 // ── PARTICLES ──
 let particleStyle = 'dots';
 function initParticles() {
+  if (document.body.classList.contains('pocket-homepage')) return;
   const canvas = document.getElementById('particles');
   const ctx = canvas.getContext('2d');
   let W, H, dots = [];
@@ -1997,7 +2406,7 @@ function downloadResume() {
 
 // ── TWEAKS ──
 function setAccent(color) {
-  document.documentElement.style.setProperty('--accent', color);
+  document.body.style.setProperty('--accent', color);
   window.parent.postMessage({type:'__edit_mode_set_keys', edits:{accentColor: color}}, '*');
 }
 function setFont(f) {
@@ -2136,7 +2545,7 @@ function renderGithubRepos() {
 }
 
 // ── INIT ──
-const savedTheme = localStorage.getItem('tw-theme') || 'light';
+const savedTheme = localStorage.getItem('tw-pocket-theme') || 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '☀' : '☾';
 

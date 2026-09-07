@@ -105,6 +105,32 @@ function route(quest, target) {
 try {
   await page.goto(pageUrl, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => window.TeemoHandheld?.snapshot().initialized);
+  const sectionOrder = await page.locator('body > section').evaluateAll(sections => sections.map(section => section.id));
+  assert.equal(sectionOrder[sectionOrder.indexOf('hero') + 1], 'playground', 'the handheld should be the first section after the hero');
+  const disclosure = page.locator('#handheld-toggle');
+  const handheldContent = page.locator('#handheld-content');
+  assert.equal(await disclosure.getAttribute('aria-controls'), 'handheld-content');
+  assert.equal(await disclosure.getAttribute('aria-expanded'), 'true', 'the handheld is expanded by default');
+  assert.equal(await handheldContent.isVisible(), true);
+  for (const lang of ['zh', 'en']) {
+    await language(lang);
+    const heroButtons = await page.locator('.hero-actions > a, .hero-actions > button').evaluateAll(buttons => buttons.map(button => {
+      const rect = button.getBoundingClientRect();
+      return { x: rect.x, y: rect.y, right: rect.right };
+    }));
+    assert.equal(heroButtons.length, 4, 'the hero retains four actions');
+    assert.ok(heroButtons.every(button => Math.abs(button.y - heroButtons[0].y) < 2), `${lang}: four desktop hero actions share a row`);
+    assert.ok(heroButtons.slice(1).every((button, index) => button.x >= heroButtons[index].right), `${lang}: hero actions do not overlap`);
+    assert.match(await disclosure.innerText(), lang === 'zh' ? /收起/ : /collapse/i);
+    await disclosure.click();
+    assert.equal(await disclosure.getAttribute('aria-expanded'), 'false');
+    assert.equal(await handheldContent.isVisible(), false, 'collapsed console content is actually hidden');
+    assert.match(await disclosure.innerText(), lang === 'zh' ? /展开/ : /expand/i);
+    await disclosure.click();
+    assert.equal(await disclosure.getAttribute('aria-expanded'), 'true');
+    assert.equal(await handheldContent.isVisible(), true);
+  }
+  console.log('PASS first-section placement, four desktop hero actions and bilingual disclosure');
   await page.locator('#handheld-console').scrollIntoViewIfNeeded();
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   const initial = await snapshot();
@@ -251,6 +277,35 @@ try {
       await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
       await action('a');
       assert.equal((await snapshot()).quest.paused, false);
+      const savedProgress = (await snapshot()).quest;
+      const expectProgress = async () => {
+        const current = (await snapshot()).quest;
+        assert.deepEqual([current.x, current.y, current.collected], [savedProgress.x, savedProgress.y, savedProgress.collected], 'collapse and expansion preserve maze progress');
+        assert.equal((await snapshot()).mode, 'quest');
+      };
+      await disclosure.click();
+      assert.equal(await disclosure.getAttribute('aria-expanded'), 'false');
+      assert.equal(await handheldContent.isVisible(), false);
+      assert.equal((await snapshot()).quest.paused, true, 'collapsing an active game pauses it');
+      await expectProgress();
+      await disclosure.focus();
+      await page.keyboard.press('Enter');
+      assert.equal(await disclosure.getAttribute('aria-expanded'), 'true', 'Enter expands the native disclosure button');
+      assert.equal(await handheldContent.isVisible(), true);
+      assert.equal((await snapshot()).quest.paused, true, 'expanding does not silently resume a game');
+      await expectProgress();
+      await disclosure.focus();
+      await page.keyboard.press('Space');
+      assert.equal(await disclosure.getAttribute('aria-expanded'), 'false', 'Space collapses the disclosure button');
+      await page.locator('#hero a[href="#playground"]').click();
+      assert.equal(await disclosure.getAttribute('aria-expanded'), 'true', 'the hero Play action reveals a collapsed console');
+      assert.equal(await handheldContent.isVisible(), true);
+      await expectProgress();
+      await page.locator('#handheld-console').scrollIntoViewIfNeeded();
+      await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+      await action('a');
+      assert.equal((await snapshot()).quest.paused, false);
+      console.log('PASS collapse pauses, keyboard expansion and hero Play preserve game progress');
     }
   }
   quest = (await snapshot()).quest;
@@ -266,6 +321,11 @@ try {
     await page.setViewportSize({ width, height: width < 500 ? 844 : 1000 });
     for (const lang of ['en', 'zh']) {
       await language(lang);
+      const clippedHeroActions = await page.locator('.hero-actions > a, .hero-actions > button').evaluateAll(buttons => buttons.filter(button => {
+        const rect = button.getBoundingClientRect();
+        return rect.left < -1 || rect.right > innerWidth + 1;
+      }).map(button => button.innerText));
+      if (clippedHeroActions.length) layoutFindings.push({ label: `${width}px ${lang} hero`, problem: 'hero actions outside viewport', buttons: clippedHeroActions });
       await page.locator('#handheld-console').scrollIntoViewIfNeeded();
       await assertDisplayFits(`${width}px ${lang} home`);
       for (const [index, mode] of [[0, 'player'], [1, 'projects'], [2, 'skills'], [3, 'contact'], [4, 'quest-intro']]) {

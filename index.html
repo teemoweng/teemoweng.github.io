@@ -138,11 +138,11 @@ canvas#particles {
 }
 .hero-content {
   position: relative; z-index: 1;
-  display: grid; grid-template-columns: 1fr 340px;
-  gap: 80px; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 48px; align-items: center;
   max-width: 1100px; width: 100%; padding: 0 40px;
 }
-.hero-text { }
+.hero-text { min-width: 0; }
 .hero-tag {
   display: inline-block; font-family: 'JetBrains Mono', monospace;
   font-size: 12px; color: var(--accent); letter-spacing: 0.12em;
@@ -171,7 +171,21 @@ canvas#particles {
   font-size: 15px; line-height: 1.75; color: var(--fg2);
   max-width: 520px; margin-bottom: 36px;
 }
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-actions { display: flex; gap: 8px; flex-wrap: nowrap; }
+.hero-actions > a, .hero-actions > button { padding-inline: 15px; font-size: 13px; white-space: nowrap; justify-content: center; }
+.hero-action-short { display: none; }
+@media (max-width: 960px) {
+  .hero-content { grid-template-columns: 1fr; gap: 40px; padding-inline: 20px; text-align: center; }
+  .hero-avatar { order: -1; }
+  .hero-actions { justify-content: center; }
+  .hero-desc { margin-inline: auto; }
+}
+@media (max-width: 480px) {
+  .hero-actions { gap: 6px; }
+  .hero-actions > a, .hero-actions > button { flex: 1; min-width: 0; min-height: 44px; padding: 10px 6px; font-size: 11px; }
+  .hero-action-full { display: none; }
+  .hero-action-short { display: inline; }
+}
 .btn-primary {
   padding: 12px 28px; background: var(--accent); color: #000;
   border: none; border-radius: 8px; font-weight: 600;
@@ -1022,6 +1036,14 @@ footer span { color: var(--accent); }
 @media(max-width:680px){[data-lang="zh"] .handheld-intro h2 span{display:block}[data-lang="zh"] .handheld-intro h2 span+span::before{content:none}.hh-menu-item{font-size:12px!important;min-height:27px}.handheld-screen .hh-menu{gap:1px}}
 @media(max-width:380px){.handheld-screen{height:250px}.hh-links{flex-wrap:nowrap;gap:4px}.hh-links .hh-link{font-size:9px!important;white-space:nowrap;margin-right:0;padding-inline:4px}}
 
+.handheld-stage-header > [data-i18n="game_edition"]{margin-left:auto}
+.handheld-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0;min-height:40px;padding:8px 12px;border:1px solid var(--hh-rule);border-radius:5px;background:transparent;color:var(--hh-ink);font:11px 'JetBrains Mono','PingFang SC',monospace;cursor:pointer}
+.handheld-toggle[hidden],#handheld-content[hidden]{display:none}
+.handheld-toggle:hover{background:#8e997a18}
+.handheld-toggle:focus-visible{outline:2px solid var(--hh-ink);outline-offset:3px}
+.handheld-toggle[aria-expanded="false"] svg{transform:rotate(180deg)}
+.handheld-stage[data-collapsed="true"] .handheld-stage-header{padding-bottom:0;border-bottom:0}
+@media(max-width:680px){.handheld-stage-header > [data-i18n="game_edition"]{display:none}.handheld-toggle{font-size:10px;padding-inline:9px}}
 </style>
 </head>
 
@@ -1061,11 +1083,9 @@ footer span { color: var(--accent); }
         MSc student at Imperial College London, currently an AI Product Intern at Alibaba (space-leasing product line). Experienced in strategy consulting (BCG), internet product (Beike, POIZON), and startup building. Seeking product & strategy roles in China.
       </p>
       <div class="hero-actions">
-        <a class="btn-primary" href="#" onclick="downloadResume()" data-i18n="btn_resume">
-          ↓ Download Resume
-        </a>
-        <a class="btn-outline" href="#contact" data-i18n="btn_contact">Get in Touch</a>
-        <a class="btn-outline" href="#playground" data-i18n="game_hero_link">▶ Play a little</a>
+        <a class="btn-primary" href="#" onclick="downloadResume()" data-i18n-aria-label="btn_resume"><span class="hero-action-full" data-i18n="btn_resume">↓ Download Resume</span><span class="hero-action-short" data-i18n="btn_resume_short">↓ Resume</span></a>
+        <a class="btn-outline" href="#contact" data-i18n-aria-label="btn_contact"><span class="hero-action-full" data-i18n="btn_contact">Get in Touch</span><span class="hero-action-short" data-i18n="btn_contact_short">Contact</span></a>
+        <a class="btn-outline" href="#playground" data-i18n-aria-label="game_hero_link"><span class="hero-action-full" data-i18n="game_hero_link">▶ Play a little</span><span class="hero-action-short" data-i18n="game_hero_short">▶ Play</span></a>
         <button type="button" class="btn-outline" onclick="openGithubModal()" data-i18n="btn_github">⌥ GitHub</button>
       </div>
     </div>
@@ -1079,6 +1099,57 @@ footer span { color: var(--accent); }
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span data-i18n="scroll_hint">scroll</span>
+  </div>
+</section>
+
+<!-- INTERACTIVE HANDHELD — isolated addition to the classic homepage -->
+<section id="playground">
+  <div class="handheld-stage">
+    <div class="handheld-stage-header">
+      <strong><span class="handheld-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span> TEEMO / PLAY</strong>
+      <span data-i18n="game_edition">A little world, ready to play.</span>
+      <button id="handheld-toggle" class="handheld-toggle" type="button" aria-expanded="true" aria-controls="handheld-content" hidden><span data-i18n="game_collapse">Collapse</span><svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
+    </div>
+    <div id="handheld-content">
+    <div class="handheld-layout">
+      <div class="handheld-intro">
+        <h2 data-i18n="game_heading"><span>Press start.</span><span>Meet Teemo.</span></h2>
+        <p data-i18n="game_intro">A few projects, a little curiosity, and a pocket-sized way to get to know me. Go on. Press a button.</p>
+        <div class="handheld-player-tag"><span class="handheld-player-symbol" aria-hidden="true">T</span><div><strong>Teemo Weng</strong><small data-i18n="game_player_role">Product · AI · Strategy</small></div></div>
+        <span class="handheld-pencil-note" data-i18n="game_margin_note">Made for the curious. ↗</span>
+      </div>
+      <div id="handheld-console" class="handheld-console" tabindex="0" role="group" data-powered="true" data-palette="green" data-i18n-aria-label="game_console_label" aria-label="Teemo interactive handheld. Use direction keys and A or B while focused.">
+        <div class="handheld-top-rail"><span>OFF · ON</span><button id="handheld-power" class="handheld-power" type="button" aria-pressed="true" aria-label="Power" data-i18n-aria-label="game_power_label"></button><small>TW—01</small></div>
+        <div class="handheld-bezel">
+          <div class="handheld-bezel-top" aria-hidden="true">DOT MATRIX · PERSONAL SYSTEM</div>
+          <div class="handheld-power-light" aria-hidden="true"><i></i>POWER</div>
+          <div id="handheld-screen" class="handheld-screen"><div id="handheld-display" class="handheld-display">
+            <div class="hh-title-screen"><span class="hh-title-mark" aria-hidden="true"></span><div class="hh-title-logo">TEEMO<span>PLAY</span></div><p data-i18n="game_title_sub">A pocket-sized introduction.</p><button type="button" class="hh-title-start" data-handheld-action="start" data-i18n="game_press_start">PRESS START</button><p>© TEEMO WENG 2026</p></div>
+          </div></div>
+        </div>
+        <div class="handheld-brand" aria-hidden="true"><strong>TEEMO</strong><span>POCKET PERSONAL SYSTEM</span><small>01</small></div>
+        <div class="handheld-controls">
+          <div class="handheld-dpad" aria-label="Direction controls">
+            <button type="button" data-handheld-action="up" data-i18n-aria-label="game_up" aria-label="Up">▲</button><button type="button" data-handheld-action="left" data-i18n-aria-label="game_left" aria-label="Left">◀</button><span class="handheld-dpad-center" aria-hidden="true"></span><button type="button" data-handheld-action="right" data-i18n-aria-label="game_right" aria-label="Right">▶</button><button type="button" data-handheld-action="down" data-i18n-aria-label="game_down" aria-label="Down">▼</button>
+          </div>
+          <div class="handheld-ab"><div class="handheld-ab-key"><button type="button" data-handheld-action="b" data-i18n-aria-label="game_b" aria-label="B — back"></button><span aria-hidden="true">B</span></div><div class="handheld-ab-key"><button type="button" data-handheld-action="a" data-i18n-aria-label="game_a" aria-label="A — select"></button><span aria-hidden="true">A</span></div></div>
+        </div>
+        <div class="handheld-bottom"><div class="handheld-system-controls"><div class="handheld-system-key"><button type="button" data-handheld-action="select" data-i18n-aria-label="game_select" aria-label="Select — switch screen color"></button><span aria-hidden="true">SELECT</span></div><div class="handheld-system-key"><button type="button" data-handheld-action="start" data-i18n-aria-label="game_start" aria-label="Start — main menu"></button><span aria-hidden="true">START</span></div></div><div class="handheld-speaker" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="handheld-shell-label" aria-hidden="true">DESIGNED FOR A LITTLE CURIOSITY</div><i class="handheld-screw" aria-hidden="true"></i>
+      </div>
+      <aside class="handheld-guide">
+        <div class="handheld-guide-title" data-i18n="game_guide">A QUICK START</div>
+        <div class="handheld-guide-item"><strong data-i18n="game_direction_title">Find your way</strong><p data-i18n="game_direction_desc">Use the D-pad or arrow keys.</p><div class="handheld-guide-keys" aria-hidden="true"><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd></div></div>
+        <div class="handheld-guide-item"><strong data-i18n="game_action_title">Follow your curiosity</strong><p data-i18n="game_action_desc">A to select. B to go back.</p><div class="handheld-guide-keys" aria-hidden="true"><kbd>A</kbd><span>/</span><kbd>Enter</kbd><kbd>B</kbd><span>/</span><kbd>Esc</kbd></div></div>
+        <div class="handheld-guide-item"><strong data-i18n="game_home_title">Make yourself at home</strong><p data-i18n="game_home_desc">START returns home. SELECT changes the screen color.</p></div>
+        <button type="button" id="handheld-sound" class="handheld-sound" aria-pressed="false" aria-label="Enable sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 5 5 9H2v6h3l5 4V5Z"/><path class="hh-sound-wave" d="M14 8q4 4 0 8m3-11q7 7 0 14"/><path class="hh-sound-mute" d="m15 9 6 6m0-6-6 6"/></svg><span data-i18n="game_sound_off">Sound off · turn on</span></button>
+        <p class="handheld-guide-note" data-i18n="game_quest_note">Psst… there’s a little side quest inside.</p>
+      </aside>
+    </div>
+    <div class="handheld-stage-footer"><span data-i18n="game_footer">Real projects. A playful way in.</span><a href="#projects" data-i18n="game_skip">Browse the projects below ↗</a></div>
+    </div>
+    <div id="handheld-announcement" class="handheld-sr-only" aria-live="polite" aria-atomic="true"></div>
+    <noscript><p class="handheld-nojs">掌机需要 JavaScript。你仍可在下方浏览完整项目。 / Enable JavaScript to play, or browse all projects below.</p><style>.handheld-nojs{display:block;padding-top:15px;font-size:12px}.project-card,.news-item,.tl-item,.edu-card,.skill-group,.reveal{opacity:1;transform:none}.handheld-console button,.handheld-sound{pointer-events:none}.handheld-nojs a{color:inherit}</style></noscript>
   </div>
 </section>
 
@@ -1194,51 +1265,6 @@ footer span { color: var(--accent); }
       <div class="news-date">2022.03</div>
       <div class="news-text" data-i18n="news_6">🚀 Led 0-to-1 launch of <strong>Hinbor</strong>, a North America campus group-ordering food platform.</div>
     </div>
-  </div>
-</section>
-
-<!-- INTERACTIVE HANDHELD — isolated addition to the classic homepage -->
-<section id="playground">
-  <div class="handheld-stage">
-    <div class="handheld-stage-header"><strong><span class="handheld-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span> TEEMO / PLAY</strong><span data-i18n="game_edition">A little world, ready to play.</span></div>
-    <div class="handheld-layout">
-      <div class="handheld-intro">
-        <h2 data-i18n="game_heading"><span>Press start.</span><span>Meet Teemo.</span></h2>
-        <p data-i18n="game_intro">A few projects, a little curiosity, and a pocket-sized way to get to know me. Go on. Press a button.</p>
-        <div class="handheld-player-tag"><span class="handheld-player-symbol" aria-hidden="true">T</span><div><strong>Teemo Weng</strong><small data-i18n="game_player_role">Product · AI · Strategy</small></div></div>
-        <span class="handheld-pencil-note" data-i18n="game_margin_note">Made for the curious. ↗</span>
-      </div>
-      <div id="handheld-console" class="handheld-console" tabindex="0" role="group" data-powered="true" data-palette="green" data-i18n-aria-label="game_console_label" aria-label="Teemo interactive handheld. Use direction keys and A or B while focused.">
-        <div class="handheld-top-rail"><span>OFF · ON</span><button id="handheld-power" class="handheld-power" type="button" aria-pressed="true" aria-label="Power" data-i18n-aria-label="game_power_label"></button><small>TW—01</small></div>
-        <div class="handheld-bezel">
-          <div class="handheld-bezel-top" aria-hidden="true">DOT MATRIX · PERSONAL SYSTEM</div>
-          <div class="handheld-power-light" aria-hidden="true"><i></i>POWER</div>
-          <div id="handheld-screen" class="handheld-screen"><div id="handheld-display" class="handheld-display">
-            <div class="hh-title-screen"><span class="hh-title-mark" aria-hidden="true"></span><div class="hh-title-logo">TEEMO<span>PLAY</span></div><p data-i18n="game_title_sub">A pocket-sized introduction.</p><button type="button" class="hh-title-start" data-handheld-action="start" data-i18n="game_press_start">PRESS START</button><p>© TEEMO WENG 2026</p></div>
-          </div></div>
-        </div>
-        <div class="handheld-brand" aria-hidden="true"><strong>TEEMO</strong><span>POCKET PERSONAL SYSTEM</span><small>01</small></div>
-        <div class="handheld-controls">
-          <div class="handheld-dpad" aria-label="Direction controls">
-            <button type="button" data-handheld-action="up" data-i18n-aria-label="game_up" aria-label="Up">▲</button><button type="button" data-handheld-action="left" data-i18n-aria-label="game_left" aria-label="Left">◀</button><span class="handheld-dpad-center" aria-hidden="true"></span><button type="button" data-handheld-action="right" data-i18n-aria-label="game_right" aria-label="Right">▶</button><button type="button" data-handheld-action="down" data-i18n-aria-label="game_down" aria-label="Down">▼</button>
-          </div>
-          <div class="handheld-ab"><div class="handheld-ab-key"><button type="button" data-handheld-action="b" data-i18n-aria-label="game_b" aria-label="B — back"></button><span aria-hidden="true">B</span></div><div class="handheld-ab-key"><button type="button" data-handheld-action="a" data-i18n-aria-label="game_a" aria-label="A — select"></button><span aria-hidden="true">A</span></div></div>
-        </div>
-        <div class="handheld-bottom"><div class="handheld-system-controls"><div class="handheld-system-key"><button type="button" data-handheld-action="select" data-i18n-aria-label="game_select" aria-label="Select — switch screen color"></button><span aria-hidden="true">SELECT</span></div><div class="handheld-system-key"><button type="button" data-handheld-action="start" data-i18n-aria-label="game_start" aria-label="Start — main menu"></button><span aria-hidden="true">START</span></div></div><div class="handheld-speaker" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-        <div class="handheld-shell-label" aria-hidden="true">DESIGNED FOR A LITTLE CURIOSITY</div><i class="handheld-screw" aria-hidden="true"></i>
-      </div>
-      <aside class="handheld-guide">
-        <div class="handheld-guide-title" data-i18n="game_guide">A QUICK START</div>
-        <div class="handheld-guide-item"><strong data-i18n="game_direction_title">Find your way</strong><p data-i18n="game_direction_desc">Use the D-pad or arrow keys.</p><div class="handheld-guide-keys" aria-hidden="true"><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd></div></div>
-        <div class="handheld-guide-item"><strong data-i18n="game_action_title">Follow your curiosity</strong><p data-i18n="game_action_desc">A to select. B to go back.</p><div class="handheld-guide-keys" aria-hidden="true"><kbd>A</kbd><span>/</span><kbd>Enter</kbd><kbd>B</kbd><span>/</span><kbd>Esc</kbd></div></div>
-        <div class="handheld-guide-item"><strong data-i18n="game_home_title">Make yourself at home</strong><p data-i18n="game_home_desc">START returns home. SELECT changes the screen color.</p></div>
-        <button type="button" id="handheld-sound" class="handheld-sound" aria-pressed="false" aria-label="Enable sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 5 5 9H2v6h3l5 4V5Z"/><path class="hh-sound-wave" d="M14 8q4 4 0 8m3-11q7 7 0 14"/><path class="hh-sound-mute" d="m15 9 6 6m0-6-6 6"/></svg><span data-i18n="game_sound_off">Sound off · turn on</span></button>
-        <p class="handheld-guide-note" data-i18n="game_quest_note">Psst… there’s a little side quest inside.</p>
-      </aside>
-    </div>
-    <div class="handheld-stage-footer"><span data-i18n="game_footer">Real projects. A playful way in.</span><a href="#projects" data-i18n="game_skip">Browse the projects below ↗</a></div>
-    <div id="handheld-announcement" class="handheld-sr-only" aria-live="polite" aria-atomic="true"></div>
-    <noscript><p class="handheld-nojs">掌机需要 JavaScript。你仍可在下方浏览完整项目。 / Enable JavaScript to play, or browse all projects below.</p><style>.handheld-nojs{display:block;padding-top:15px;font-size:12px}.project-card,.news-item,.tl-item,.edu-card,.skill-group,.reveal{opacity:1;transform:none}.handheld-console button,.handheld-sound{pointer-events:none}.handheld-nojs a{color:inherit}</style></noscript>
   </div>
 </section>
 
@@ -1554,6 +1580,8 @@ footer span { color: var(--accent); }
 const i18n = {
   en: {
     game_hero_link: "▶ Play a little",
+    btn_resume_short: "↓ Resume", btn_contact_short: "Contact", game_hero_short: "▶ Play",
+    game_collapse: "Collapse", game_expand: "Expand",
     game_edition: "A little world, ready to play.",
     game_heading: "<span>Press start.</span><span>Meet Teemo.</span>",
     game_intro: "A few projects, a little curiosity, and a pocket-sized way to get to know me. Go on. Press a button.",
@@ -1680,6 +1708,8 @@ const i18n = {
   },
   zh: {
     game_hero_link: "▶ 玩一下掌机",
+    btn_resume_short: "↓ 简历", btn_contact_short: "联系我", game_hero_short: "▶ 掌机",
+    game_collapse: "收起掌机", game_expand: "展开掌机",
     game_edition: "我的小世界，随时开机。",
     game_heading: "<span>按下开始，</span><span>认识一下我。</span>",
     game_intro: "几个项目，一点好奇心，装进一台小掌机。用方向键逛逛我的作品，也可以去收集一点灵感。",
@@ -2612,6 +2642,26 @@ initReveal();
 }());
 
 window.TeemoHandheld.init();
+
+// Collapse the display without discarding its current page or game progress.
+const handheldToggle = document.getElementById('handheld-toggle');
+const handheldContent = document.getElementById('handheld-content');
+function setHandheldExpanded(expanded) {
+  if (!expanded) {
+    window.TeemoHandheld.pause();
+    if (handheldContent.contains(document.activeElement)) handheldToggle.focus({ preventScroll: true });
+  }
+  handheldContent.hidden = !expanded;
+  handheldToggle.setAttribute('aria-expanded', String(expanded));
+  handheldToggle.closest('.handheld-stage').dataset.collapsed = String(!expanded);
+  const label = handheldToggle.querySelector('span');
+  const key = expanded ? 'game_collapse' : 'game_expand';
+  label.dataset.i18n = key;
+  label.textContent = i18n[currentLang][key];
+}
+handheldToggle.hidden = false;
+handheldToggle.addEventListener('click', () => setHandheldExpanded(handheldToggle.getAttribute('aria-expanded') !== 'true'));
+document.querySelector('.hero-actions a[href="#playground"]').addEventListener('click', () => setHandheldExpanded(true));
 </script>
 </body>
 </html>
